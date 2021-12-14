@@ -15,4 +15,3 @@ req = webapi_request(url3,params=dictionary)
 print(req)
 df = pd.DataFrame(req["playerstats"])
 df.to_csv("~/danganronpa.csv")
-
