@@ -2,6 +2,7 @@
 ### Tests de l'API Steam
 ##### Doc Steam API
 La Doc sur l'API Steam : https://developer.valvesoftware.com/wiki/Steam_Web_API#GetGlobalAchievementPercentagesForApp_.28v0001.29
+Autre Doc de l'API Steam : https://steamcommunity.com/dev?l=french
 ##### Clé Steam
 Pour les différentes requêtes, il faut ajouter une clé Steam que l'on réclame ici : https://steamcommunity.com/dev/apikey
 ##### Notes
