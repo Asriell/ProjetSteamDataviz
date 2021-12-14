@@ -39,3 +39,14 @@ IndentationError: unexpected indent
 >>> dictionary = {"key" : "F6F2A22B759FEE0F79940A8783603562", "steamId":"76561198119517741"}
 >>> req = webapi_request(url,params=dictionary)
 >>> print(req)
+
+  >>> import pandas as pd
+>>> df = pd.DataFrame(req["response"]["games"])
+>>> df.head()
+   appid  playtime_forever  playtime_windows_forever  playtime_mac_forever  playtime_linux_forever  playtime_2weeks
+0     70                 0                         0                     0                       0              NaN
+1   4000              1500                       475                     0                       0              NaN
+2   2700                14                        12                     0                       0              NaN
+3  10090              5280                       248                     0                       0              NaN
+4  17390               274                        82                     0                       0              NaN
+>>> df.to_csv("~/games.csv")
