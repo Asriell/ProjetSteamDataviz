@@ -10,6 +10,7 @@ Pour le client, j'ai été capable de récupérer les infos de mon compte. Par c
 
 
 #### Piste lecture des données : 
+```python
 (pip install steam)
 >>> import steam
 >>> api = WebAPI(key)
@@ -34,6 +35,7 @@ ImportError: cannot import name 'WebAPI'
 IndentationError: unexpected indent
 >>> api.ISteamUser.ResolveVanityURL_v1(vanityurl="valve", url_type=2)
 {'response': {'steamid': '103582791429521412', 'success': 1}}
+
 >>> from steam.webapi import webapi_request
 >>> url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/"
 >>> dictionary = {"key" : "F6F2A22B759FEE0F79940A8783603562", "steamId":"76561198119517741"}
@@ -50,3 +52,4 @@ IndentationError: unexpected indent
 3  10090              5280                       248                     0                       0              NaN
 4  17390               274                        82                     0                       0              NaN
 >>> df.to_csv("~/games.csv")
+```
