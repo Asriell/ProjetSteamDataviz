@@ -5,10 +5,6 @@ La Doc sur l'API Steam : https://developer.valvesoftware.com/wiki/Steam_Web_API#
 Autre Doc de l'API Steam : https://steamcommunity.com/dev?l=french
 ##### Clé Steam
 Pour les différentes requêtes, il faut ajouter une clé Steam que l'on réclame ici : https://steamcommunity.com/dev/apikey
-##### Notes
-J'ai lancé un serveur Node.js avec le script Serveur.js, pour pouvoir requêter dessus. Si on requête steam directement, ça fait une erreur de CORS.
-Pour le client, j'ai été capable de récupérer les infos de mon compte. Par contre, j'ai une erreur 500 lorsque je veux récupérer les jeux. (Je pense que c est une protection de mon compte qu'il faut désactiver)
-
 
 #### Piste lecture des données : 
 ```python
@@ -54,3 +50,12 @@ IndentationError: unexpected indent
 4  17390               274                        82                     0                       0              NaN
 >>> df.to_csv("~/games.csv")
 ```
+#### La VM : 
+ubuntu@192.168.166.214
+passwd : steam
+
+Pour automatiser le lancement du script : 
+crontab -e 
+
+
+
