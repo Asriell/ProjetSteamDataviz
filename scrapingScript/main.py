@@ -4,12 +4,13 @@ import pyrebase
 import requests
 import logging
 import os
+import sys
 import time
 
 # Steam API config
 player_info_api = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/"
 key = "F6F2A22B759FEE0F79940A8783603562"
-dictionary = {"key": "F6F2A22B759FEE0F79940A8783603562", "steamids": "76561198067634691", "format": "json"}
+dictionary = {"key": "F6F2A22B759FEE0F79940A8783603562", "steamids": "76561198119517741", "format": "json"}
 
 # Firebase configuration
 apiKey = "AIzaSyA2zHs_ZFcq9psawAyDi1ry8XNDJXWHYXE",
@@ -206,13 +207,31 @@ def get_players_data(firebase_storage):
         except Exception as e:
             error_logger("Unknown error has occurred")
 
+    
+def read_ids(filename):
+    with open(filename,'r') as f :
+        ids = f.read().splitlines()
+    return ids
+
+def steamIdsList(filename):
+    try :
+        ids  = read_ids(filename)
+        dictionary["steamids"] = ""
+        for i in range(0,len(ids) -1):
+            dictionary["steamids"] += ids[i] + ","
+        dictionary["steamids"] += ids[len(ids)-1]
+    except FileNotFoundError: 
+        print("File not found")
+        pass
+    
 
 def main():
+
+    if len(sys.argv) > 1 : steamIdsList(sys.argv[1])
     # Creating connection to database
     firebase_storage = FirebaseStorage(apiKey, authDomain, projectId,
                                        storageBucket, messagingSenderId, appId, databaseURL)
     get_players_data(firebase_storage)
-
 
 if __name__ == '__main__':
     main()

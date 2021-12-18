@@ -9,24 +9,8 @@ python3 main.py
 ``
 
 ##  Collecting data from multiple steam IDs
-This functionality will be modified later, but for testing purpose, change steamids value in the following line:
 
-```
-dictionary = {
-    "key": "F6F2A22B759FEE0F79940A8783603562",
-    "steamids": "steamid1",
-    "format": "json"
-}
-```
-
-TO :
-```
-dictionary = {
-    "key": "F6F2A22B759FEE0F79940A8783603562",
-    "steamids": "steamid1, steamid2, steamid3...",
-    "format": "json"
-}
-```
+We can add a file with steam ids as script argument. The script will collect informations from each ids. We have a default value when no argument is provided or if the file is not found. 
 
 ## Data storage
 All data is stored in a Firebase realtime database.
