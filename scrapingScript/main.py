@@ -3,6 +3,7 @@ from steam.webapi import webapi_request
 import pyrebase
 import requests
 import logging
+import pandas as pd
 import os
 import sys
 import time
@@ -199,6 +200,17 @@ def get_players_data(firebase_storage):
 
                         # Storing data
                         firebase_storage.store_data(user_data.__dict__)
+                        print(user_data.__dict__)
+                        
+                        # Storing data locally
+                        df = pd.DataFrame(user_data.__dict__,index = [0])
+                        try : 
+                            path = "./data/"+player_id+"/"+end_time[player_id].split(" ")[0]+"/"+end_time[player_id].split(" ")[1]
+                            file = "/"+"gamestats-"+player_id+"_"+end_time[player_id].split(" ")[0]+"_"+end_time[player_id].split(" ")[1]+".csv"
+                            os.makedirs(path,exist_ok=True)
+                            df.to_csv(path+file)
+                        except Exception as e :
+                            print(e)
                     players_status_dict[player_id] = player_response
             time.sleep(2)
         except requests.exceptions.ReadTimeout or requests.exceptions.Timeout:
@@ -231,7 +243,7 @@ def main():
     # Creating connection to database
     firebase_storage = FirebaseStorage(apiKey, authDomain, projectId,
                                        storageBucket, messagingSenderId, appId, databaseURL)
-    get_players_data(firebase_storage)
+    get_players_data(firebase_storage) 
 
 if __name__ == '__main__':
     main()
