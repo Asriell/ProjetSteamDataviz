@@ -19,3 +19,14 @@ Database URL: 'https://steam-players-data-default-rtdb.firebaseio.com/'
 
 ##  Errors and bugs
 All errors' logs are in ``errors.log`` file (the file will be created once an error occurs).
+
+## Script Scheduling 
+
+Type "crontab -e" in VM to manage scheduling.
+	 "crontab -l" in VM to list schedules.
+	 "systemctl restart cron" to restart scheduling service.
+	 
+```
+In our case : * * * * * python3 ~/dataviz/mainWithoutWhile.py ~/dataviz/steamIds.txt
+```
+Run our script every minutes.
