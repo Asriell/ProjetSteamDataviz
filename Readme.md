@@ -54,8 +54,3 @@ IndentationError: unexpected indent
 ubuntu@192.168.166.214
 passwd : steam
 
-Pour automatiser le lancement du script : 
-crontab -e 
-
-
-
