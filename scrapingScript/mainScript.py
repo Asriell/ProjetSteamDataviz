@@ -6,6 +6,7 @@ import logging
 import pandas as pd
 import os
 import sys
+import json
 import time
 
 # Steam API config
@@ -153,12 +154,69 @@ def error_logger(error_message):
 
 
 def get_players_data(firebase_storage):
+    """
     curr_api_response = request_data(player_info_api)['response']
     players_status_dict = init_status_dict(curr_api_response)
     start_time = {}
     game_data = {}
     end_time = {}
     game_duration = {}
+    """
+
+    try :
+        with open('meta/players_status_dict.json','r') as f :
+            players_status_dict = json.load(f)
+    except FileNotFoundError:
+        with open('meta/players_status_dict.json','w') as f:
+            curr_api_response = request_data(player_info_api)['response']
+            players_status_dict = init_status_dict(curr_api_response)
+            json.dump(players_status_dict,f)
+
+    try :
+        with open('meta/start_time.json','r') as f :
+            start_time = json.load(f)
+            for key in start_time:
+                try :
+                    start_time[key] = datetime.strptime(start_time[key],'%Y-%m-%d %H:%M:%S.%f')
+                except ValueError : 
+                    start_time[key] = datetime.strptime(start_time[key],'%Y-%m-%d %H:%M:%S')
+
+    except FileNotFoundError:
+        with open('meta/players_status_dict.json','w') as f:
+            start_time = {}
+            json.dump(start_time,f)
+
+
+    try :
+        with open('meta/game_data.json','r') as f :
+            game_data = json.load(f)
+    except FileNotFoundError:
+        with open('meta/game_data.json','w') as f:
+            game_data = {}
+            json.dump(game_data,f)
+
+    try :
+        with open('meta/end_time.json','r') as f :
+            end_time = json.load(f)
+            for key in end_time:
+                try : 
+                    end_time[key] = datetime.strptime(end_time[key],'%Y-%m-%d %H:%M:%S.%f')
+                except ValueError : 
+                    end_time[key] = datetime.strptime(end_time[key],'%Y-%m-%d %H:%M:%S')
+    except FileNotFoundError:
+        with open('meta/end_time.json','w') as f:
+            end_time = {}
+            json.dump(end_time,f)
+
+
+    try :
+        with open('meta/game_duration.json','r') as f :
+            game_duration = json.load(f)
+    except FileNotFoundError:
+        with open('meta/game_duration.json','w') as f:
+            game_duration = {}
+            json.dump(game_duration,f)
+
     # Reading database content (just for testing)
     # all_players = firebase_storage.get_players()
     # if all_players.val():
@@ -184,10 +242,24 @@ def get_players_data(firebase_storage):
                 if player_response != players_status_dict[player_id]:
                     if 'gameid' in player_response.keys():
                         start_time[player_id] = datetime.now()
+                        open('meta/start_time.json','w').close()
+                        with open('meta/start_time.json','w') as f:
+                            json.dump(start_time,f,default=str)
+
                         game_data[player_id] = player_response
+                        open('meta/game_data.json','w').close()
+                        with open('meta/game_data.json','w') as f:
+                            json.dump(game_data,f)
                     else:
                         end_time[player_id] = datetime.now()
+                        open('meta/end_time.json','w').close()
+                        with open('meta/end_time.json','w') as f:
+                            json.dump(end_time,f,default=str)
+
                         game_duration[player_id] = end_time[player_id] - start_time[player_id]
+                        open('meta/game_duration.json','w').close()
+                        with open('meta/game_duration.json','w') as f:
+                            json.dump(game_duration,f,default=str)
 
                         # Converting dates to str (to remove ms)
                         game_duration[player_id] = str(game_duration[player_id]).split('.')[0]
@@ -212,6 +284,9 @@ def get_players_data(firebase_storage):
                         except Exception as e :
                             print(e)
                     players_status_dict[player_id] = player_response
+                    open('meta/players_status_dict.json','w').close()
+                    with open('meta/players_status_dict.json','w') as f:
+                        json.dump(players_status_dict,f)
             time.sleep(2)
         except requests.exceptions.ReadTimeout or requests.exceptions.Timeout:
             error_logger("Could not retrieve data from API")
