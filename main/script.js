@@ -2,13 +2,13 @@ function traitement_data(x) {
     return Math.log(x);
 }
 
+console.log("KSDHLGKGMLHGMLH");
 $.get( "https://store.steampowered.com/api/appdetails/?appids=242050", function( data ) {
     $( ".result" ).html( data );
     alert( "Load was performed." );
     console.log(data);
   });
-
-const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/main/main/games.csv"
+console.log("AAAAAAAAAAAAH");
 
 function display_graph1() {
 
