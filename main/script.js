@@ -2,15 +2,14 @@ function traitement_data(x) {
     return Math.log(x);
 }
 
-console.log("KSDHLGKGMLHGMLH");
-$.get( "https://store.steampowered.com/api/appdetails/?appids=242050", function( data ) {
-    $( ".result" ).html( data );
-    alert( "Load was performed." );
-    console.log(data);
-  });
-console.log("AAAAAAAAAAAAH");
-
 function display_graph1() {
+    console.log("KSDHLGKGMLHGMLH");
+    $.get( "https://store.steampowered.com/api/appdetails/?appids=242050", function( data ) {
+        $( ".result" ).html( data );
+        alert( "Load was performed." );
+        console.log(data);
+    });
+    console.log("AAAAAAAAAAAAH");
 
     var distance_between_bars = 10
     var start_margin = 50;
