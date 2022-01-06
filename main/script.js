@@ -2,23 +2,70 @@ function display() {
     alert("Hammer time");  
     } 
 
-const margin = { top: 0, right: 30, bottom: 20, left: 10 },
-    width = 960,
-    height = 960;
-
+const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/main/main/games.csv"
 function display_graph1() {
-    var svg1 = d3
-    .select("#visu-activite1")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var distance_between_bars = 10
+    var start_margin = 50;
+    var margin = 20;
+    var width = 800;
+    var height = 650;
+    var total_height = height*1.1;
+    var total_width = width*1.1;
+    d3.csv(urlRaw).then(function (data) {
+        data.sort((a, b) => {
+            return b.playtime_forever-a.playtime_forever;
+        })
+        let newId = 0;
+        data.forEach(element => {
+            element.id = newId;
+            newId++;
+        });
+        console.log(data);
 
-    console.log("Shit")
-    
-    urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/main/main/games.csv"
-    d3.csv(urlRaw, (d) => {
-        console.log(d)
-    })
+        var nbApps = d3.range(data.length);
+
+
+        var svg1 = d3.select("svg1")
+                .append("svg")
+                .attr("width", total_width)
+                .attr("height", total_height)
+                .attr("transform", "translate(" + start_margin + "," + margin + ")");
+
+        var xScale = d3.scaleLinear()
+        .domain(nbApps)
+        .range([0, distance_between_bars]);
+
+        var x_axis = d3.axisBottom()
+                   .scale(xScale);
+
+        var yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, function(d) { return Math.log(d.playtime_forever); })])
+        .range([height, margin]);
+
+        var y_axis = d3.axisLeft()
+                    .scale(yScale);
+
+        svg1.append("g")
+        .attr("transform", "translate(" + start_margin + "," + height + ")")
+        .call(x_axis);
+
+        svg1.append("g")
+        .call(y_axis)
+        .attr("transform", "translate(" + margin + ",0)");
+
+        svg1.selectAll(".bar")
+         .data(data)
+         .enter().append("rect")
+         .attr("class", "bar")
+         .attr("x", function(d) {
+             //console.log(xScale(d.id));
+             return xScale(d.id) + start_margin;
+            })
+         .attr("y", function(d) {
+            //console.log(d.playtime_forever);
+            return yScale(Math.log(d.playtime_forever));
+        })
+         .attr("width", 5)
+         .attr("height", function(d) { return height - yScale(Math.log(d.playtime_forever)); });
+    });
 }
