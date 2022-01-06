@@ -1,9 +1,12 @@
 function traitement_data(x) {
     return Math.log(x);
 }
-$.get('https://store.steampowered.com/api/appdetails/?appids=242050',function(data,status) {
-      console.log(data);
-},'html');
+
+$.get( "https://store.steampowered.com/api/appdetails/?appids=242050", function( data ) {
+    $( ".result" ).html( data );
+    alert( "Load was performed." );
+    console.log(data);
+  });
 
 const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/main/main/games.csv"
 
