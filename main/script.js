@@ -4,7 +4,7 @@ function traitement_data(x) {
 
 function transform_data(dataset) {
     dataset.sort((a, b) => {
-        return b.playtime_forever-a.playtime_forever;
+        return b.playtime_forever - a.playtime_forever;
     })
     let newId = 0;
     dataset.forEach(element => {
@@ -18,74 +18,300 @@ function transform_data(dataset) {
     console.log(dataset);
 }
 
-$.get( "https://store.steampowered.com/api/appdetails/?appids=242050", function( data ) {
-    $( ".result" ).html( data );
-    alert( "Load was performed." );
+$.get("https://store.steampowered.com/api/appdetails/?appids=242050", function (data) {
+    $(".result").html(data);
+    alert("Load was performed.");
     console.log(data);
-  });
+});
 
-const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/main/main/games.csv"
+function formatDate(date) {
+    let ddDate = String(date.getDate()).padStart(2, "0");
+    let mmDate = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyyDate = date.getFullYear();
+    return yyyyDate + "-" + mmDate + "-" + ddDate;
+}
+
+var ParseDuration = function (duration) {
+    return duration.split(":");
+};
+
+var SumDurations = function (duration1, duration2) {
+    let d1 = ParseDuration(duration1).map((d) => parseInt(d));
+    let d2 = ParseDuration(duration2).map((d) => parseInt(d));
+    let h = d1[0] + d2[0];
+    let m = d1[1] + d2[1];
+    let s = d1[2] + d2[2];
+    if (s > 60) {
+        m += 1;
+        s = s % 60;
+    }
+    if (m > 60) {
+        h += 1;
+        m = m % 60;
+    }
+    return String(h) + ":" + String(m) + ":" + String(s);
+};
+
+var USER = "Asriel";
+var PERIOD = "1 Month";
+var TODAY = formatDate(new Date());
+const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
+const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
 
 function display_graph1() {
+    var tooltip = d3
+        .select("body")
+        .append("div")
+        .attr("class", "hidden tooltip");
+    var distance_between_bars = 10;
+    var start_margin = 50;
+    var margin = 20;
+    var width = 800;
+    var height = 650;
+    var total_height = height * 1.1;
+    var total_width = width * 1.1;
+    d3.json(urlplayersjson).then((json) => {
+        //console.log(json);
+        var data = Object.values(json.players).filter(
+            (player) =>
+                player.persona_name ==
+                document.getElementById("user-select").value
+        );
+        //console.log(data);
+        tmpData = {};
+        for (var entry of data) {
+            if (!entry.game_duration.includes("day")) {
+                tmpData[entry.game_end] = entry;
+            }
+        }
+        data = tmpData;
+        //console.log(data);
 
-    let distance_between_bars = 10
-    let start_margin = 50;
-    let margin = 20;
-    let width = 800;
-    let height = 650;
-    let total_height = height*1.1;
-    let total_width = width*1.1;
-    let bar_width = 10;
+        inf = "1970-01-01";
+        nbJours = 30;
+        todate = new Date(TODAY);
+        inf = formatDate(
+            new Date(todate.setDate(todate.getDate() - nbJours))
+        );
+        inf2 = formatDate(
+            new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
+        );
+        //console.log(TODAY, " | ", inf, " | ", inf2);
+        gameTimePerDay = {};
+        while (inf != TODAY) {
+            gameTimePerDay[inf] = "0:0:0";
+            for (entry of Object.keys(data)) {
+                if (data[entry].game_end.includes(inf)) {
+                    gameTimePerDay[inf] = SumDurations(
+                        gameTimePerDay[inf],
+                        data[entry].game_duration
+                    );
+                    //console.log(
+                    // "inf : " + inf + "   " + data[entry].game_duration
+                    //);
+                }
+            }
+            inf = formatDate(
+                new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
+            );
+        }
+        //console.log(gameTimePerDay);
+        datas = [];
+        var id = 0;
+        for (val of Object.values(gameTimePerDay)) {
+            element = {};
+            element["id"] = id;
+            element["date"] = Object.keys(gameTimePerDay)[id];
+            splitVal = val.split(":");
+            valInSeconds =
+                splitVal[2] * Math.pow(60, 0) +
+                splitVal[1] * Math.pow(60, 1) +
+                splitVal[0] * Math.pow(60, 2);
+            element["playtime"] = valInSeconds;
+            console.log(splitVal, " | ", valInSeconds);
+            datas.push(element);
+            id++;
+        }
+        console.log(datas);
+        var nbApps = d3.range(datas.length);
 
+        var svg1 = d3
+            .select("svg1")
+            .append("svg")
+            .attr("width", total_width)
+            .attr("height", total_height)
+            .attr(
+                "transform",
+                "translate(" + start_margin + "," + margin + ")"
+            );
 
-    d3.csv(urlRaw).then(function (data) {
-        transform_data(data);
+        var xScale = d3
+            .scaleLinear()
+            .domain(nbApps)
+            .range([0, distance_between_bars]);
 
-        var nbApps = d3.range(data.length);
+        var x_axis = d3.axisBottom().scale(xScale);
 
+        console.log(
+            "max : ",
+            d3.max(datas, (d) => Math.log(d.playtime))
+        );
+        var yScale = d3
+            .scaleLinear()
+            .domain([0, d3.max(datas, (d) => Math.log(d.playtime))])
+            .range([height, margin]);
 
-        var svg1 = d3.select("svg1")
-                .append("svg")
-                .attr("width", total_width)
-                .attr("height", total_height)
-                .attr("transform", "translate(" + start_margin + "," + margin + ")");
+        var y_axis = d3.axisLeft().scale(yScale);
+        console.log(xScale(5));
 
-        var xScale = d3.scaleLinear()
-        .domain(nbApps)
-        .range([0, distance_between_bars+bar_width]);
+        svg1
+            .append("g")
+            .attr("transform", "translate(" + start_margin + "," + height + ")")
+            .call(x_axis);
 
-        var x_axis = d3.axisBottom()
-                   .scale(xScale);
+        svg1
+            .append("g")
+            .call(y_axis)
+            .attr("transform", "translate(" + margin + ",0)");
 
-        var yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return d.playtime_forever; })])
-        .range([height, margin]);
-
-        var y_axis = d3.axisLeft()
-                    .scale(yScale);
-
-        svg1.append("g")
-        .attr("transform", "translate(" + start_margin + "," + height + ")")
-        .call(x_axis);
-
-        svg1.append("g")
-        .call(y_axis)
-        .attr("transform", "translate(" + margin + ",0)");
-
-        svg1.selectAll(".bar")
-         .data(data)
-         .enter().append("rect")
-         .attr("class", "bar")
-         .attr("x", function(d) {
-             //console.log(xScale(d.id));
-             return xScale(d.id) + start_margin;
+        svg1
+            .selectAll(".bar")
+            .data(datas)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) {
+                //console.log(xScale(d.id));
+                return xScale(d.id) + start_margin;
             })
-         .attr("y", function(d) {
-            //console.log(d.playtime_forever);
-            return yScale(d.playtime_forever);
-        })
-         .attr("width", bar_width)
-         .attr("height", function(d) { return height - yScale(d.playtime_forever); });
+            .attr("y", function (d) {
+                //console.log(d.playtime_forever);
+                return yScale(Math.log(d.playtime));
+            })
+            .attr("width", 5)
+            .attr("height", function (d) {
+                return height - yScale(Math.log(d.playtime));
+            })
+            .on("mousemove", function (e, d) {
+                // on recupere la position de la souris,
+                // e est l'object event d
+                //console.log(d);
+                var mousePosition = [e.x, e.y];
+                //console.log(mousePosition);
+                // on affiche le toolip
+                tooltip
+                    .classed("hidden", false)
+                    // on positionne le tooltip en fonction
+                    // de la position de la souris
+                    .attr(
+                        "style",
+                        "left:" +
+                        (mousePosition[0] + 15) +
+                        "px; top:" +
+                        (mousePosition[1] - 35) +
+                        "px"
+                    )
+                    // on recupere le nom de l'etat
+                    .html(
+                        d.date +
+                        " | Temps de jeu : " +
+                        parseInt(d.playtime / 3600) +
+                        " h " +
+                        parseInt(
+                            (d.playtime - parseInt(d.playtime / 3600) * 3600) / 60
+                        ) +
+                        " m " +
+                        (d.playtime -
+                            (parseInt(d.playtime / 3600) * 3600 +
+                                parseInt(
+                                    (d.playtime - parseInt(d.playtime / 3600) * 3600) / 60
+                                ) *
+                                60)) +
+                        " s."
+                    );
+            })
+            .on("mouseout", function () {
+                tooltip.classed("hidden", true);
+            });
+
+        d3.select("#user-select").on("change", (event) => {
+            console.log(event.target.value);
+            var data = Object.values(json.players).filter(
+                (player) =>
+                    player.persona_name ==
+                    document.getElementById("user-select").value
+            );
+            //console.log(data);
+
+            tmpData = {};
+            for (var entry of data) {
+                if (!entry.game_duration.includes("day")) {
+                    tmpData[entry.game_end] = entry;
+                }
+            }
+            data = tmpData;
+            //console.log(data);
+
+            inf = "1970-01-01";
+            nbJours = 30;
+            todate = new Date(TODAY);
+            inf = formatDate(
+                new Date(todate.setDate(todate.getDate() - nbJours))
+            );
+            inf2 = formatDate(
+                new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
+            );
+            //console.log(TODAY, " | ", inf, " | ", inf2);
+            gameTimePerDay = {};
+            while (inf != TODAY) {
+                gameTimePerDay[inf] = "0:0:0";
+                for (entry of Object.keys(data)) {
+                    if (data[entry].game_end.includes(inf)) {
+                        gameTimePerDay[inf] = SumDurations(
+                            gameTimePerDay[inf],
+                            data[entry].game_duration
+                        );
+                        //console.log(
+                        // "inf : " + inf + "   " + data[entry].game_duration
+                        //);
+                    }
+                }
+                inf = formatDate(
+                    new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
+                );
+            }
+            //console.log(gameTimePerDay);
+            datas = [];
+            var id = 0;
+            for (val of Object.values(gameTimePerDay)) {
+                element = {};
+                element["id"] = id;
+                element["date"] = Object.keys(gameTimePerDay)[id];
+                splitVal = val.split(":");
+                valInSeconds =
+                    splitVal[2] * Math.pow(60, 0) +
+                    splitVal[1] * Math.pow(60, 1) +
+                    splitVal[0] * Math.pow(60, 2);
+                element["playtime"] = valInSeconds;
+                //console.log(splitVal, " | ", valInSeconds);
+                datas.push(element);
+                id++;
+            }
+            //console.log(datas);
+
+            svg1
+                .selectAll(".bar")
+                .data(datas)
+                .transition()
+                .duration(1000)
+                .attr("y", function (d) {
+                    //console.log(d.playtime_forever);
+                    return yScale(Math.log(d.playtime));
+                })
+                .attr("height", function (d) {
+                    return height - yScale(Math.log(d.playtime));
+                });
+        });
     });
 }
 
@@ -99,10 +325,10 @@ function display_graph2() {
 
     // append the svg object to the div called 'my_dataviz'
     var svg2 = d3.select("svg2")
-    .append("svg")
+        .append("svg")
         .attr("width", width)
         .attr("height", height)
-    .append("g")
+        .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     // Create dummy data
@@ -110,28 +336,28 @@ function display_graph2() {
         transform_data(data);
         // set the color scale
         var color = d3.scaleOrdinal()
-        .domain([0, d3.max(data, function(d) { return d.playtime_forever; })])
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
+            .domain([0, d3.max(data, function (d) { return d.playtime_forever; })])
+            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
 
         // Compute the position of each group on the pie:
         var pie = d3.pie()
-        .value(function(d) {return d.playtime_forever; })
+            .value(function (d) { return d.playtime_forever; })
         var data_ready = pie(data)
         console.log(data_ready);
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         svg2
-        .selectAll('whatever')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', d3.arc()
-            .innerRadius(0)
-            .outerRadius(radius)
-        )
-        .attr('fill', function(d){ return(color(d.data.appid)) })
-        .attr("stroke", "black")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.7)
+            .selectAll('whatever')
+            .data(data_ready)
+            .enter()
+            .append('path')
+            .attr('d', d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius)
+            )
+            .attr('fill', function (d) { return (color(d.data.appid)) })
+            .attr("stroke", "black")
+            .style("stroke-width", "2px")
+            .style("opacity", 0.7)
     })
 }
