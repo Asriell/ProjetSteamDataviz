@@ -260,8 +260,6 @@ function display_graph1(svg_already_exists, svg) {
             .attr("transform", "translate(" + start_margin + "," + height + ")")
             .attr("class","abscisses")
             .call(x_axis)
-            .data(datas)
-            .html((d)=>{console.log(d.value); return d.value})
             //.text("Day");
 
         svg1
@@ -351,8 +349,7 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         set_legende_graph1(datas);
-
-
+        
         d3.select("#user-select").on("change", (event) => {
             display_graph1(true, svg1);
         });
