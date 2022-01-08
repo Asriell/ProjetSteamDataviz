@@ -338,6 +338,7 @@ function display_graph1(svg_already_exists, svg) {
             svg1
                 .selectAll(".bar")
                 .data(datas)
+                .classed("hidden",false)
                 .transition()
                 .duration(1000)
                 .attr("x", function (d) {
@@ -348,11 +349,9 @@ function display_graph1(svg_already_exists, svg) {
                     //console.log(d.playtime_forever);
                     return yScale(d.playtime);
                 })
-
                 .attr("height", function (d) {
                     return height - yScale(d.playtime);
                 })
-                .classed("hidden",false);
         }
 
         set_legende_graph1(datas);
