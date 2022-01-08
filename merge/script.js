@@ -263,8 +263,8 @@ function display_graph1(svg_already_exists, svg) {
             .attr("class","ordonnees")
             //.text("Time played");
         } else {
-            scg1.selectAll(".abscisses").call(x_axis)
-            scg1.selectAll(".ordonnees").call(y_axis)
+            svg1.selectAll(".abscisses").transition().delay(1000).call(x_axis)
+            svg1.selectAll(".ordonnees").transition().delay(1000).call(y_axis)
         }
 
         if(!svg_already_exists) {
