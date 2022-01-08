@@ -17,6 +17,7 @@ function set_legende_graph1(datas) {
     document.getElementById("legende1").innerHTML = final_text;
 }
 
+
 function transform_data_for_pie(dataset) {
     dataset.sort((a, b) => {
         return b.playtime_forever - a.playtime_forever;
@@ -253,26 +254,27 @@ function display_graph1(svg_already_exists, svg) {
         var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
 
-        if (svg_already_exists) {
-            svg1.selectAll("g").remove();
-        }
+        if (!svg_already_exists) {
         svg1
             .append("g")
             .attr("transform", "translate(" + start_margin + "," + height + ")")
-            .transition()
-            .duration(1000)
+            .attr("class","abscisses")
             .call(x_axis)
             //.text("Day");
 
         svg1
             .append("g")
-            .transition()
-            .duration(1000)
             .call(y_axis)
             .attr("transform", "translate(" + start_margin + ",0)")
+            .attr("class","ordonnees")
             //.text("Time played");
+        } else {
+            svg1.selectAll(".abscisses").transition().duration(1000).call(x_axis)
+            svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
+        }
 
-        svg1
+        if(!svg_already_exists) {
+            svg1
             .selectAll(".bar")
             .data(datas)
             .enter()
@@ -331,12 +333,7 @@ function display_graph1(svg_already_exists, svg) {
             .on("mouseout", function () {
                 tooltip.classed("hidden", true);
             });
-
-        set_legende_graph1(datas);
-
-        d3.select("#user-select").on("change", (event) => {
-            console.log(event.target.value);
-            svg1.selectAll("g").remove();
+        } else {
             svg1
                 .selectAll(".bar")
                 .data(datas)
@@ -349,12 +346,18 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("height", function (d) {
                     return height - yScale(d.playtime);
                 });
+        }
+
+        set_legende_graph1(datas);
+
+        
+        d3.select("#user-select").on("change", (event) => {
             display_graph1(true, svg1);
         });
 
         d3.select("#period-select").on("change", (event) => {
             svg1.selectAll('*').remove();
-            display_graph1(false, svg1);
+            display_graph1(true, svg1);
         });
 
 
