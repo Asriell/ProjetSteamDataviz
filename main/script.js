@@ -349,15 +349,14 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         set_legende_graph1(datas);
-
         
         d3.select("#user-select").on("change", (event) => {
             display_graph1(true, svg1);
         });
 
         d3.select("#period-select").on("change", (event) => {
-            svg1.selectAll('*').remove();
-            display_graph1(true, svg1);
+            svg1.remove();
+            display_graph1(false, undefined);
         });
 
 
