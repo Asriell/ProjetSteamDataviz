@@ -1,6 +1,7 @@
 function traitement_data(x) {
-    return parseInt(x)/60;
+    return parseInt(x);
 }
+
 
 function transform_data_for_bar(dataset) {
     console.log(dataset.players);
