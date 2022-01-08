@@ -248,22 +248,24 @@ function display_graph1(svg_already_exists, svg) {
         var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
 
-        if (svg_already_exists) {
-            svg1.selectAll("g").remove();
-        }
+        if (!svg_already_exists) {
         svg1
             .append("g")
             .attr("transform", "translate(" + start_margin + "," + height + ")")
+            .attr("class","abscisses")
             .call(x_axis)
             //.text("Day");
 
         svg1
             .append("g")
-            .transition()
-            .duration(1000)
             .call(y_axis)
             .attr("transform", "translate(" + start_margin + ",0)")
+            .attr("class","ordonnees")
             //.text("Time played");
+        } else {
+            scg1.selectAll(".abscisses").call(x_axis)
+            scg1.selectAll(".ordonnees").transition().delay(1000).call(y_axis)
+        }
 
         if(!svg_already_exists) {
             svg1
