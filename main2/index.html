@@ -6,6 +6,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <script>
+      //Fonctions utilitaires
       function display() {
         alert("Hammer time");
       }
@@ -38,6 +39,35 @@
         return String(h) + ":" + String(m) + ":" + String(s);
       };
 
+      //Fonction nettoyage de données
+      var DataCleaning = function (data, user) {
+        console.log("data : ", data, "  user : ", user);
+        var datasUser = Object.values(data.players).filter(
+          (player) => player.persona_name == user
+          //document.getElementById("user-select").value
+        );
+        console.log("datasUser : ", datasUser);
+        //console.log(data);
+        tmpData = {};
+        for (var entry in datasUser) {
+          if (!datasUser[entry].game_duration.includes("day")) {
+            if (entry != 0) {
+              date1 = new Date(datasUser[entry - 1].game_end);
+              date2 = new Date(datasUser[entry].game_end);
+              datediff = Math.abs(date2 - date1) / 1000;
+              if (datediff > 5) {
+                tmpData[datasUser[entry].game_end] = datasUser[entry];
+              }
+            } else {
+              tmpData[datasUser[entry].game_end] = datasUser[entry];
+            }
+          }
+        }
+        console.log("tmpData : ", tmpData);
+        return tmpData;
+      };
+
+      //Fonctions pour afficher les graphes
       var USER = "Asriel";
       var PERIOD = "1 Month";
       var TODAY = formatDate(new Date());
@@ -131,6 +161,7 @@
       */
         d3.json("steam-players-data.json").then((json) => {
           //console.log(json);
+          /*
           var data = Object.values(json.players).filter(
             (player) =>
               player.persona_name ==
@@ -143,8 +174,12 @@
               tmpData[entry.game_end] = entry;
             }
           }
-          data = tmpData;
-          //console.log(data);
+          data = tmpData;*/
+
+          data = DataCleaning(
+            json,
+            document.getElementById("user-select").value
+          );
 
           inf = "1970-01-01";
           nbJours = 30;
@@ -186,6 +221,7 @@
               splitVal[2] * Math.pow(60, 0) +
               splitVal[1] * Math.pow(60, 1) +
               splitVal[0] * Math.pow(60, 2);
+            if (valInSeconds == 0) valInSeconds = 1;
             element["playtime"] = valInSeconds;
             console.log(splitVal, " | ", valInSeconds);
             datas.push(element);
@@ -295,6 +331,7 @@
 
           d3.select("#user-select").on("change", (event) => {
             console.log(event.target.value);
+            /*
             var data = Object.values(json.players).filter(
               (player) =>
                 player.persona_name ==
@@ -309,7 +346,12 @@
               }
             }
             data = tmpData;
-            //console.log(data);
+            //console.log(data);*/
+
+            data = DataCleaning(
+              json,
+              document.getElementById("user-select").value
+            );
 
             inf = "1970-01-01";
             nbJours = 30;
@@ -351,6 +393,7 @@
                 splitVal[2] * Math.pow(60, 0) +
                 splitVal[1] * Math.pow(60, 1) +
                 splitVal[0] * Math.pow(60, 2);
+              if (valInSeconds == 0) valInSeconds = 1;
               element["playtime"] = valInSeconds;
               //console.log(splitVal, " | ", valInSeconds);
               datas.push(element);
@@ -389,6 +432,9 @@
     <select name="user" id="user-select">
       <option value="Asriel">Asriel</option>
       <option value="Mak-Dh">Mak-Dh</option>
+      <option value="Superbuddy">Supperbuddy</option>
+      <option value="Pyromaniaque">Pyromaniaque</option>
+      <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
     </select>
 
     <!--Un div pour chaque chart qu'on fait-->
