@@ -1,5 +1,5 @@
 function traitement_data(x) {
-    return Math.log(x);
+    return parseInt(x)/60;
 }
 
 function transform_data_for_bar(dataset) {
