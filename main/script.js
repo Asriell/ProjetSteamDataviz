@@ -259,11 +259,15 @@ function display_graph1(svg_already_exists, svg) {
         svg1
             .append("g")
             .attr("transform", "translate(" + start_margin + "," + height + ")")
+            .transition()
+            .duration(1000)
             .call(x_axis)
             //.text("Day");
 
         svg1
             .append("g")
+            .transition()
+            .duration(1000)
             .call(y_axis)
             .attr("transform", "translate(" + start_margin + ",0)")
             //.text("Time played");
