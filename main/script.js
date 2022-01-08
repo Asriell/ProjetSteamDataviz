@@ -32,11 +32,31 @@ $.get("https://store.steampowered.com/api/appdetails/?appids=242050", function (
     console.log(data);
 });
 
+function get_nb_days_to_display() {
+    let periode = document.getElementById("period-select").value;
+    if(periode == "1week") {
+        return 7;
+    }
+    if(periode == "1month") {
+        return 30;
+    }
+    else {
+        console.error("WRONG DAYS ARGH");
+    }
+}
+
 function formatDate(date) {
     let ddDate = String(date.getDate()).padStart(2, "0");
     let mmDate = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
     let yyyyDate = date.getFullYear();
     return yyyyDate + "-" + mmDate + "-" + ddDate;
+}
+
+function formatDateObject(date) {
+    let ddDate = String(date.getDate()).padStart(2, "0");
+    let mmDate = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyyDate = date.getFullYear();
+    return new Date(yyyyDate, mmDate, ddDate);
 }
 
 var ParseDuration = function (duration) {
@@ -66,16 +86,16 @@ var TODAY = formatDate(new Date());
 const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
 const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
 
-function display_graph1() {
+function display_graph1(svg_already_exists, svg) {
     var tooltip = d3
         .select("body")
         .append("div")
         .attr("class", "hidden tooltip");
     var distance_between_bars = 50;
     var bar_width = 30;
-    var start_margin = 50;
+    var start_margin = 100;
     var margin = 20;
-    var width = 800;
+    var width = 8000;
     var height = 650;
     var total_height = height * 1.1;
     var total_width = width * 1.1;
@@ -99,7 +119,7 @@ function display_graph1() {
         //console.log(data);
 
         inf = "1970-01-01";
-        nbJours = 30;
+        nbJours = get_nb_days_to_display();
         todate = new Date(TODAY);
         inf = formatDate(
             new Date(todate.setDate(todate.getDate() - nbJours))
@@ -132,7 +152,10 @@ function display_graph1() {
         for (val of Object.values(gameTimePerDay)) {
             element = {};
             element["id"] = id;
+
+            // Date formatting
             element["date"] = Object.keys(gameTimePerDay)[id];
+
             splitVal = val.split(":");
             valInSeconds =
                 splitVal[2] * Math.pow(60, 0) +
@@ -143,22 +166,26 @@ function display_graph1() {
             datas.push(element);
             id++;
         }
-        console.log(datas);
-        var nbApps = d3.range(datas.length);
+        console.log("AAAAAAAAAAAAA\n"+datas[0].playtime);
 
-        var svg1 = d3
-            .select("svg1")
-            .append("svg")
-            .attr("width", total_width)
-            .attr("height", total_height)
-            .attr(
-                "transform",
-                "translate(" + start_margin + "," + margin + ")"
-            );
+        if(!svg_already_exists){
+            var svg1 = d3
+                .select("svg1")
+                .append("svg")
+                .attr("width", total_width)
+                .attr("height", total_height)
+                .attr(
+                    "transform",
+                    "translate(" + start_margin + "," + margin + ")"
+                );
+        }
+        else {
+            var svg1 = svg;
+        }
 
         var xScale = d3
             .scaleLinear()
-            .domain(nbApps)
+            .domain(d3.range(datas.length))
             .range([0, distance_between_bars]);
 
         var x_axis = d3.axisBottom().scale(xScale);
@@ -178,12 +205,14 @@ function display_graph1() {
         svg1
             .append("g")
             .attr("transform", "translate(" + start_margin + "," + height + ")")
-            .call(x_axis);
+            .call(x_axis)
+            //.text("Day");
 
         svg1
             .append("g")
             .call(y_axis)
-            .attr("transform", "translate(" + margin + ",0)");
+            .attr("transform", "translate(" + start_margin + ",0)")
+            //.text("Time played");
 
         svg1
             .selectAll(".bar")
@@ -246,70 +275,8 @@ function display_graph1() {
             });
 
         d3.select("#user-select").on("change", (event) => {
-            //console.log(event.target.value);
-            var data = Object.values(json.players).filter(
-                (player) =>
-                    player.persona_name ==
-                    document.getElementById("user-select").value
-            );
-            //console.log(data);
-
-            tmpData = {};
-            for (var entry of data) {
-                if (!entry.game_duration.includes("day")) {
-                    tmpData[entry.game_end] = entry;
-                }
-            }
-            data = tmpData;
-            //console.log(data);
-
-            inf = "1970-01-01";
-            nbJours = 30;
-            todate = new Date(TODAY);
-            inf = formatDate(
-                new Date(todate.setDate(todate.getDate() - nbJours))
-            );
-            inf2 = formatDate(
-                new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
-            );
-            //console.log(TODAY, " | ", inf, " | ", inf2);
-            gameTimePerDay = {};
-            while (inf != TODAY) {
-                gameTimePerDay[inf] = "0:0:0";
-                for (entry of Object.keys(data)) {
-                    if (data[entry].game_end.includes(inf)) {
-                        gameTimePerDay[inf] = SumDurations(
-                            gameTimePerDay[inf],
-                            data[entry].game_duration
-                        );
-                        //console.log(
-                        // "inf : " + inf + "   " + data[entry].game_duration
-                        //);
-                    }
-                }
-                inf = formatDate(
-                    new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
-                );
-            }
-            //console.log(gameTimePerDay);
-            datas = [];
-            var id = 0;
-            for (val of Object.values(gameTimePerDay)) {
-                element = {};
-                element["id"] = id;
-                element["date"] = Object.keys(gameTimePerDay)[id];
-                splitVal = val.split(":");
-                valInSeconds =
-                    splitVal[2] * Math.pow(60, 0) +
-                    splitVal[1] * Math.pow(60, 1) +
-                    splitVal[0] * Math.pow(60, 2);
-                element["playtime"] = valInSeconds;
-                //console.log(splitVal, " | ", valInSeconds);
-                datas.push(element);
-                id++;
-            }
-            //console.log(datas);
-
+            console.log(event.target.value);
+            svg1.selectAll("g").remove();
             svg1
                 .selectAll(".bar")
                 .data(datas)
@@ -322,9 +289,19 @@ function display_graph1() {
                 .attr("height", function (d) {
                     return height - yScale(d.playtime);
                 });
+            display_graph1(true, svg1);
         });
+
+        d3.select("#period-select").on("change", (event) => {
+            svg1.selectAll('*').remove();
+            display_graph1(true, svg1);
+        });
+
+
+        
     });
 }
+
 
 function display_graph2() {
     let width = 600
