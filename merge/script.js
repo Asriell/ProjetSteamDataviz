@@ -149,7 +149,7 @@ var TODAY = formatDate(new Date());
 const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
 const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
 
-function display_graph1(svg_already_exists, svg, changebars=0) {
+function display_graph1(svg_already_exists, svg) {
     var tooltip = d3
         .select("body")
         .append("div")
@@ -273,17 +273,12 @@ function display_graph1(svg_already_exists, svg, changebars=0) {
             svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
         }
 
-        if((!svg_already_exists) || changebars) {
-            if (changebars) {
-                svg1.selectAll(".bar").remove()
-            }
+        if(!svg_already_exists) {
             svg1
             .selectAll(".bar")
             .data(datas)
             .enter()
             .append("rect")
-            .transition()
-            .duration(1000)
             .attr("class", "bar")
             .attr("x", function (d) {
                 //console.log(xScale(d.id));
@@ -366,7 +361,7 @@ function display_graph1(svg_already_exists, svg, changebars=0) {
 
         d3.select("#period-select").on("change", (event) => {
             //svg1.remove();
-            display_graph1(true, svg1,1);
+            display_graph1(true, svg1);
         });
 
 
