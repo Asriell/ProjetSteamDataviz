@@ -260,7 +260,7 @@ function display_graph1(svg_already_exists, svg) {
             .attr("transform", "translate(" + start_margin + "," + height + ")")
             .attr("class","abscisses")
             .call(x_axis)
-            //.data(datas)
+            .data(datas)
             .html((d)=>d)
             //.text("Day");
 
