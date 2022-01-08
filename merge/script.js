@@ -248,6 +248,9 @@ function display_graph1(svg_already_exists, svg) {
         var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
 
+        if (svg_already_exists) {
+            svg1.selectAll("g").remove();
+        }
         svg1
             .append("g")
             .attr("transform", "translate(" + start_margin + "," + height + ")")
