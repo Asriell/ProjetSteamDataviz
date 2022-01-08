@@ -11,6 +11,12 @@ function transform_data_for_bar(dataset) {
     //console.log(dataset);
 }
 
+function set_legende_graph1(datas) {
+    let periode = document.getElementById("period-select").value;
+    let final_text = periode + " du " + d3.min(datas, (d) => d.date) + " au " + d3.max(datas, (d) => d.date);
+    document.getElementById("legende1").innerHTML = final_text;
+}
+
 function transform_data_for_pie(dataset) {
     dataset.sort((a, b) => {
         return b.playtime_forever - a.playtime_forever;
@@ -35,10 +41,10 @@ $.get("https://store.steampowered.com/api/appdetails/?appids=242050", function (
 
 function get_nb_days_to_display() {
     let periode = document.getElementById("period-select").value;
-    if(periode == "1week") {
+    if(periode == "semaine") {
         return 7;
     }
-    if(periode == "1month") {
+    if(periode == "mois") {
         return 30;
     }
     else {
@@ -212,7 +218,6 @@ function display_graph1(svg_already_exists, svg) {
             datas.push(element);
             id++;
         }
-        console.log("AAAAAAAAAAAAA\n"+datas[0].playtime);
 
         if(!svg_already_exists){
             var svg1 = d3
@@ -319,6 +324,8 @@ function display_graph1(svg_already_exists, svg) {
             .on("mouseout", function () {
                 tooltip.classed("hidden", true);
             });
+
+        set_legende_graph1(datas);
 
         d3.select("#user-select").on("change", (event) => {
             console.log(event.target.value);
