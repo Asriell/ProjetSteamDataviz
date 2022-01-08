@@ -68,4 +68,77 @@ function display_graph1() {
          .attr("width", 5)
          .attr("height", function(d) { return height - yScale(Math.log(d.playtime_forever)); });
     });
+
+    
+    USER = "Asriel";
+    PERIOD = "2 Weeks";
+    TODAY = new Date();
+    dd = String(TODAY.getDate()).padStart(2, "0");
+    mm = String(TODAY.getMonth() + 1).padStart(2, "0"); //January is 0!
+    yyyy = TODAY.getFullYear();
+    TODAY = yyyy + "-" + mm + "-" + dd;
+    d3.json("steam-players-data.json").then((json) => {
+    //console.log(json);
+    var data = Object.values(json.players).filter(
+        (player) => player.persona_name == USER
+    );
+    //console.log(data);
+    tmpData = {};
+    for (var entry of data) {
+        if (!entry.game_duration.includes("day")) {
+        tmpData[entry.game_end] = entry;
+        }
+    }
+    data = tmpData;
+    console.log(data);
+    //console.log(TODAY);
+    inf = "1970-01-01";
+    if (PERIOD == "2 Weeks") {
+        /*[inf, yyyyInf, mmInf, ddInf] = DifferenceDate(
+        30,
+        parseInt(dd),
+        parseInt(mm),
+        parseInt(yyyy)
+        );*/
+        inf = new Date(TODAY)
+        console.log(inf);
+        //console.log(inf, +"   " + yyyyInf + "    " + mmInf + "    " + ddInf);
+        /*
+        gameTimePerDay = {};
+        while (inf != TODAY) {
+        console.log(inf);
+        gameTimePerDay[inf] = "0:0:0";
+        for (entry of Object.keys(data)) {
+            if (data[entry].game_end.includes(inf)) {
+            gameTimePerDay[inf] = SumDurations(
+                gameTimePerDay[inf],
+                data[entry].game_duration
+            );
+            console.log("inf : " + inf + "   " + data[entry].game_duration);
+            }
+        }
+        [inf, yyyyInf, mmInf, ddInf] = SumDate(1, ddInf, mmInf, yyyyInf);
+        }
+        console.log(gameTimePerDay);*/
+    }
+    });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
