@@ -18,9 +18,12 @@
         <label for="user-select">Choix de l'utilisateur : </label>
         
         <select name="user" id="user-select">
-            <option selected value="Asriel">Asriel</option>
+            <option value="Asriel">Asriel</option>
             <option value="Mak-Dh">Mak-Dh</option>
-        </select>
+            <option value="Superbuddy">Supperbuddy</option>
+            <option value="Pyromaniaque">Pyromaniaque</option>
+            <option value="Yu-Gi-Oh!">Yu-Gi-Oh!</option>
+          </select>
         
         <label for="period-select">Période : </label>
         
@@ -33,6 +36,7 @@
         <div id="visu-activite1">
             <svg1></svg1>
             <script>
+                document.getElementById("user-select").value = "Asriel";
                 display_graph1(false, undefined);
             </script>
         </div>
