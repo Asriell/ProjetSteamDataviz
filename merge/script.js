@@ -261,7 +261,7 @@ function display_graph1(svg_already_exists, svg) {
             .attr("class","abscisses")
             .call(x_axis)
             .data(datas)
-            .html((d)=>d)
+            .html((d)=>{console.log(d.value); return d.value})
             //.text("Day");
 
         svg1
