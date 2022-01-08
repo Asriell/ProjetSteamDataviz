@@ -339,10 +339,15 @@ function display_graph1(svg_already_exists, svg) {
                 .data(datas)
                 .transition()
                 .duration(1000)
+                .attr("x", function (d) {
+                    //console.log(xScale(d.id));
+                    return xScale(d.id) + start_margin;
+                })
                 .attr("y", function (d) {
                     //console.log(d.playtime_forever);
                     return yScale(d.playtime);
                 })
+
                 .attr("height", function (d) {
                     return height - yScale(d.playtime);
                 });
@@ -355,8 +360,8 @@ function display_graph1(svg_already_exists, svg) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            svg1.remove();
-            display_graph1(false, undefined);
+            //svg1.remove();
+            display_graph1(true, svg1);
         });
 
 
