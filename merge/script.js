@@ -275,15 +275,15 @@ function display_graph1(svg_already_exists, svg, changebars=0) {
 
         if((!svg_already_exists) || changebars) {
             if (changebars) {
-                svg1.selectAll(".bar").remove();
+                svg1.selectAll(".bar").remove()
             }
             svg1
             .selectAll(".bar")
             .data(datas)
             .enter()
+            .append("rect")
             .transition()
             .duration(1000)
-            .append("rect")
             .attr("class", "bar")
             .attr("x", function (d) {
                 //console.log(xScale(d.id));
