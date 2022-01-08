@@ -56,5 +56,5 @@ IndentationError: unexpected indent
 ubuntu@192.168.166.214
 passwd : steam
 
-Lecture de JSON ne marche pas en local (erreur de CORS). Le codesandbox : https://codesandbox.io/s/optimistic-fire-wcrvl?file=/index.html
+Lecture de JSON ne marche pas en local (erreur de CORS). Le codesandbox : https://codesandbox.io/s/naughty-butterfly-237l9?file=/index.html
 
