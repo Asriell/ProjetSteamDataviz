@@ -355,8 +355,8 @@ function display_graph1(svg_already_exists, svg) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            d3.select("svg1").selectAll("svg").remove();
-            display_graph1(false, svg1);
+            svg1.remove();
+            display_graph1(false, undefined);
         });
 
 
