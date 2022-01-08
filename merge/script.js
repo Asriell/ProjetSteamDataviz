@@ -335,6 +335,8 @@ function display_graph1(svg_already_exists, svg) {
             });
         } else {
             svg1.selectAll(".bar")
+                .transition()
+                .duration(1000)
                 .attr("y", height)
                 .attr("height", 0);
             svg1
