@@ -334,6 +334,7 @@ function display_graph1(svg_already_exists, svg) {
                 tooltip.classed("hidden", true);
             });
         } else {
+            svg1.selectAll(".bar").remove();
             svg1
                 .selectAll(".bar")
                 .data(datas)
