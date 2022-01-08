@@ -2,7 +2,15 @@ function traitement_data(x) {
     return Math.log(x);
 }
 
-function transform_data(dataset) {
+function transform_data_for_bar(dataset) {
+    console.log(dataset.players);
+    Object.entries(dataset).forEach(([key, value]) => {
+        value.playtime = traitement_data(value.playtime);
+    });
+    //console.log(dataset);
+}
+
+function transform_data_for_pie(dataset) {
     dataset.sort((a, b) => {
         return b.playtime_forever - a.playtime_forever;
     })
@@ -15,7 +23,7 @@ function transform_data(dataset) {
         element.id = newId;
         newId++;
     });
-    console.log(dataset);
+    //console.log(dataset);
 }
 
 $.get("https://store.steampowered.com/api/appdetails/?appids=242050", function (data) {
@@ -63,7 +71,8 @@ function display_graph1() {
         .select("body")
         .append("div")
         .attr("class", "hidden tooltip");
-    var distance_between_bars = 10;
+    var distance_between_bars = 50;
+    var bar_width = 30;
     var start_margin = 50;
     var margin = 20;
     var width = 800;
@@ -72,6 +81,8 @@ function display_graph1() {
     var total_width = width * 1.1;
     d3.json(urlplayersjson).then((json) => {
         //console.log(json);
+        transform_data_for_bar(json);
+
         var data = Object.values(json.players).filter(
             (player) =>
                 player.persona_name ==
@@ -154,11 +165,11 @@ function display_graph1() {
 
         console.log(
             "max : ",
-            d3.max(datas, (d) => Math.log(d.playtime))
+            d3.max(datas, (d) => d.playtime)
         );
         var yScale = d3
             .scaleLinear()
-            .domain([0, d3.max(datas, (d) => Math.log(d.playtime))])
+            .domain([0, d3.max(datas, (d) => d.playtime)])
             .range([height, margin]);
 
         var y_axis = d3.axisLeft().scale(yScale);
@@ -186,11 +197,11 @@ function display_graph1() {
             })
             .attr("y", function (d) {
                 //console.log(d.playtime_forever);
-                return yScale(Math.log(d.playtime));
+                return yScale(d.playtime);
             })
-            .attr("width", 5)
+            .attr("width", bar_width)
             .attr("height", function (d) {
-                return height - yScale(Math.log(d.playtime));
+                return height - yScale(d.playtime);
             })
             .on("mousemove", function (e, d) {
                 // on recupere la position de la souris,
@@ -235,7 +246,7 @@ function display_graph1() {
             });
 
         d3.select("#user-select").on("change", (event) => {
-            console.log(event.target.value);
+            //console.log(event.target.value);
             var data = Object.values(json.players).filter(
                 (player) =>
                     player.persona_name ==
@@ -306,10 +317,10 @@ function display_graph1() {
                 .duration(1000)
                 .attr("y", function (d) {
                     //console.log(d.playtime_forever);
-                    return yScale(Math.log(d.playtime));
+                    return yScale(d.playtime);
                 })
                 .attr("height", function (d) {
-                    return height - yScale(Math.log(d.playtime));
+                    return height - yScale(d.playtime);
                 });
         });
     });
@@ -333,7 +344,7 @@ function display_graph2() {
 
     // Create dummy data
     d3.csv(urlRaw).then(function (data) {
-        transform_data(data);
+        transform_data_for_pie(data);
         // set the color scale
         var color = d3.scaleOrdinal()
             .domain([0, d3.max(data, function (d) { return d.playtime_forever; })])
