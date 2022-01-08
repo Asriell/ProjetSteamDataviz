@@ -347,7 +347,7 @@ function display_graph1(svg_already_exists, svg) {
 
         d3.select("#period-select").on("change", (event) => {
             svg1.selectAll('*').remove();
-            display_graph1(true, svg1);
+            display_graph1(false, svg1);
         });
 
 
