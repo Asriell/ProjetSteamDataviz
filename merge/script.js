@@ -248,14 +248,12 @@ function display_graph1(svg_already_exists, svg) {
         var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
 
-        if (svg_already_exists) {
-            svg1.selectAll("g").remove();
-        }
-        svg1
+
+        if (!svg_already_exists) {
+            svg1
             .append("g")
-            .transition()
-            .duration(1000)
             .attr("transform", "translate(" + start_margin + "," + height + ")")
+            .attr("class", "abscisse")
             .call(x_axis)
             //.text("Day");
 
@@ -265,7 +263,21 @@ function display_graph1(svg_already_exists, svg) {
             .duration(1000)
             .call(y_axis)
             .attr("transform", "translate(" + start_margin + ",0)")
+            .attr("class", "ordonnee")
             //.text("Time played");
+        } else {
+            svg1
+                .selectAll(".abscisse")
+                .transition()
+                .duration(1000)
+                .call(x_axis)
+            
+            svg1
+                .selectAll(".ordonnee")
+                .transition()
+                .duration(1000)
+                .call(y_axis)
+        }
 
         if(!svg_already_exists) {
             svg1
