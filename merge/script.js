@@ -334,6 +334,7 @@ function display_graph1(svg_already_exists, svg) {
                 tooltip.classed("hidden", true);
             });
         } else {
+            svg1.selectAll(".bar").classed("hidden",true)
             svg1
                 .selectAll(".bar")
                 .data(datas)
@@ -350,7 +351,8 @@ function display_graph1(svg_already_exists, svg) {
 
                 .attr("height", function (d) {
                     return height - yScale(d.playtime);
-                });
+                })
+                .classed("hidden",false);
         }
 
         set_legende_graph1(datas);
