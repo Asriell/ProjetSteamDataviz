@@ -334,11 +334,12 @@ function display_graph1(svg_already_exists, svg) {
                 tooltip.classed("hidden", true);
             });
         } else {
-            svg1.selectAll(".bar").classed("hidden",true)
+            svg1.selectAll(".bar")
+                .attr("y", 0)
+                .attr("height", 0);
             svg1
                 .selectAll(".bar")
                 .data(datas)
-                .classed("hidden",false)
                 .transition()
                 .duration(1000)
                 .attr("x", function (d) {
