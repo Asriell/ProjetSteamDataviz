@@ -80,8 +80,63 @@ var SumDurations = function (duration1, duration2) {
     return String(h) + ":" + String(m) + ":" + String(s);
 };
 
-var USER = "Asriel";
-var PERIOD = "1 Month";
+var DataCleaning = function (data, user) {
+    console.log("data : ", data, "  user : ", user);
+    var datasUser = Object.values(data.players).filter(
+      (player) => player.persona_name == user
+      //document.getElementById("user-select").value
+    );
+    console.log("datasUser : ", datasUser);
+    //console.log(data);
+    tmpData = {};
+    for (var entry in datasUser) {
+      if (!datasUser[entry].game_duration.includes("day")) {
+        if (entry != 0) {
+          date1 = new Date(datasUser[entry - 1].game_end);
+          date2 = new Date(datasUser[entry].game_end);
+          datediff = Math.abs(date2 - date1) / 1000;
+          dureeJeuSecondes = parseInt(
+            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) *
+              3600 +
+              parseInt(ParseDuration(datasUser[entry].game_duration)[1]) *
+                60 +
+              parseInt(ParseDuration(datasUser[entry].game_duration)[2])
+          );
+          if (datediff > 5 && datediff >= dureeJeuSecondes) {
+            console.log(
+              datasUser[entry].game_end,
+              "   ",
+              datediff,
+              "   ",
+              ParseDuration(datasUser[entry].game_duration),
+              "  ",
+              dureeJeuSecondes
+            );
+            tmpData[datasUser[entry].game_end] = datasUser[entry];
+            if (
+              parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
+              12
+            ) {
+              tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+            }
+          }
+        } else {
+          tmpData[datasUser[entry].game_end] = datasUser[entry];
+          if (
+            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) > 12
+          ) {
+            tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+          }
+        }
+      }
+    }
+    console.log("tmpData : ", tmpData);
+    return tmpData;
+  };
+
+
+//var USER = "Asriel";
+//var PERIOD = "1 Month";
 var TODAY = formatDate(new Date());
 const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
 const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
@@ -102,20 +157,10 @@ function display_graph1(svg_already_exists, svg) {
     d3.json(urlplayersjson).then((json) => {
         //console.log(json);
         transform_data_for_bar(json);
-
-        var data = Object.values(json.players).filter(
-            (player) =>
-                player.persona_name ==
-                document.getElementById("user-select").value
-        );
-        //console.log(data);
-        tmpData = {};
-        for (var entry of data) {
-            if (!entry.game_duration.includes("day")) {
-                tmpData[entry.game_end] = entry;
-            }
-        }
-        data = tmpData;
+        data = DataCleaning(
+            json,
+            document.getElementById("user-select").value
+          );
         //console.log(data);
 
         inf = "1970-01-01";
