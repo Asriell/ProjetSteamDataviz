@@ -468,12 +468,12 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
             } else {
-                /*
-                svg1.selectAll("rect")
+                
+                groups.selectAll("rect")
                     .transition()
                     .duration(1000)
                     .attr("y", height)
-                    .attr("height", 0);*/
+                    .attr("height", 0);
                 groups
                     .selectAll("rect")
                     .data(d => d)
