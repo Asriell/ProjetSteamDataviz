@@ -443,7 +443,7 @@ function display_graph1(svg_already_exists, svg) {
                 .selectAll("rect")
                 .data(d => d)
                 .enter()
-                .append(rect)
+                .append("rect")
                 .attr("x",(d) => xScale(d.id) + start_margin)
                 .attr("width", bar_width)
                 .attr("y",(d)=> yScale(d[1]))
