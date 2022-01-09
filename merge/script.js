@@ -307,6 +307,14 @@ function display_graph1(svg_already_exists, svg) {
                             .offset(d3.stackOffsetNone);
             const series = stack(datas);
             console.log(series);
+            var x = d3.scaleBand()
+                    .domain(datas.map(d => d.date))
+                    .range([0, width])
+                    .padding(0.1);
+
+            var y = d3.scaleLinear()
+                        .domain([0, d3.max(series[series.length - 1], d => d[1])])
+                        .range([height, 0]);
             var groups = svg1.selectAll("g.games")
                             .data(series)
                             .enter()
@@ -444,10 +452,10 @@ function display_graph1(svg_already_exists, svg) {
                 .data(d => d)
                 .enter()
                 .append("rect")
-                .attr("x",(d) => xScale(d.id) + start_margin)
-                .attr("width", bar_width)
-                .attr("y",(d)=> yScale(d[1]))
-                .attr("height", (d)=> height - yScale(d[0]-d[1]));
+                .attr("x",(d) => x(d.date))
+                .attr("width", x.bandwidth)
+                .attr("y",(d)=> y(d[1]))
+                .attr("height", (d)=> height - y(d[0]-d[1]));
 
 
         }
