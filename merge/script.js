@@ -613,7 +613,7 @@ function display_graph1(svg_already_exists, svg) {
 
 
 function addLegend(colors,keys,total_width,start_margin,margin) {
-    legendCellSize = total_width/keys.length;
+    legendCellSize = 80 * keys.length;
     colorsKeys = [];
     for (var i in keys) {
         colorsKeys.push(colors(i));
