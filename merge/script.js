@@ -646,7 +646,7 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i * spacingBeetweenCells + 10) + ", " + 0 + ")")
+            .attr("transform", (d,i) => "translate(" + (i * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
             .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
