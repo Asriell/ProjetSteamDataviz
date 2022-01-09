@@ -622,7 +622,7 @@ function addLegend(colors,keys,svg) {
     //console.log("legend removed");
     //let svg1 = svg.append("svg1");
     let legend = svg.append('g')
-        .attr('transform', 'translate(-20, 20)')
+        .attr('transform', 'translate(10, 20)')
         .attr("class","legendDetails");
         
     legend.selectAll()
