@@ -629,14 +629,18 @@ function addLegend(colors,keys,svg) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
+            /*
             .attr('x', 5)
             .attr('y', (d,i) => i * legendCellSize)
+            */
+            .attr('y', 5)
+            .attr('x', (d,i) => i * legendCellSize)
             .style("fill", d => d);
     
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (legendCellSize + 10) + ", " + (i * legendCellSize) + ")")
+            .attr("transform", (d,i) => "translate(" + (legendCellSize + (i * legendCellSize)) + ", " + 10 + ")")
             .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
