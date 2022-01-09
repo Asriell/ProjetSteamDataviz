@@ -462,19 +462,20 @@ function display_graph1(svg_already_exists, svg) {
                 .data(d => d)
                 .enter()
                 .append("rect")
-                .attr("class","bar")
+                //.attr("class","bar")
                 .attr("x",(d) => {console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d); return xScale(d.data.id);})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
             } else {
-                svg1.selectAll(".bar")
+                /*
+                svg1.selectAll("rect")
                     .transition()
                     .duration(1000)
                     .attr("y", height)
-                    .attr("height", 0);
+                    .attr("height", 0);*/
                 svg1
-                    .selectAll(".bar")
+                    .selectAll("rect")
                     .data(series)
                     .transition()
                     .duration(1000)
