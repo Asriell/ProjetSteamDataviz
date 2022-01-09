@@ -584,7 +584,7 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         set_legende_graph1(datas);
-        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,svg1);
+        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
         
         d3.select("#user-select").on("change", (event) => {
             console.log("change");
@@ -612,17 +612,24 @@ function display_graph1(svg_already_exists, svg) {
 }
 
 
-function addLegend(colors,keys,svg1) {
+function addLegend(colors,keys,total_width,start_margin,margin) {
     legendCellSize = 20,
     colorsKeys = [];
     for (var i in keys) {
         colorsKeys.push(colors(i));
     }
-    d3.selectAll(".legendDetails").remove();
+    d3.select("svg1").selectAll(".legendDetails").remove();
     //console.log("legend removed");
-    let legend = d3.select("svg1").append('g')
-        //.attr('transform', 'translate(10, 20)')
-        .attr("class","legendDetails");
+    let legend = d3
+                    .select("svg1")
+                    .append("svg")
+                    .attr("width", total_width)
+                    .attr("height", 20)
+                    .attr(
+                        "transform",
+                        "translate(" + start_margin + "," + margin + ")"
+                    )
+                    .attr("class","legendDetails");
         
     legend.selectAll()
         .data(colorsKeys)
@@ -630,7 +637,7 @@ function addLegend(colors,keys,svg1) {
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
             .attr('x', 5)
-            .attr('y', (d,i) => i * legendCellSize)
+            //.attr('y', (d,i) => i * legendCellSize)
             .style("fill", d => d);
     
     legend.selectAll()
