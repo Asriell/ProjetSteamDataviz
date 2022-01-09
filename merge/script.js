@@ -271,6 +271,22 @@ function display_graph1(svg_already_exists, svg) {
             }
         }
 
+        
+        if(!svg_already_exists){
+            var svg1 = d3
+                .select("svg1")
+                .append("svg")
+                .attr("width", total_width)
+                .attr("height", total_height)
+                .attr(
+                    "transform",
+                    "translate(" + start_margin + "," + margin + ")"
+                );
+        }
+        else {
+            var svg1 = svg;
+        }
+
         if (document.getElementById("details-checkbox").checked) {
             var color = d3
                             .scaleQuantize()
@@ -296,22 +312,6 @@ function display_graph1(svg_already_exists, svg) {
                             .enter()
                             .append("g")
                             .style("fill", (d, i) => color(i));
-        }
-
-
-        if(!svg_already_exists){
-            var svg1 = d3
-                .select("svg1")
-                .append("svg")
-                .attr("width", total_width)
-                .attr("height", total_height)
-                .attr(
-                    "transform",
-                    "translate(" + start_margin + "," + margin + ")"
-                );
-        }
-        else {
-            var svg1 = svg;
         }
 
         var xScale = d3
