@@ -456,17 +456,40 @@ function display_graph1(svg_already_exists, svg) {
                     })
             }
         } else {
-            groups
+            if(!svg_already_exists) {
+                groups
                 .selectAll("rect")
                 .data(d => d)
                 .enter()
                 .append("rect")
+                .attr("class","bar")
                 .attr("x",(d) => {console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d); return xScale(d.data.id);})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
-
-
+            } else {
+                svg1.selectAll(".bar")
+                    .transition()
+                    .duration(1000)
+                    .attr("y", height)
+                    .attr("height", 0);
+                svg1
+                    .selectAll(".bar")
+                    .data(series)
+                    .transition()
+                    .duration(1000)
+                    .attr("x", function (d) {
+                        //console.log(xScale(d.id));
+                        return xScale(d.data.id);
+                    })
+                    .attr("y", function (d) {
+                        //console.log(d.playtime_forever);
+                        return y(d[1]);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d[1]-d[0]);
+                    })
+            }
         }
 
         set_legende_graph1(datas);
