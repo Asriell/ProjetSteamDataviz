@@ -471,6 +471,7 @@ function display_graph1(svg_already_exists, svg) {
             } else {
                 
                 svg1.selectAll(".games")
+                    .selectAll("rect")
                     .transition()
                     .duration(1000)
                     .attr("y", height)
