@@ -309,12 +309,11 @@ function display_graph1(svg_already_exists, svg) {
             console.log(series);
             var x = d3.scaleBand()
                     .domain(datas.map(d => d.date))
-                    .range([0, width])
-                    .padding(0.1);
+                    .range([0, distance_between_bars])
 
             var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
-                        .range([height, 0]);
+                        .range([height, margin]);
             var groups = svg1.selectAll("g.games")
                             .data(series)
                             .enter()
@@ -452,8 +451,8 @@ function display_graph1(svg_already_exists, svg) {
                 .data(d => d)
                 .enter()
                 .append("rect")
-                .attr("x",(d) => x(d.date))
-                .attr("width", x.bandwidth)
+                .attr("x",(d) => x(d.date) + start_margin)
+                .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[0]-d[1]));
 
