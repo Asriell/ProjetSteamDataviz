@@ -577,6 +577,9 @@ function display_graph1(svg_already_exists, svg) {
                             " s."
                         );
                 })
+                .on("mouseout", function () {
+                    tooltip.classed("hidden", true);
+                });
             }
         }
 
