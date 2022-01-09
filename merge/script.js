@@ -621,7 +621,7 @@ function addLegend(colors,keys,svg1) {
     svg1.selectAll(".legendDetails").remove();
     //console.log("legend removed");
     let legend = svg1.append('g')
-        .attr('transform', 'translate(-20, 20)')
+        .attr('transform', 'translate(10, 20)')
         .attr("class","legendDetails");
         
     legend.selectAll()
@@ -629,14 +629,14 @@ function addLegend(colors,keys,svg1) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', 5)
+            .attr('x', 0)
             .attr('y', (d,i) => i * legendCellSize)
             .style("fill", d => d);
     
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (legendCellSize + 10) + ", " + (i * legendCellSize) + ")")
+            .attr("transform", (d,i) => "translate(" + (legendCellSize + 5) + ", " + (i * legendCellSize) + ")")
             .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
