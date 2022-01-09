@@ -274,7 +274,7 @@ function display_graph1(svg_already_exists, svg) {
             console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
             datas.map((d) => {
                 for (game of gamesPlayed) {
-                    if (!d.includes(game)) {
+                    if (!Object.keys(d).includes(game)) {
                         d[game] = 0;
                     }
                 }
