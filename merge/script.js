@@ -477,8 +477,9 @@ function display_graph1(svg_already_exists, svg) {
                     .attr("y", height)
                     .attr("height", 0);
                     
-                svg1.selectAll(".games")
+                    groups
                     .selectAll("rect")
+                    .data(d => d)
                     .data(series)
                     .transition()
                     .duration(1000)
