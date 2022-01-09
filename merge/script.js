@@ -236,18 +236,17 @@ function display_graph1(svg_already_exists, svg) {
                 element = {}
                 element["id"] = id;
                 element["date"] = Object.keys(gameTimePerDay)[id];
-                idGame = 0;
+                element["games"] = []
                 for (game of Object.keys(val)) {
                     if (game != "total") {
-                        element[game] = {}
-                        element[game]["id"] = idGame;
+                        elementGames = {}
                         splitVal = val[game].split(":");
                         valInSeconds =
                             splitVal[2] * Math.pow(60, 0) +
                             splitVal[1] * Math.pow(60, 1) +
                             splitVal[0] * Math.pow(60, 2);
-                        element[game]["playtime"] = valInSeconds;
-                        idGame ++;
+                        elementGames["playtime"] = valInSeconds;
+                        element.games.push(elementGames);
                     }
                 }
                 datas.push(element);
