@@ -614,6 +614,7 @@ function display_graph1(svg_already_exists, svg) {
 
 function addLegend(colors,keys,svg) {
     legendCellSize = 20,
+    width = 8000
     colorsKeys = [];
     for (var i in keys) {
         colorsKeys.push(colors(i));
@@ -636,7 +637,7 @@ function addLegend(colors,keys,svg) {
             .attr('y', 5)
             .attr('x', (d,i) => i * legendCellSize)
             .style("fill", d => d);
-    
+    /*
     legend.selectAll()
         .data(keys)
         .enter().append('text')
@@ -645,6 +646,7 @@ function addLegend(colors,keys,svg) {
             .style("font-size", "13px")
             .style("fill", "grey")
             .text(d => d);
+    */
 }
 
 
