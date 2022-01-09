@@ -290,7 +290,8 @@ function display_graph1(svg_already_exists, svg) {
         if (document.getElementById("details-checkbox").checked) {
             var color = d3
                             .scaleQuantize()
-                            .range(["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"]);
+                            .range(["#ff0000", "#00ff00", "#0000ff"]);
+                            //.range(["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"])
             color.domain([0,gamesPlayed.length]);
             console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
             datas.map((d) => {
