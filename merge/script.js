@@ -620,8 +620,8 @@ function addLegend(colors,keys,svg1) {
     }
     svg1.selectAll(".legendDetails").remove();
     //console.log("legend removed");
-    let legend = svg1.append('g')
-        .attr('transform', 'translate(-20, 20)')
+    let legend = d3.select("svg1").append('g')
+        .attr('transform', 'translate(10, 20)')
         .attr("class","legendDetails");
         
     legend.selectAll()
