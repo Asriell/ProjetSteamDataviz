@@ -186,12 +186,11 @@ function display_graph1(svg_already_exists, svg) {
             if (document.getElementById("details-checkbox").checked) {
                 games = [];
                 for (entry of Object.values(data)) {
-                    console.log("test",entry.game_end, "   ", entry.game_name,"   ",entry )
                     if ((!entry.game_name in games) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
-                        console.log("ok");
+                        //console.log("ok");
                     }
-                    //console.log("games : ",games, "    ",Object.values(data));
+                    console.log("games : ",games);
                 }
             } else {
                 gameTimePerDay[inf] = "0:0:0";
