@@ -522,8 +522,10 @@ function addLegend(colors,keys,svg1) {
     for (var i in keys) {
         colorsKeys.push(colors(i));
     }
+    svg1.selectAll(".legendDetals").remove();
     let legend = svg1.append('g')
-        .attr('transform', 'translate(10, 20)');
+        .attr('transform', 'translate(10, 20)')
+        .attr("class","legendDetails");
         
     legend.selectAll()
         .data(colorsKeys)
