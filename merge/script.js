@@ -493,7 +493,7 @@ function display_graph1(svg_already_exists, svg) {
                         )
                         // on recupere le nom de l'etat
                         .html(
-                            d.date +
+                            d.data.date +
                             " | Jeu : " + Object.keys(d.data).find(key => d.data[key] === d[1]) + " Temps de jeu : " +
                             parseInt(d[1] / 3600) +
                             " h " +
