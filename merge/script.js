@@ -190,7 +190,7 @@ function display_graph1(svg_already_exists, svg) {
                         games.push(entry.game_name)
                     }
                     gameTimePerDay[inf] = {}
-                    gameTimePerDay[inf][total] = "0:0:0";
+                    gameTimePerDay[inf]["total"] = "0:0:0";
                     if (games.length != 0) {
                         for (game of games) {
                             gameTimePerDay[inf][game] = "0:0:0";
@@ -201,8 +201,8 @@ function display_graph1(svg_already_exists, svg) {
                                         data[entry].game_duration
                                     );
 
-                                    gameTimePerDay[inf][total] = SumDurations(
-                                        gameTimePerDay[inf][total],
+                                    gameTimePerDay[inf]["total"] = SumDurations(
+                                        gameTimePerDay[inf]["total"],
                                         data[entry].game_duration
                                     );
                                 }
