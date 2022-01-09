@@ -8,7 +8,7 @@
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="script.js"></script>
 
-        <title>Good Graphs</title>
+        <title>Graphes Vapeur</title>
 
         <h1>Visualisation des activités Steam par joueur</h1>
     </head>
@@ -38,6 +38,7 @@
         <label for="details">Détail des jeux</label>
         <!--Un div pour chaque chart qu'on fait-->
         <div id="visu-activite1">
+            <div id="legende1">hello</div>
             <svg1></svg1>
             <script>
                 document.getElementById("user-select").value = "Asriel";
@@ -45,13 +46,12 @@
                 document.getElementById("details-checkbox").checked = false;
                 display_graph1(false, undefined);
             </script>
-            <div id="legende1">hello</div>
         </div>
 
         <div id="visu-activite2">
             <svg2 width="600" height="500"></svg2>
             <script>display_graph2()</script>
-            A magnificent diagramme camembert
+            Votre temps total réparti sur la période
         </div>
         <div id="visu-activite3"></div>
 
