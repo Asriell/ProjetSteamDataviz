@@ -483,6 +483,7 @@ function display_graph1(svg_already_exists, svg) {
 
 
 function addLegend(colors,keys,svg1) {
+    legendCellSize = 20,
     colorsKeys = [];
     for (var i in keys) {
         colorsKeys.push(colors(i));
