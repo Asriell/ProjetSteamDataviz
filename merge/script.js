@@ -502,17 +502,17 @@ function display_graph1(svg_already_exists, svg) {
                         // on recupere le nom de l'etat
                         .html(
                             d.data.date +
-                            " | Jeu : " + (Object.keys(d.data).find(key => d.data[key] === d[1]) == undefined ? Object.keys(d.data).find(key => d.data[key] === d[0] - d[1]) : Object.keys(d.data).find(key => d.data[key] === d[1])) + " | Temps de jeu : " +
-                            parseInt(d[1] / 3600) +
+                            " | Jeu : " + Object.keys(d.data).find(key => d.data[key] === d[1] - d[0]) + " | Temps de jeu : " +
+                            parseInt((d[1] - d[0]) / 3600) +
                             " h " +
                             parseInt(
-                                (d[1] - parseInt(d[1] / 3600) * 3600) / 60
+                                ((d[1] - d[0]) - parseInt((d[1] - d[0]) / 3600) * 3600) / 60
                             ) +
                             " m " +
-                            (d[1] -
-                                (parseInt(d[1] / 3600) * 3600 +
+                            ((d[1] - d[0]) -
+                                (parseInt((d[1] - d[0]) / 3600) * 3600 +
                                     parseInt(
-                                        (d[1] - parseInt(d[1] / 3600) * 3600) / 60
+                                        ((d[1] - d[0]) - parseInt((d[1] - d[0]) / 3600) * 3600) / 60
                                     ) *
                                     60)) +
                             " s."
