@@ -622,7 +622,7 @@ function addLegend(colors,keys,svg) {
     svg.selectAll(".legendDetails").remove();
     //console.log("legend removed");
     let legend = svg.append('g')
-        .attr('transform', 'translate(100, 20)')
+        .attr('transform', 'translate(10, 20)')
         .attr("class","legendDetails");
         
     legend.selectAll()
@@ -630,12 +630,8 @@ function addLegend(colors,keys,svg) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            /*
             .attr('x', 5)
             .attr('y', (d,i) => i * legendCellSize)
-            */
-            .attr('y', 5)
-            .attr('x', (d,i) => i * legendCellSize)
             .style("fill", d => d);
     /*
     legend.selectAll()
