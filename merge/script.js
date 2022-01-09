@@ -483,7 +483,7 @@ function display_graph1(svg_already_exists, svg) {
                     .transition()
                     .duration(1000)
                     .attr("x", function (d) {
-                        //console.log(xScale(d.id));
+                        console.log("xScale : " + xScale(d.id) + "  d : " + d);
                         return xScale(d.data.id);
                     })
                     .attr("y", function (d) {
