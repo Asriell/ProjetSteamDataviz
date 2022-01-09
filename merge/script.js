@@ -240,6 +240,7 @@ function display_graph1(svg_already_exists, svg) {
                 for (game of Object.keys(val)) {
                     if (game != "total") {
                         elementGames = {}
+                        elementGames["name"] = game;
                         splitVal = val[game].split(":");
                         valInSeconds =
                             splitVal[2] * Math.pow(60, 0) +
