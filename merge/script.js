@@ -487,7 +487,7 @@ function display_graph1(svg_already_exists, svg) {
                     // e est l'object event d
                     //console.log(d);
                     var mousePosition = [e.x, e.y];
-                    console.log(mousePosition);
+                    //console.log(mousePosition);
                     // on affiche le toolip
                     tooltip
                         .classed("hidden", false)
