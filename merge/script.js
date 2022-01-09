@@ -270,9 +270,16 @@ function display_graph1(svg_already_exists, svg) {
             }
         }
 
-        console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
-
         if (document.getElementById("details-checkbox").checked) {
+            console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
+            datas.map((d) => {
+                for (game of gamesPlayed) {
+                    if (!d.includes(game)) {
+                        d[game] = 0;
+                    }
+                }
+            });
+            console.log("datas : ", datas);
             const stack = d3.stack()
                             .keys(gamesPlayed)
                             .order(d3.stackOrderNone)
