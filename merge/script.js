@@ -232,19 +232,19 @@ function display_graph1(svg_already_exists, svg) {
         datas = [];
         var id = 0;
         if (document.getElementById("details-checkbox").checked) {
+            gamesPlayed = [];
             for (val of Object.values(gameTimePerDay)) {
                 element = {}
-                element["id"] = id;
                 element["date"] = Object.keys(gameTimePerDay)[id];
-                element["games"] = {}
                 for (game of Object.keys(val)) {
                     if (game != "total") {
+                        if(!gamesPlayed.includes(game))gamesPlayed.push(game);
                         splitVal = val[game].split(":");
                         valInSeconds =
                             splitVal[2] * Math.pow(60, 0) +
                             splitVal[1] * Math.pow(60, 1) +
                             splitVal[0] * Math.pow(60, 2);
-                        element["games"][game] = valInSeconds;
+                        element[game] = valInSeconds;
                     }
                 }
                 datas.push(element);
@@ -270,7 +270,16 @@ function display_graph1(svg_already_exists, svg) {
             }
         }
 
-        console.log("datas : ", datas);
+        console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
+
+        if (document.getElementById("details-checkbox").checked) {
+            const stack = d3.stack()
+                            .keys(gamesPlayed)
+                            .order(d3.stackOrderNone)
+                            .offset(d3.stackOffsetNone);
+            const series = stack(datas);
+            console.log(series);
+        }
 
 
         if(!svg_already_exists){
