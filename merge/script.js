@@ -613,7 +613,7 @@ function display_graph1(svg_already_exists, svg) {
 
 
 function addLegend(colors,keys,total_width,start_margin,margin) {
-    legendCellSize = 20,
+    legendCellSize = total_width/keys.length;
     colorsKeys = [];
     for (var i in keys) {
         colorsKeys.push(colors(i));
@@ -636,7 +636,7 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', 5)
+            .attr('x', (d,i) => i * legendCellSize)
             //.attr('y', (d,i) => i * legendCellSize)
             .style("fill", d => d);
     
