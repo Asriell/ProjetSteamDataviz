@@ -231,23 +231,50 @@ function display_graph1(svg_already_exists, svg) {
         console.log("GTPD : ",gameTimePerDay);
         datas = [];
         var id = 0;
-        for (val of Object.values(gameTimePerDay)) {
-            element = {};
-            element["id"] = id;
-
-            // Date formatting
-            element["date"] = Object.keys(gameTimePerDay)[id];
-
-            splitVal = val.split(":");
-            valInSeconds =
-                splitVal[2] * Math.pow(60, 0) +
-                splitVal[1] * Math.pow(60, 1) +
-                splitVal[0] * Math.pow(60, 2);
-            element["playtime"] = valInSeconds;
-            console.log(splitVal, " | ", valInSeconds);
-            datas.push(element);
-            id++;
+        if (document.getElementById("details-checkbox").checked) {
+            for (val of Object.values(gameTimePerDay)) {
+                element = {}
+                element["id"] = id;
+                element["date"] = Object.keys(gameTimePerDay)[id];
+                idGame = 0;
+                for (game of Object.keys(val)) {
+                    if (game != total) {
+                        element[game] = {}
+                        element[game]["id"] = idGame;
+                        splitVal = val[game].split(":");
+                        valInSeconds =
+                            splitVal[2] * Math.pow(60, 0) +
+                            splitVal[1] * Math.pow(60, 1) +
+                            splitVal[0] * Math.pow(60, 2);
+                        element[game]["playtime"] = valInSeconds;
+                        idGame ++;
+                    }
+                }
+                datas.push(element);
+                id++;
+            }
+        } else {
+            for (val of Object.values(gameTimePerDay)) {
+                element = {};
+                element["id"] = id;
+    
+                // Date formatting
+                element["date"] = Object.keys(gameTimePerDay)[id];
+    
+                splitVal = val.split(":");
+                valInSeconds =
+                    splitVal[2] * Math.pow(60, 0) +
+                    splitVal[1] * Math.pow(60, 1) +
+                    splitVal[0] * Math.pow(60, 2);
+                element["playtime"] = valInSeconds;
+                console.log(splitVal, " | ", valInSeconds);
+                datas.push(element);
+                id++;
+            }
         }
+
+        console.log("datas : ", datas);
+
 
         if(!svg_already_exists){
             var svg1 = d3
