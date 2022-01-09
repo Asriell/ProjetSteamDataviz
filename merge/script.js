@@ -189,7 +189,7 @@ function display_graph1(svg_already_exists, svg) {
                     if ((!entry.game_name in games) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
                     }
-                    console.log("games : ",games);
+                    console.log("games : ",games, "    ",Object.values(data));
                 }
             } else {
                 gameTimePerDay[inf] = "0:0:0";
