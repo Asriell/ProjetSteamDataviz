@@ -629,7 +629,7 @@ function addLegend(colors,keys,svg1) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', 0)
+            .attr('x', -20)
             .attr('y', (d,i) => i * legendCellSize)
             .style("fill", d => d);
     
