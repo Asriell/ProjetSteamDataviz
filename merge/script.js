@@ -500,7 +500,7 @@ function display_graph1(svg_already_exists, svg) {
                             "px; top:" +
                             (mousePosition[1] - 35) +
                             "px"
-                        )
+                        ).attr("x", mousePosition[0] + 15).attr("y", mousePosition[1] - 35)
                         // on recupere le nom de l'etat
                         .html(
                             d.data.date +
@@ -557,7 +557,7 @@ function display_graph1(svg_already_exists, svg) {
                             "px; top:" +
                             (mousePosition[1] - 35) +
                             "px"
-                        )
+                        ).attr("x", mousePosition[0] + 15).attr("y", mousePosition[1] - 35)
                         // on recupere le nom de l'etat
                         .html(
                             d.data.date +
