@@ -476,10 +476,10 @@ function display_graph1(svg_already_exists, svg) {
                     .duration(1000)
                     .attr("y", height)
                     .attr("height", 0);
-                    /*
-                groups
+                    
+                svg1.selectAll(".games")
                     .selectAll("rect")
-                    .data(d => d)
+                    .data(series)
                     .transition()
                     .duration(1000)
                     .attr("x", function (d) {
@@ -492,7 +492,7 @@ function display_graph1(svg_already_exists, svg) {
                     })
                     .attr("height", function (d) {
                         return height - y(d[1]-d[0]);
-                    })*/
+                    })
             }
         }
 
