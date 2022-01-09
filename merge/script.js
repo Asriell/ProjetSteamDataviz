@@ -356,15 +356,10 @@ function display_graph1(svg_already_exists, svg) {
             .domain([0, d3.max(datas, (d) => d.playtime)])
             .range([height, margin]);
 
-<<<<<<< HEAD
-        var y_axis = d3.axisLeft().scale(yScale);
-        //console.log(xScale(5));
-=======
         
         var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
         //var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
->>>>>>> 9f14f611e1000b2cbb48bcb8e626a5b612ff7bd0
 
         if (!svg_already_exists) {
         svg1
