@@ -228,7 +228,7 @@ function display_graph1(svg_already_exists, svg) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        console.log(gameTimePerDay);
+        console.log("GTPD : ",gameTimePerDay);
         datas = [];
         var id = 0;
         for (val of Object.values(gameTimePerDay)) {
