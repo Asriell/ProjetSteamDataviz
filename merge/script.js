@@ -324,6 +324,7 @@ function display_graph1(svg_already_exists, svg) {
             var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
                         .range([height, margin]);
+            svg1.selectAll(".games").remove();
             var groups = svg1.selectAll("g.games")
                             .data(series)
                             .enter()
@@ -469,30 +470,18 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
             } else {
-                
-                svg1.selectAll(".games")
-                    .selectAll("rect")
-                    .transition()
-                    .duration(1000)
-                    .attr("y", height)
-                    .attr("height", 0);
-                    
-                    svg1.selectAll(".games")
-                    .selectAll("rect")
-                    .data(d=>d)
-                    .transition()
-                    .duration(1000)
-                    .attr("x", function (d) {
-                        console.log("xScale : " + xScale(d.id) + "  d : " + d);
-                        return xScale(d.data.id);
-                    })
-                    .attr("y", function (d) {
-                        //console.log(d.playtime_forever);
-                        return y(d[1]);
-                    })
-                    .attr("height", function (d) {
-                        return height - y(d[1]-d[0]);
-                    })
+
+                groups
+                .selectAll("rect")
+                .data(d => d)
+                .enter()
+                .append("rect")
+                .transition()
+                .duration(1000)
+                .attr("x",(d) => {console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d); return xScale(d.data.id);})
+                .attr("width", bar_width)
+                .attr("y",(d)=> y(d[1]))
+                .attr("height", (d)=> height - y(d[1]-d[0]));
             }
         }
 
