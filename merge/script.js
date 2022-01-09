@@ -451,7 +451,7 @@ function display_graph1(svg_already_exists, svg) {
                 .data(d => d)
                 .enter()
                 .append("rect")
-                .attr("x",(d) => x(d.date))
+                .attr("x",(d) => {console.log("scale x : ",x(d.date)); return x(d.date);})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
