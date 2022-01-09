@@ -291,6 +291,11 @@ function display_graph1(svg_already_exists, svg) {
                             .offset(d3.stackOffsetNone);
             const series = stack(datas);
             console.log(series);
+            var groups = svg1.selectAll("g.games")
+                            .data(series)
+                            .enter()
+                            .append("g")
+                            .style("fill", (d, i) => color(i));
         }
 
 
@@ -328,13 +333,6 @@ function display_graph1(svg_already_exists, svg) {
         var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
 
-        if (document.getElementById("details-checkbox").checked) {
-            let groups = svg1.selectAll("g.games")
-                            .data(series)
-                            .enter()
-                            .append("g")
-                            .style("fill", (d, i) => color(i));
-        }
         if (!svg_already_exists) {
         svg1
             .append("g")
@@ -441,12 +439,7 @@ function display_graph1(svg_already_exists, svg) {
                     })
             }
         } else {
-            svg1
-                .selectAll(".bar")
-                .data(series)
-                .enter()
-                .append("g")
-                .style("fill",(d,i)=> color(i))
+            groups
                 .selectAll("rect")
                 .data(d => d)
                 .enter()
