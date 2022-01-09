@@ -460,6 +460,7 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         set_legende_graph1(datas);
+        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,svg1);
         
         d3.select("#user-select").on("change", (event) => {
             display_graph1(true, svg1);
@@ -478,6 +479,34 @@ function display_graph1(svg_already_exists, svg) {
 
         
     });
+}
+
+
+function addLegend(colors,keys,svg1) {
+    colorsKeys = [];
+    for (var i in keys) {
+        colorsKeys.push(colors(i));
+    }
+    let legend = svg1.append('g')
+        .attr('transform', 'translate(10, 20)');
+        
+    legend.selectAll()
+        .data(colorsKeys)
+        .enter().append('rect')
+            .attr('height', legendCellSize + 'px')
+            .attr('width', legendCellSize + 'px')
+            .attr('x', 5)
+            .attr('y', (d,i) => i * legendCellSize)
+            .style("fill", d => d);
+    
+    legend.selectAll()
+        .data(keys)
+        .enter().append('text')
+            .attr("transform", (d,i) => "translate(" + (legendCellSize + 10) + ", " + (i * legendCellSize) + ")")
+            .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
+            .style("font-size", "13px")
+            .style("fill", "grey")
+            .text(d => d);
 }
 
 
