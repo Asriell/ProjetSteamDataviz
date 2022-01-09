@@ -324,6 +324,7 @@ function display_graph1(svg_already_exists, svg) {
             var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
                         .range([height, margin]);
+            svg1.selectAll(".games").selectAll("rect").remove();
             svg1.selectAll(".games").remove();
             var groups = svg1.selectAll("g.games")
                             .data(series)
