@@ -534,6 +534,47 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
+                .on("mousemove", function (e, d) {
+                    // on recupere la position de la souris,
+                    // e est l'object event d
+                    //console.log(d);
+                    var mousePosition = [e.x, e.y];
+                    console.log(mousePosition);
+                    // on affiche le toolip
+                    tooltip
+                        .classed("hidden", false)
+                        // on positionne le tooltip en fonction
+                        // de la position de la souris
+                        .attr(
+                            "style",
+                            "left:" +
+                            (mousePosition[0] + 15) +
+                            "px; top:" +
+                            (mousePosition[1] - 35) +
+                            "px"
+                        )
+                        // on recupere le nom de l'etat
+                        .html(
+                            d.data.date +
+                            " | Jeu : " + Object.keys(d.data).find(key => d.data[key] === d[1] - d[0]) + " | Temps de jeu : " +
+                            parseInt((d[1] - d[0]) / 3600) +
+                            " h " +
+                            parseInt(
+                                ((d[1] - d[0]) - parseInt((d[1] - d[0]) / 3600) * 3600) / 60
+                            ) +
+                            " m " +
+                            ((d[1] - d[0]) -
+                                (parseInt((d[1] - d[0]) / 3600) * 3600 +
+                                    parseInt(
+                                        ((d[1] - d[0]) - parseInt((d[1] - d[0]) / 3600) * 3600) / 60
+                                    ) *
+                                    60)) +
+                            " s."
+                        );
+                })
+                .on("mouseout", function () {
+                    tooltip.classed("hidden", true);
+                });
             }
         }
 
