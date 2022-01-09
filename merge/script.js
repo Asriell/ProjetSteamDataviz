@@ -185,7 +185,11 @@ function display_graph1(svg_already_exists, svg) {
         while (inf != TODAY) {
             if (document.getElementById("details-checkbox").checked) {
                 games = [];
-                for (entry of Object.keys(data)) {
+                for (entry in Object.values(data)) {
+                    if ((!entry.game_name in games) && entry.game_end.includes(inf)) {
+                        games.push(entry.game_name)
+                    }
+                    console.log("games : ",games);
                 }
             } else {
                 gameTimePerDay[inf] = "0:0:0";
