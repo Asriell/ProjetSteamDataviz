@@ -186,7 +186,8 @@ function display_graph1(svg_already_exists, svg) {
             if (document.getElementById("details-checkbox").checked) {
                 games = [];
                 for (entry of Object.values(data)) {
-                    if ((!entry.game_name in games) && entry.game_end.includes(inf)) {
+                    //console.log()
+                    if ((!games.includes(entry.game_name)) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
                         //console.log("ok");
                     }
