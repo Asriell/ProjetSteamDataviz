@@ -356,8 +356,15 @@ function display_graph1(svg_already_exists, svg) {
             .domain([0, d3.max(datas, (d) => d.playtime)])
             .range([height, margin]);
 
+<<<<<<< HEAD
         var y_axis = d3.axisLeft().scale(yScale);
         //console.log(xScale(5));
+=======
+        
+        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
+        //var y_axis = d3.axisLeft().scale(yScale);
+        console.log(xScale(5));
+>>>>>>> 9f14f611e1000b2cbb48bcb8e626a5b612ff7bd0
 
         if (!svg_already_exists) {
         svg1
@@ -477,7 +484,48 @@ function display_graph1(svg_already_exists, svg) {
                     return xScale(d.data.id) + start_margin;})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
-                .attr("height", (d)=> height - y(d[1]-d[0]));
+                .attr("height", (d)=> height - y(d[1]-d[0]))
+                .on("mousemove", function (e, d) {
+                    // on recupere la position de la souris,
+                    // e est l'object event d
+                    //console.log(d);
+                    var mousePosition = [e.x, e.y];
+                    console.log(mousePosition);
+                    // on affiche le toolip
+                    tooltip
+                        .classed("hidden", false)
+                        // on positionne le tooltip en fonction
+                        // de la position de la souris
+                        .attr(
+                            "style",
+                            "left:" +
+                            (mousePosition[0] + 15) +
+                            "px; top:" +
+                            (mousePosition[1] - 35) +
+                            "px"
+                        )
+                        // on recupere le nom de l'etat
+                        .html(
+                            d.data.date +
+                            " | Jeu : " + (Object.keys(d.data).find(key => d.data[key] === d[1]) == undefined ? Object.keys(d.data).find(key => d.data[key] === d[0] - d[1]) : Object.keys(d.data).find(key => d.data[key] === d[1])) + " | Temps de jeu : " +
+                            parseInt(d[1] / 3600) +
+                            " h " +
+                            parseInt(
+                                (d[1] - parseInt(d[1] / 3600) * 3600) / 60
+                            ) +
+                            " m " +
+                            (d[1] -
+                                (parseInt(d[1] / 3600) * 3600 +
+                                    parseInt(
+                                        (d[1] - parseInt(d[1] / 3600) * 3600) / 60
+                                    ) *
+                                    60)) +
+                            " s."
+                        );
+                })
+                .on("mouseout", function () {
+                    tooltip.classed("hidden", true);
+                });
             } else {
 
                 groups
