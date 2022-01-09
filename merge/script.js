@@ -397,6 +397,11 @@ function display_graph1(svg_already_exists, svg) {
             display_graph1(true, svg1);
         });
 
+        d3.select("#details-checkbox").on("change", (event) => {
+            //svg1.remove();
+            display_graph1(false, undefined);
+        });
+
 
         
     });
