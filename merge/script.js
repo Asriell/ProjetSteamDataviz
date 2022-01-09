@@ -169,7 +169,7 @@ function display_graph1(svg_already_exists, svg) {
             json,
             document.getElementById("user-select").value
           );
-        //console.log(data);
+        console.log(data);
 
         inf = "1970-01-01";
         nbJours = get_nb_days_to_display();
@@ -183,16 +183,22 @@ function display_graph1(svg_already_exists, svg) {
         //console.log(TODAY, " | ", inf, " | ", inf2);
         gameTimePerDay = {};
         while (inf != TODAY) {
-            gameTimePerDay[inf] = "0:0:0";
-            for (entry of Object.keys(data)) {
-                if (data[entry].game_end.includes(inf)) {
-                    gameTimePerDay[inf] = SumDurations(
-                        gameTimePerDay[inf],
-                        data[entry].game_duration
-                    );
-                    //console.log(
-                    // "inf : " + inf + "   " + data[entry].game_duration
-                    //);
+            if (document.getElementById("details-checkbox").checked) {
+                games = [];
+                for (entry of Object.keys(data)) {
+                }
+            } else {
+                gameTimePerDay[inf] = "0:0:0";
+                for (entry of Object.keys(data)) {
+                    if (data[entry].game_end.includes(inf)) {
+                        gameTimePerDay[inf] = SumDurations(
+                            gameTimePerDay[inf],
+                            data[entry].game_duration
+                        );
+                        //console.log(
+                        // "inf : " + inf + "   " + data[entry].game_duration
+                        //);
+                    }
                 }
             }
             inf = formatDate(
