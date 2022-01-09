@@ -192,6 +192,20 @@ function display_graph1(svg_already_exists, svg) {
                         //console.log("ok");
                     }
                     console.log("games : ",games);
+                    gameTimePerDay[inf] = {}
+                    if (games.length != 0) {
+                        for (game of games) {
+                            gameTimePerDay[inf][game] = "0:0:0";
+                            for (entry of Object.keys(data)) {
+                                if (data[entry].game_end.includes(inf) && game == data[entry].game_name ) {
+                                    gameTimePerDay[inf][game] = SumDurations(
+                                        gameTimePerDay[inf][game],
+                                        data[entry].game_duration
+                                    );
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 gameTimePerDay[inf] = "0:0:0";
@@ -211,7 +225,7 @@ function display_graph1(svg_already_exists, svg) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        //console.log(gameTimePerDay);
+        console.log(gameTimePerDay);
         datas = [];
         var id = 0;
         for (val of Object.values(gameTimePerDay)) {
