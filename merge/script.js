@@ -315,7 +315,7 @@ function display_graph1(svg_already_exists, svg) {
                             .keys(gamesPlayed)
                             .order(d3.stackOrderNone)
                             .offset(d3.stackOffsetNone);
-            const series = stack(datas);
+            var series = stack(datas);
             console.log(series);
             var x = d3.scaleBand()
                     .domain(datas.map(d => d.date))
@@ -328,7 +328,8 @@ function display_graph1(svg_already_exists, svg) {
                             .data(series)
                             .enter()
                             .append("g")
-                            .style("fill", (d, i) => color(i));
+                            .style("fill", (d, i) => color(i))
+                            .attr("class","games");
         }
 
         var xScale = d3
@@ -469,7 +470,7 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("height", (d)=> height - y(d[1]-d[0]));
             } else {
                 
-                groups.selectAll("rect")
+                svg1.selectAll(".games")
                     .transition()
                     .duration(1000)
                     .attr("y", height)
