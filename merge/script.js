@@ -616,7 +616,7 @@ function display_graph1(svg_already_exists, svg) {
 function addLegend(colors,keys,total_width,start_margin,margin) {
     legendCellSize = 20,
     maxCarac = d3.max(keys,(d)=> d.length);
-    spacingBeetweenCells = legendCellSize + maxCarac * 4 + 5;
+    spacingBeetweenCells = legendCellSize + maxCarac * 5 + 5;
     colorsKeys = [];
     for (var i in keys) {
         colorsKeys.push(colors(i));
