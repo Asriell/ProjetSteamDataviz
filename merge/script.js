@@ -535,7 +535,7 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("x",(d) => {console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d); return xScale(d.data.id) + start_margin;})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
-                .attr("height", (d)=> height - y(d[1]-d[0]));
+                .attr("height", (d)=> height - y(d[1]-d[0]))
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
                     // e est l'object event d
