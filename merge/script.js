@@ -38,11 +38,13 @@ function transform_data_for_pie(dataset) {
     //console.log(dataset);
 }
 
+/*
 $.get("https://store.steampowered.com/api/appdetails/?appids=242050", function (data) {
     $(".result").html(data);
     alert("Load was performed.");
     //console.log(data);
 });
+*/
 
 function get_nb_days_to_display() {
     let periode = document.getElementById("period-select").value;
