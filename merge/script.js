@@ -329,7 +329,7 @@ function display_graph1(svg_already_exists, svg) {
         console.log(xScale(5));
 
         if (document.getElementById("details-checkbox").checked) {
-            let groups = svg.selectAll("g.games")
+            let groups = svg1.selectAll("g.games")
                             .data(series)
                             .enter()
                             .append("g")
