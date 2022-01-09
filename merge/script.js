@@ -475,6 +475,7 @@ function display_graph1(svg_already_exists, svg) {
                     .duration(1000)
                     .attr("y", height)
                     .attr("height", 0);
+                    /*
                 groups
                     .selectAll("rect")
                     .data(d => d)
@@ -490,7 +491,7 @@ function display_graph1(svg_already_exists, svg) {
                     })
                     .attr("height", function (d) {
                         return height - y(d[1]-d[0]);
-                    })
+                    })*/
             }
         }
 
