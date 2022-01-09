@@ -584,7 +584,7 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         set_legende_graph1(datas);
-        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,d3.select("svg"));
+        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,d3.select("svg1"));
         
         d3.select("#user-select").on("change", (event) => {
             console.log("change");
@@ -620,7 +620,6 @@ function addLegend(colors,keys,svg) {
     }
     svg.selectAll(".legendDetails").remove();
     //console.log("legend removed");
-    //let svg1 = svg.append("svg1");
     let legend = svg.append('g')
         .attr('transform', 'translate(10, 20)')
         .attr("class","legendDetails");
