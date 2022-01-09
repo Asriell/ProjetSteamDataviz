@@ -236,6 +236,7 @@ function display_graph1(svg_already_exists, svg) {
             for (val of Object.values(gameTimePerDay)) {
                 element = {}
                 element["date"] = Object.keys(gameTimePerDay)[id];
+                element["id"] = id
                 for (game of Object.keys(val)) {
                     if (game != "total") {
                         if(!gamesPlayed.includes(game))gamesPlayed.push(game);
@@ -271,6 +272,10 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         if (document.getElementById("details-checkbox").checked) {
+            var color = d3
+                            .scaleQuantize()
+                            .range(["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"]);
+            color.domain([0,gamesPlayed.length]);
             console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
             datas.map((d) => {
                 for (game of gamesPlayed) {
@@ -323,6 +328,13 @@ function display_graph1(svg_already_exists, svg) {
         var y_axis = d3.axisLeft().scale(yScale);
         console.log(xScale(5));
 
+        if (document.getElementById("details-checkbox").checked) {
+            let groups = svg.selectAll("g.games")
+                            .data(series)
+                            .enter()
+                            .append("g")
+                            .style("fill", (d, i) => color(i));
+        }
         if (!svg_already_exists) {
         svg1
             .append("g")
@@ -342,77 +354,16 @@ function display_graph1(svg_already_exists, svg) {
             svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
         }
 
-        if(!svg_already_exists) {
-            svg1
-            .selectAll(".bar")
-            .data(datas)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", function (d) {
-                //console.log(xScale(d.id));
-                return xScale(d.id) + start_margin;
-            })
-            .attr("y", function (d) {
-                //console.log(d.playtime_forever);
-                return yScale(d.playtime);
-            })
-            .attr("width", bar_width)
-            .attr("height", function (d) {
-                return height - yScale(d.playtime);
-            })
-            .on("mousemove", function (e, d) {
-                // on recupere la position de la souris,
-                // e est l'object event d
-                //console.log(d);
-                var mousePosition = [e.x, e.y];
-                //console.log(mousePosition);
-                // on affiche le toolip
-                tooltip
-                    .classed("hidden", false)
-                    // on positionne le tooltip en fonction
-                    // de la position de la souris
-                    .attr(
-                        "style",
-                        "left:" +
-                        (mousePosition[0] + 15) +
-                        "px; top:" +
-                        (mousePosition[1] - 35) +
-                        "px"
-                    )
-                    // on recupere le nom de l'etat
-                    .html(
-                        d.date +
-                        " | Temps de jeu : " +
-                        parseInt(d.playtime / 3600) +
-                        " h " +
-                        parseInt(
-                            (d.playtime - parseInt(d.playtime / 3600) * 3600) / 60
-                        ) +
-                        " m " +
-                        (d.playtime -
-                            (parseInt(d.playtime / 3600) * 3600 +
-                                parseInt(
-                                    (d.playtime - parseInt(d.playtime / 3600) * 3600) / 60
-                                ) *
-                                60)) +
-                        " s."
-                    );
-            })
-            .on("mouseout", function () {
-                tooltip.classed("hidden", true);
-            });
-        } else {
-            svg1.selectAll(".bar")
-                .transition()
-                .duration(1000)
-                .attr("y", height)
-                .attr("height", 0);
-            svg1
+        
+
+        if (document.getElementById("details-checkbox").checked) {
+            if(!svg_already_exists) {
+                svg1
                 .selectAll(".bar")
                 .data(datas)
-                .transition()
-                .duration(1000)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
                 .attr("x", function (d) {
                     //console.log(xScale(d.id));
                     return xScale(d.id) + start_margin;
@@ -421,9 +372,91 @@ function display_graph1(svg_already_exists, svg) {
                     //console.log(d.playtime_forever);
                     return yScale(d.playtime);
                 })
+                .attr("width", bar_width)
                 .attr("height", function (d) {
                     return height - yScale(d.playtime);
                 })
+                .on("mousemove", function (e, d) {
+                    // on recupere la position de la souris,
+                    // e est l'object event d
+                    //console.log(d);
+                    var mousePosition = [e.x, e.y];
+                    //console.log(mousePosition);
+                    // on affiche le toolip
+                    tooltip
+                        .classed("hidden", false)
+                        // on positionne le tooltip en fonction
+                        // de la position de la souris
+                        .attr(
+                            "style",
+                            "left:" +
+                            (mousePosition[0] + 15) +
+                            "px; top:" +
+                            (mousePosition[1] - 35) +
+                            "px"
+                        )
+                        // on recupere le nom de l'etat
+                        .html(
+                            d.date +
+                            " | Temps de jeu : " +
+                            parseInt(d.playtime / 3600) +
+                            " h " +
+                            parseInt(
+                                (d.playtime - parseInt(d.playtime / 3600) * 3600) / 60
+                            ) +
+                            " m " +
+                            (d.playtime -
+                                (parseInt(d.playtime / 3600) * 3600 +
+                                    parseInt(
+                                        (d.playtime - parseInt(d.playtime / 3600) * 3600) / 60
+                                    ) *
+                                    60)) +
+                            " s."
+                        );
+                })
+                .on("mouseout", function () {
+                    tooltip.classed("hidden", true);
+                });
+            } else {
+                svg1.selectAll(".bar")
+                    .transition()
+                    .duration(1000)
+                    .attr("y", height)
+                    .attr("height", 0);
+                svg1
+                    .selectAll(".bar")
+                    .data(datas)
+                    .transition()
+                    .duration(1000)
+                    .attr("x", function (d) {
+                        //console.log(xScale(d.id));
+                        return xScale(d.id) + start_margin;
+                    })
+                    .attr("y", function (d) {
+                        //console.log(d.playtime_forever);
+                        return yScale(d.playtime);
+                    })
+                    .attr("height", function (d) {
+                        return height - yScale(d.playtime);
+                    })
+            }
+        } else {
+            svg1
+                .selectAll(".bar")
+                .data(series)
+                .enter()
+                .append("g")
+                .style("fill",(d,i)=> color(i))
+                .selectAll("rect")
+                .data(d => d)
+                .enter()
+                .append(rect)
+                .attr("x",(d) => xScale(d.id) + start_margin)
+                .attr("width", bar_width)
+                .attr("y",(d)=> yScale(d[1]))
+                .attr("height", (d)=> height - yScale(d[0]-d[1]));
+
+
         }
 
         set_legende_graph1(datas);
