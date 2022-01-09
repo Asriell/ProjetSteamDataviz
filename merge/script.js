@@ -238,7 +238,7 @@ function display_graph1(svg_already_exists, svg) {
                 element["date"] = Object.keys(gameTimePerDay)[id];
                 idGame = 0;
                 for (game of Object.keys(val)) {
-                    if (game != total) {
+                    if (game != "total") {
                         element[game] = {}
                         element[game]["id"] = idGame;
                         splitVal = val[game].split(":");
