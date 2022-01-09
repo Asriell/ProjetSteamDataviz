@@ -354,7 +354,7 @@ function display_graph1(svg_already_exists, svg) {
 
         
 
-        if (document.getElementById("details-checkbox").checked) {
+        if (!document.getElementById("details-checkbox").checked) {
             if(!svg_already_exists) {
                 svg1
                 .selectAll(".bar")
