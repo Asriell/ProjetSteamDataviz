@@ -536,7 +536,7 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]))
-                .on("mousemove", function (e, d) {
+                .on("mouseover", function (e, d) {
                     // on recupere la position de la souris,
                     // e est l'object event d
                     //console.log(d);
@@ -618,7 +618,7 @@ function addLegend(colors,keys,svg1) {
     svg1.selectAll(".legendDetails").remove();
     //console.log("legend removed");
     let legend = svg1.append('g')
-        .attr('transform', 'translate(10, 20)')
+        .attr('transform', 'translate(-10, 20)')
         .attr("class","legendDetails");
         
     legend.selectAll()
