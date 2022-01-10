@@ -206,12 +206,12 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         if (change == "details") {
             if (document.getElementById("details-checkbox").checked) {
                 console.log("checked");
-                svg1.selectAll(".bar").classed("hidden", "true");
-                svg1.selectAll(".games").classed("hidden", "false");
+                svg1.selectAll(".bar").classed("hidden", true);
+                svg1.selectAll(".games").classed("hidden", false);
             } else {
                 console.log("unchecked");
-                svg1.selectAll(".bar").classed("hidden", "false");
-                svg1.selectAll(".games").classed("hidden", "true");
+                svg1.selectAll(".bar").classed("hidden", false);
+                svg1.selectAll(".games").classed("hidden", true);
             }
         }
 
