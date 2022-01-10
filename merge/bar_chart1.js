@@ -221,7 +221,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .attr("transform", "translate(" + start_margin + "," + height + ")")
             .attr("class","abscisses")
             .call(x_axis)
-            .text("Day");
+            //.text("Day");
+            .html((d)=> {console.log("d : ", d)})
+            .text((d)=> {console.log("d : ", d)})
 
         svg1
             .append("g")
