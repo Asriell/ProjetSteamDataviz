@@ -201,7 +201,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .range([height, margin]);
 
         
-        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
+        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale).tickFormat((d) => {console.log("d : ",d); return d}).orient("bottom"));
         //var y_axis = d3.axisLeft().scale(yScale);
         if (change == "details") {
             if (document.getElementById("details-checkbox").checked) {
@@ -222,8 +222,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .attr("class","abscisses")
             .call(x_axis)
             //.text("Day");
-            .html((d)=> {console.log("d : ", d)})
-            .text((d)=> {console.log("d : ", d)})
 
         svg1
             .append("g")
