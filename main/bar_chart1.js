@@ -1,5 +1,5 @@
 
-function display_graph1(svg_already_exists, svg) {
+function display_graph1(svg_already_exists, svg, change = undefined) {
     var tooltip = d3
         .select("body")
         .append("div")
@@ -203,7 +203,17 @@ function display_graph1(svg_already_exists, svg) {
         
         var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
         //var y_axis = d3.axisLeft().scale(yScale);
-        console.log(xScale(5));
+        if (change == "details") {
+            if (document.getElementById("details-checkbox").checked) {
+                console.log("checked");
+                svg1.selectAll(".bar").classed("hidden", true);
+                svg1.selectAll(".games").classed("hidden", false);
+            } else {
+                console.log("unchecked");
+                svg1.selectAll(".bar").classed("hidden", false);
+                svg1.selectAll(".games").classed("hidden", true);
+            }
+        }
 
         if (!svg_already_exists) {
         svg1
@@ -311,7 +321,7 @@ function display_graph1(svg_already_exists, svg) {
                     })
             }
         } else {
-            if(!svg_already_exists) {
+            if(change=="details") {
                 groups
                 .selectAll("rect")
                 .data(d => d)
@@ -445,8 +455,7 @@ function display_graph1(svg_already_exists, svg) {
         });
 
         d3.select("#details-checkbox").on("change", (event) => {
-            svg1.remove();
-            display_graph1(false, undefined);
+            display_graph1(true, svg1,"details");
         });
 
 
