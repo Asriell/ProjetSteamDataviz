@@ -24,6 +24,10 @@ div.tooltip {
   fill: #666;
 }
 
+.games:hover {
+  fill: #666;
+}
+
 footer {
   height: 10em;
   background-color: yellow;
