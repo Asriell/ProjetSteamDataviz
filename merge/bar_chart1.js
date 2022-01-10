@@ -490,14 +490,14 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
             .attr('x', (d,i) => i%4 * spacingBeetweenCells)
-            .attr('y', (d,i) => parseInt(i/4) * legendCellSize + 10*parseInt(1/4))
+            .attr('y', (d,i) => Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10)
             .style("fill", d => d);
     
     legend.selectAll()
         .data(keys)
         .enter().append('text')
             .attr("transform", (d,i) => "translate(" + (i * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-            .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
+            .attr("dy", (d,i) => Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
             .text(d => d);
