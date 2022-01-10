@@ -258,7 +258,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     return xScale(d.id) + start_margin;
                 })
                 .attr("y", function (d) {
-                    //console.log(d.playtime_forever);
+                    console.log("playtime : ", d.playtime);
                     return (d.playtime == 0 ? 0 : yScale(d.playtime));
                 })
                 .attr("width", bar_width)
