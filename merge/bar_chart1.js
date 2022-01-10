@@ -334,6 +334,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]))
+                .attr("class","rectGames")
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
                     // e est l'object event d
@@ -388,7 +389,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]));
-
+                .attr("class","rectGames")
                 groups
                 .selectAll("rect")
                 .on("mousemove", function (e, d) {
