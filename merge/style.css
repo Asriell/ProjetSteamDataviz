@@ -28,6 +28,10 @@ div.tooltip {
   fill: #666;
 }
 
+.pie:hover {
+  fill: #666;
+}
+
 footer {
   height: 10em;
   background-color: yellow;
