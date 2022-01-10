@@ -190,7 +190,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .range([0, distance_between_bars]);
 
         console.log("datasLength : ",datas);
-        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,3)});
+        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
 
         /*console.log(
             "max : ",
