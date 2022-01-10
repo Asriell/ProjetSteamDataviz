@@ -204,10 +204,18 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             "max : ",
             d3.max(datas, (d) => d.playtime)
         );*/
-        var yScale = d3
+        if (datas.length != 0) {
+            var yScale = d3
             .scaleLinear()
             .domain([0, d3.max(datas, (d) => d.playtime)])
             .range([height, margin]);
+        } else {
+            var yScale = d3
+            .scaleLinear()
+            .domain([0, 0])
+            .range([height, margin]);
+        }
+        
 
         
         var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y).tickFormat((d) =>  hhmmss(d)):d3.axisLeft().scale(yScale).tickFormat((d) =>  hhmmss(d)));
