@@ -185,7 +185,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         }
 
         var xScale = d3
-            .scaleLinear()
+            .scaleBand()
             .domain(d3.range(datas.length))
             .range([0, distance_between_bars])
             .align(0);
