@@ -187,7 +187,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         var xScale = d3
             .scaleLinear()
             .domain(d3.range(datas.length))
-            .range([0, distance_between_bars*datas.length]);
+            .range([1/2, distance_between_bars + 1/2]);
 
         console.log("datasLength : ",datas);
         var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
