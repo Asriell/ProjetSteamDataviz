@@ -437,7 +437,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
-        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,0,margin);
+        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
         
         d3.select("#user-select").on("change", (event) => {
             console.log("change");
@@ -464,7 +464,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 }
 
 
-function addLegend(colors,keys,total_width,start_margin,margin) {
+function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 4) {
     legendCellSize = 20,
     maxCarac = d3.max(keys,(d)=> d.length);
     spacingBeetweenCells = legendCellSize + maxCarac * 7 + 5;
@@ -477,10 +477,10 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
                     .select("svg1")
                     .append("svg")
                     .attr("width", total_width)
-                    .attr("height", 20)
+                    .attr("height", 30 * (Math.floor(keys.length/legendPerLines) + 1)+15)
                     .attr(
                         "transform",
-                        "translate(" + start_margin + "," + margin + ")"
+                        "translate(" + 2*start_margin + "," + margin + ")"
                     )
                     .attr("class","legendDetails");
         
@@ -489,15 +489,15 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', (d,i) => i * spacingBeetweenCells)
-            //.attr('y', (d,i) => i * legendCellSize)
+            .attr('x', (d,i) => i%legendPerLines * spacingBeetweenCells)
+            .attr('y', (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10)
             .style("fill", d => d);
     
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-            .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
+            .attr("transform", (d,i) => "translate(" + (i%legendPerLines * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("dy", (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
             .text(d => d);
