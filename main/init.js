@@ -2,16 +2,9 @@ var svg1;
 var svg2;
 var svg3;
 
-//var USER = "Asriel";
-//var PERIOD = "1 Month";
-var TODAY = formatDate(new Date());
-const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
-const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
-
 function traitement_data(x) {
     return parseInt(x);
 }
-
 
 
 function transform_data_for_bar(dataset) {
@@ -28,7 +21,6 @@ function set_legende_graph1(datas) {
     document.getElementById("legende1").innerHTML = final_text;
 }
 
-
 function transform_data_for_pie(dataset) {
     dataset.sort((a, b) => {
         return b.playtime_forever - a.playtime_forever;
@@ -44,6 +36,7 @@ function transform_data_for_pie(dataset) {
     });
     //console.log(dataset);
 }
+
 
 function get_nb_days_to_display() {
     let periode = document.getElementById("period-select").value;
@@ -147,4 +140,19 @@ var DataCleaning = function (data, user) {
     }
     //console.log("tmpData : ", tmpData);
     return tmpData;
-};
+  };
+
+
+//var USER = "Asriel";
+//var PERIOD = "1 Month";
+var TODAY = formatDate(new Date());
+const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
+const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
+
+function get_total_playtime_of_all_data(dataset) {
+  let total = 0;
+  Object.entries(dataset).forEach(([key, value]) => {
+    total += traitement_data(value.playtime);
+  });
+  return total;
+}

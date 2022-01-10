@@ -1,9 +1,5 @@
-function arc_generator(rad) { return d3.arc()
-    .innerRadius(0)
-    .outerRadius(rad);
-}
-
 function display_graph2(svg_already_exists) {
+
     if(svg_already_exists) {
         svg2.selectAll('*').remove();
     }
@@ -11,12 +7,18 @@ function display_graph2(svg_already_exists) {
         .select("body")
         .append("div")
         .attr("class", "hidden tooltip");
-    let width = 600
-    height = 450
-    margin = 40
+    let width = 700;
+    let height = 550;
+    let margin = 40;
+    let total_height = height * 1.1;
+    let total_width = width * 1.1;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     let radius = Math.min(width, height) / 2 - margin
+
+    var arcGenerator = d3.arc()
+    .innerRadius(0)
+    .outerRadius(radius)
 
     // append the svg object to the div called 'my_dataviz'
     if(!svg_already_exists) {
@@ -182,11 +184,8 @@ function display_graph2(svg_already_exists) {
             .data(data_ready)
             .enter()
             .append('path')
-            .attr('d', arc_generator(radius))
+            .attr('d', arcGenerator)
             .attr('fill', function (d) { return (color(d.data.date)) })
-            .attr("stroke", "black")
-            .style("stroke-width", "2px")
-            .style("opacity", 0.7)
             .on("mousemove", function (e, d) {
                 // on recupere la position de la souris,
                 // e est l'object event d
@@ -229,15 +228,23 @@ function display_graph2(svg_already_exists) {
                 tooltip.classed("hidden", true);
             });
 
-        svg
+        let very_total_playtime = get_total_playtime_of_all_data(datas);
+        svg2
             .selectAll('arcs')
             .data(data_ready)
             .enter()
             .append('text')
-            .text(function(d){ return "grp " + d.data.date})
+            .text(function(d){
+                return "";  //Enlever cette ligne pour marquer du texte dans les sections du pie
+                if(d.data.playtime > very_total_playtime/20) {
+                    return d.data.date;
+                }
+            })
             .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
             .style("text-anchor", "middle")
             .style("font-size", 17)
+
+        addLegend_pie(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
             console.log("change");
@@ -252,4 +259,50 @@ function display_graph2(svg_already_exists) {
             display_graph2(true, svg2);
         });            
     });
+}
+
+function addLegend_pie(colors,keys,total_width,start_margin,margin) {
+    d3.select("svg2").selectAll(".legendDetails").remove();
+    let legendCellSize = 20;
+    let maxCarac = d3.max(keys,(d)=> d.date.length);
+    var spacingBetweenCells = legendCellSize + maxCarac * 7 + 5;
+    colorsKeys = [];
+    for (let i=0;i<keys.length;++i) {
+        colorsKeys.push(colors(keys[i].date));
+    }
+    //console.log("legend removed");
+    let legend = d3
+                    .select("svg2")
+                    .append("svg")
+                    .attr("width", total_width)
+                    .attr("height", 400)
+                    .attr(
+                        "transform",
+                        "translate(" + start_margin + "," + margin + ")"
+                    )
+                    .attr("class","legendDetails");
+        
+    legend.selectAll()
+        .data(colorsKeys)
+        .enter().append('rect')
+            .attr('height', legendCellSize + 'px')
+            .attr('width', legendCellSize + 'px')
+            .attr('x', function (d,i) {
+                return i%4 * spacingBetweenCells;
+            })
+            .attr('y', function (d,i) {
+                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
+            })
+            .style("fill", d => d);
+    
+    legend.selectAll()
+        .data(keys)
+        .enter().append('text')
+            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("dy", function (d, i) {
+                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+            }) // Pour centrer le texte par rapport aux carrés
+            .style("font-size", "13px")
+            .style("fill", "grey")
+            .text(d => d.date);
 }
