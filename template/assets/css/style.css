@@ -49,6 +49,9 @@ a.chart-switch {
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
 }
+.center-switch {
+  border-radius: 0px !important;
+}
 
 .right-switch {
   border-bottom-left-radius: 0 !important;

@@ -162,8 +162,11 @@
                     <li class="nav-item" >
                       <a class="nav-link active chart-switch left-switch" id="pills-barchart-tab" data-toggle="pill" href="#barchart" role="tab" aria-controls="barchart" aria-selected="true"><i class="far fa-chart-bar fa-lg"></i></a>
                     </li>
-                    <li class="nav-item" id="right-switch">
+                    <li class="nav-item" id="center-switch">
                       <a class="nav-link chart-switch right-switch" id="pills-piechart-tab" data-toggle="pill" href="#piechart" role="tab" aria-controls="piechart" aria-selected="false"><i class="fas fa-chart-pie fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item" id="right-switch">
+                      <a class="nav-link chart-switch right-switch" id="pills-piechart2-tab" data-toggle="pill" href="#piechart2" role="tab" aria-controls="piechart2" aria-selected="false"><i class="fas fa-gamepad fa-lg"></i></a>
                     </li>
                   </ul>
                 </div>
@@ -205,22 +208,55 @@
                 </div>
               </div>
               <div class="card-body">
-                <div class="chart-area tab-content" id="pills-tabContent">
-                  <div class="tab-pane fade show active" id="barchart" role="tabpanel" aria-labelledby="pills-barchart-tab">
-                    <h3 id="legende1">hello</h3>
-                    <svg1></svg1>
-                    <script>
-                      document.getElementById("user-select").value = "Asriel";
-                      display_graph1();
-                    </script>
-                  </div>
-                  <div class="tab-pane fade" id="piechart" role="tabpanel" aria-labelledby="pills-piechart-tab">
-                    <div id="visu-activite2">
-                      <h3>Votre temps total réparti sur la période</h3>
-                      <svg2 width="600" height="500"></svg2>
-                      <script>display_graph2()</script>
+                <div class="row">
+                  <div class="chart-area tab-content col-sm-9" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="barchart" role="tabpanel" aria-labelledby="pills-barchart-tab">
+                      <h3 id="legende1">hello</h3>
+                      <svg1></svg1>
+                      <script>
+                        document.getElementById("user-select").value = "Asriel";
+                        display_graph1();
+                      </script>
+                    </div>
+                    <div class="tab-pane fade" id="piechart" role="tabpanel" aria-labelledby="pills-piechart-tab">
+                      <div id="visu-activite2">
+                        <h3>Votre temps total réparti sur la période</h3>
+                        <svg2 width="600" height="500"></svg2>
+                        <script>display_graph2()</script>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="piechart2" role="tabpanel" aria-labelledby="pills-piechart2-tab">
+                      <div id="visu-activite3">
+                        <h3>3eme Pie chart</h3>
+                        <svg3 width="600" height="500"></svg3>
+                      </div>
                     </div>
                   </div>
+                  <!-- Debut -->
+                  <div class="col-sm-3">
+                    <div class="col-lg-12 ">
+                      <div class="card card-chart">
+                        <div class="card-header">
+                          <h4 class="card-title">Info 2</h4>
+                        </div>
+                        <div class="card-body custom-card">
+                          <p class="card-value">xxx</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 ">
+                      <div class="card card-chart">
+                        <div class="card-header">
+                          <h4 class="card-title">Info 2</h4>
+                        </div>
+                        <div class="card-body custom-card">
+                          <p class="card-value">xxx</p>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--- Fin -->
                 </div>
               </div>
             </div>
