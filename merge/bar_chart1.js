@@ -189,7 +189,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .domain(d3.range(datas.length))
             .range([0, distance_between_bars]);
 
-        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length,"f");
+        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length);
 
         /*console.log(
             "max : ",
