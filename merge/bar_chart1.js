@@ -189,8 +189,8 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .domain(d3.range(datas.length))
             .range([0, distance_between_bars]);
 
-        console.log("datasLength : ",datas.length);
-        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length);
+        console.log("datasLength : ",datas);
+        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => datas[d].date);
 
         /*console.log(
             "max : ",
