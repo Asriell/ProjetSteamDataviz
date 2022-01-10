@@ -206,7 +206,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         if (change == "details") {
             console.log("checkbox : ",document.getElementById("details-checkbox").checked);
             (document.getElementById("details-checkbox").checked ? svg1.selectAll(".bar").classed("hidden", "true") : svg1.selectAll(".bar").classed("hidden", "false"));
-            (document.getElementById("details-checkbox").checked ? svg1.selectAll(".games").classed("hidden", "false") : svg1.selectAll(".games").classed("hidden", "true"));
+            (!document.getElementById("details-checkbox").checked ? svg1.selectAll(".games").classed("hidden", "true") : svg1.selectAll(".games").classed("hidden", "false"));
         }
 
         if (!svg_already_exists) {
