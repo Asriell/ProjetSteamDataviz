@@ -204,7 +204,15 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             "max : ",
             d3.max(datas, (d) => d.playtime)
         );*/
-        if (datas.length != 0) {
+        PlayedThisPeriod = false;
+        for (day of datas) {
+            if(day.playtime > 0) {
+                PlayedThisPeriod = true;
+                break;
+            }
+        }
+        
+        if (PlayedThisPeriod) {
             var yScale = d3
             .scaleLinear()
             .domain([0, d3.max(datas, (d) => d.playtime)])
