@@ -161,7 +161,7 @@ var hhmmss = function (time) {
   return parseInt(time / 3600) +
   " : " +
   parseInt(
-      (d.playtime - parseInt(time / 3600) * 3600) / 60
+      (time - parseInt(time / 3600) * 3600) / 60
   ) +
   " : " +
   (time -
