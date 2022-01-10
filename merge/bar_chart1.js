@@ -477,7 +477,7 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
                     .select("svg1")
                     .append("svg")
                     .attr("width", total_width)
-                    .attr("height", 20*keys.length/4)
+                    .attr("height", 20*Math.floor(keys.length/4))
                     .attr(
                         "transform",
                         "translate(" + start_margin + "," + margin + ")"
@@ -496,7 +496,7 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
             .attr("dy", (d,i) => Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
