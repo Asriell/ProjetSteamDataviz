@@ -159,11 +159,11 @@ function get_total_playtime_of_all_data(dataset) {
 
 var hhmmss = function (time) {
   return parseInt(time / 3600) +
-  " : " +
+  ":" +
   parseInt(
       (time - parseInt(time / 3600) * 3600) / 60
   ) +
-  " : " +
+  ":" +
   (time -
       (parseInt(time / 3600) * 3600 +
           parseInt(
