@@ -480,7 +480,7 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
                     .attr("height", 30 * (Math.floor(keys.length/legendPerLines) + 1)+15)
                     .attr(
                         "transform",
-                        "translate(" + start_margin + "," + margin + ")"
+                        "translate(" + 2*start_margin + "," + margin + ")"
                     )
                     .attr("class","legendDetails");
         
