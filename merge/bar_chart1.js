@@ -263,7 +263,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 })
                 .attr("width", bar_width)
                 .attr("height", function (d) {
-                    return height - yScale(d.playtime);
+                    return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                 })
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
@@ -323,10 +323,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     })
                     .attr("y", function (d) {
                         //console.log(d.playtime_forever);
-                        return yScale(d.playtime);
+                        return (d.playtime == 0 ? 0 : yScale(d.playtime));
                     })
                     .attr("height", function (d) {
-                        return height - yScale(d.playtime);
+                        return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                     })
             }
         } else {
