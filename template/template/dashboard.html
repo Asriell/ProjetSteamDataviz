@@ -1,0 +1,411 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    Steam Data
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css" media="screen" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../assets/js/init.js"></script>
+  <script src="../assets/js/piechart.js"> </script>
+  <script src="../assets/js/barchart.js"></script>
+
+
+</head>
+
+<body class="">
+  <div class="wrapper">
+    <div class="sidebar" data="transparent">
+      <div class="sidebar-wrapper mb-5">
+        <div class="logo">
+          <a href="javascript:void(0)" class="simple-text logo-normal text-center" style="font-size: 16px;">
+            Données de l'utilisateur
+          </a>
+        </div>
+        <div class="col-lg-12 ">
+          <div class="card card-chart user-info">
+            <div class="card-header">
+              <h4 class="card-title">User</h4>
+            </div>
+            <div class="card-body custom-card">
+              <p class="card-value">Some Name</p>
+              <i class="fa fa-user fa-5x card-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ">
+          <div class="card card-chart user-info">
+            <div class="card-header">
+              <h4 class="card-title">Nombre de jeux</h4>
+            </div>
+            <div class="card-body custom-card">
+              <p class="card-value">500</p>
+              <i class="fas fa-gamepad fa-5x card-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ">
+          <div class="card card-chart user-info">
+            <div class="card-header">
+              <h4 class="card-title">Durée totale de jeu</h4>
+            </div>
+            <div class="card-body custom-card">
+              <p class="card-value">9000</p>
+              <i class="far fa-clock fa-5x card-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ">
+          <div class="card card-chart user-info">
+            <div class="card-header">
+              <h4 class="card-title">Dernière partie</h4>
+            </div>
+            <div class="card-body custom-card">
+              <p class="card-value">12/12/1212</p>
+              <i class="far fa-calendar-alt fa-5x card-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-panel" data="blue">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="javascript:void(0)" >Dashboard</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="photo">
+                    <img src="" alt="Profile Photo">
+                  </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                </ul>
+              </li>
+              <li class="separator d-lg-none"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <!--  Partie pour changer la vizu affichée-->
+                <div class="row mb-5">
+                  <ul class="nav nav-pills mb-3 col-sm-6 m-auto justify-content-center" id="pills-tab" role="tablist" data="blue">
+                    <li class="nav-item" >
+                      <a class="nav-link active chart-switch left-switch" id="pills-barchart-tab" data-toggle="pill" href="#barchart" role="tab" aria-controls="barchart" aria-selected="true"><i class="far fa-chart-bar fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item" id="right-switch">
+                      <a class="nav-link chart-switch right-switch" id="pills-piechart-tab" data-toggle="pill" href="#piechart" role="tab" aria-controls="piechart" aria-selected="false"><i class="fas fa-chart-pie fa-lg"></i></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category" id="card-category-title">Bar chart</h5>
+                    <h2 id="chart-type-title">Titre</h2>
+                  </div>
+                  <div class="offset-sm-1"></div>
+                  <div class="col-sm-1">
+                      <label for="details-checkbox">Détail des jeux</label>
+                      <input type="checkbox" id="details-checkbox" name="details">
+                  </div>
+
+                  <div class="col-sm-2">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+
+                    </div>
+                    <div class="form-group" data="green">
+                      <label for="user-select">Select player</label>
+                      <select class="form-control" id="user-select" data="green">
+                        <option value="Asriel" class="dropdown-item">Asriel</option>
+                        <option value="Mak-Dh" class="dropdown-item">Mak-Dh</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+
+                    </div>
+                    <div class="form-group" data="green">
+                      <label for="period-select">Select period</label>
+                      <select class="form-control" id="period-select" data="green">
+                        <option value="semaine" class="dropdown-item">Une semaine</option>
+                        <option selected value="mois" class="dropdown-item">Un mois</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="barchart" role="tabpanel" aria-labelledby="pills-barchart-tab">
+                    <h3 id="legende1">hello</h3>
+                    <svg1></svg1>
+                    <script>
+                      document.getElementById("user-select").value = "Asriel";
+                      display_graph1();
+                    </script>
+                  </div>
+                  <div class="tab-pane fade" id="piechart" role="tabpanel" aria-labelledby="pills-piechart-tab">
+                    <div id="visu-activite2">
+                      <h3>Votre temps total réparti sur la période</h3>
+                      <svg2 width="600" height="500"></svg2>
+                      <script>display_graph2()</script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+
+
+    </div>
+  </div>
+    <footer class="footer fixed-bottom m-auto w-75">
+      <div class="container-fluid">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
+              Creative Tim
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
+              About Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link">
+              Blog
+            </a>
+          </li>
+        </ul>
+        <div class="copyright">
+          ©
+          <script>
+            document.write(new Date().getFullYear())
+          </script>2018 made with <i class="tim-icons icon-heart-2"></i> by
+          <a href="javascript:void(0)" target="_blank">Creative Tim</a> for a better web.
+        </div>
+      </div>
+    </footer>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Chart JS -->
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/black-dashboard.min.js?v=1.0.0"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
+
+  <script>
+    $(document).ready(function() {
+
+      bar_chart_title="Bar chart title";
+      pie_chart_title="Pie chart title";
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+        $navbar = $('.navbar');
+        $main_panel = $('.main-panel');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+        sidebar_mini_active = true;
+        white_color = false;
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+        $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+          var active_chart = $(e.target).attr("href")
+          var chart_small_title = $("#card-category-title")
+          var chart_title = $("#chart-type-title")
+          if (active_chart == "#piechart") {
+            chart_title.html(pie_chart_title)
+            chart_small_title.html("Pie chart")
+          } else {
+            chart_title.html(bar_chart_title)
+            chart_small_title.html("Bar chart")
+          }
+
+        });
+
+        $('.fixed-plugin a').click(function(event) {
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .background-color span').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data', new_color);
+          }
+
+          if ($main_panel.length != 0) {
+            $main_panel.attr('data', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data', new_color);
+          }
+        });
+
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
+          var $btn = $(this);
+
+          if (sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = false;
+            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+          } else {
+            $('body').addClass('sidebar-mini');
+            sidebar_mini_active = true;
+            blackDashboard.showSidebarMessage('Sidebar mini activated...');
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+        });
+
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
+          var $btn = $(this);
+
+          if (white_color == true) {
+
+            $('body').addClass('change-background');
+            setTimeout(function() {
+              $('body').removeClass('change-background');
+              $('body').removeClass('white-content');
+            }, 900);
+            white_color = false;
+          } else {
+
+            $('body').addClass('change-background');
+            setTimeout(function() {
+              $('body').removeClass('change-background');
+              $('body').addClass('white-content');
+            }, 900);
+
+            white_color = true;
+          }
+
+
+        });
+
+        $('.light-badge').click(function() {
+          $('body').addClass('white-content');
+        });
+
+        $('.dark-badge').click(function() {
+          $('body').removeClass('white-content');
+        });
+      });
+    });
+  </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+      });
+  </script>
+</body>
+
+</html>
