@@ -204,26 +204,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             "max : ",
             d3.max(datas, (d) => d.playtime)
         );*/
-        PlayedThisPeriod = false;
-        for (day of datas) {
-            if(day.playtime > 0) {
-                PlayedThisPeriod = true;
-                break;
-            }
-        }
-        
-        if (PlayedThisPeriod) {
-            var yScale = d3
+        var yScale = d3
             .scaleLinear()
             .domain([0, d3.max(datas, (d) => d.playtime)])
             .range([height, margin]);
-        } else {
-            var yScale = d3
-            .scaleLinear()
-            .domain([0, 0])
-            .range([height, margin]);
-        }
-        
 
         
         var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y).tickFormat((d) =>  hhmmss(d)):d3.axisLeft().scale(yScale).tickFormat((d) =>  hhmmss(d)));
@@ -275,7 +259,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 })
                 .attr("y", function (d) {
                     //console.log(d.playtime_forever);
-                    return yScale(d.playtime);
+                    return (d.playtime == 0 ? 0 : yScale(d.playtime));
                 })
                 .attr("width", bar_width)
                 .attr("height", function (d) {
