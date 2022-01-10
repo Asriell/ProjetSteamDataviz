@@ -20,6 +20,18 @@ div.tooltip {
   display: none;
 }
 
+.bar:hover {
+  fill: #666;
+}
+
+.rectGames:hover {
+  fill: #666;
+}
+
+.pie:hover {
+  fill: #666;
+}
+
 footer {
   height: 10em;
   background-color: yellow;

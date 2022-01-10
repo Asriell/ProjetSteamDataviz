@@ -186,6 +186,7 @@ function display_graph2(svg_already_exists) {
             .append('path')
             .attr('d', arcGenerator)
             .attr('fill', function (d) { return (color(d.data.date)) })
+            .attr("class","pie")
             .on("mousemove", function (e, d) {
                 // on recupere la position de la souris,
                 // e est l'object event d
