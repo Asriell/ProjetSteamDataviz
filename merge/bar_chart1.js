@@ -173,7 +173,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 
             console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
             var y = d3.scaleLinear()
-                        .domain([0, d3.max(series[series.length - 1], d => (series[series.length - 1] == undefined? 0 : d[1]))])
+                        .domain([0, d3.max(series[series.length - 1], d => (series.length == 0 ? 0 : d[1]))])
                         .range([height, margin]);
             svg1.selectAll(".games").selectAll("rect").remove();
             svg1.selectAll(".games").remove();
