@@ -171,6 +171,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .domain(datas.map(d => d.date))
                     .range([0, distance_between_bars])
 
+            console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
             var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
                         .range([height, margin]);
