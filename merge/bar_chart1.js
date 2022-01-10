@@ -203,9 +203,11 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         
         var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
         //var y_axis = d3.axisLeft().scale(yScale);
-
-        (document.getElementById("details-checkbox").checked ? svg1.selectAll(".bar").classed("hidden", "true") : svg1.selectAll(".bar").classed("hidden", "false"));
-        (document.getElementById("details-checkbox").checked ? svg1.selectAll(".games").classed("hidden", "false") : svg1.selectAll(".games").classed("hidden", "true"));
+        if (change == "details") {
+            console.log("checkbox : ",document.getElementById("details-checkbox").checked);
+            (document.getElementById("details-checkbox").checked ? svg1.selectAll(".bar").classed("hidden", "true") : svg1.selectAll(".bar").classed("hidden", "false"));
+            (document.getElementById("details-checkbox").checked ? svg1.selectAll(".games").classed("hidden", "false") : svg1.selectAll(".games").classed("hidden", "true"));
+        }
 
         if (!svg_already_exists) {
         svg1
