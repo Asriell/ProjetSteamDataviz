@@ -172,9 +172,15 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .range([0, distance_between_bars])
 
             console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
-            var y = d3.scaleLinear()
-                        .domain([0, d3.max(series[series.length - 1], d => (series.length == 0 ? 0 : d[1]))])
+            if (series.length != 0) {
+                var y = d3.scaleLinear()
+                        .domain([0, d3.max(series[series.length - 1], d => d[1])])
                         .range([height, margin]);
+            } else {
+                var y = d3.scaleLinear()
+                        .domain([0,0])
+                        .range([height, margin]);
+            }
             svg1.selectAll(".games").selectAll("rect").remove();
             svg1.selectAll(".games").remove();
             var groups = svg1.selectAll("g.games")
