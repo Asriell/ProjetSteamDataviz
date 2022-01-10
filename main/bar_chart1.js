@@ -185,11 +185,13 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         }
 
         var xScale = d3
-            .scaleLinear()
+            .scaleBand()
             .domain(d3.range(datas.length))
-            .range([0, distance_between_bars]);
+            .range([0, distance_between_bars*datas.length])
+            .align(0);
 
-        var x_axis = d3.axisBottom().scale(xScale);
+        console.log("datasLength : ",datas);
+        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
 
         /*console.log(
             "max : ",
@@ -201,7 +203,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .range([height, margin]);
 
         
-        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
+        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y).tickFormat((d) =>  hhmmss(d)):d3.axisLeft().scale(yScale).tickFormat((d) =>  hhmmss(d)));
         //var y_axis = d3.axisLeft().scale(yScale);
         if (change == "details") {
             if (document.getElementById("details-checkbox").checked) {
