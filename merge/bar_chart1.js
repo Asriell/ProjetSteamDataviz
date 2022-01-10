@@ -464,7 +464,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 }
 
 
-function addLegend(colors,keys,total_width,start_margin,margin) {
+function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 4) {
     legendCellSize = 20,
     maxCarac = d3.max(keys,(d)=> d.length);
     spacingBeetweenCells = legendCellSize + maxCarac * 7 + 5;
@@ -477,7 +477,7 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
                     .select("svg1")
                     .append("svg")
                     .attr("width", total_width)
-                    .attr("height", 20*Math.floor(keys.length/4))
+                    .attr("height", Math.floor(keys.length/legendPerLines)*legendCellSize+Math.floor(keys.length/legendPerLines)*10)
                     .attr(
                         "transform",
                         "translate(" + start_margin + "," + margin + ")"
@@ -489,15 +489,15 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', (d,i) => i%4 * spacingBeetweenCells)
-            .attr('y', (d,i) => Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10)
+            .attr('x', (d,i) => i%legendPerLines * spacingBeetweenCells)
+            .attr('y', (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10)
             .style("fill", d => d);
     
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-            .attr("dy", (d,i) => Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
+            .attr("transform", (d,i) => "translate(" + (i%legendPerLines * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("dy", (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
             .text(d => d);
