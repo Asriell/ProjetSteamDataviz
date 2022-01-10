@@ -221,7 +221,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .attr("transform", "translate(" + start_margin + "," + height + ")")
             .attr("class","abscisses")
             .call(x_axis)
-            //.text("Day");
+            .text("Day");
 
         svg1
             .append("g")
@@ -436,8 +436,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             }
         }
 
-        console.log("changement axe : ");
-        d3.select(".ordonnees").selectAll("tick").data(d=>d).text((d)=> {console.log("d : ",d); return d;})
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
         if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
