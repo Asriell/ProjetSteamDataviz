@@ -437,7 +437,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
-        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,0,margin);
+        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
         
         d3.select("#user-select").on("change", (event) => {
             console.log("change");
