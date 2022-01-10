@@ -20,10 +20,16 @@ div.tooltip {
   display: none;
 }
 
+footer {
+  height: 10em;
+  background-color: yellow;
+}
+
 #visu-activite1 {
   background-color: blanchedalmond;
 }
 
 #visu-activite2 {
   background-color: lightpink;
+  height: 900px;
 }
