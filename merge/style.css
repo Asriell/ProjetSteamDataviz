@@ -19,3 +19,11 @@ div.tooltip {
 .hidden {
   display: none;
 }
+
+#visu-activite1 {
+  background-color: blanchedalmond;
+}
+
+#visu-activite2 {
+  background-color: lightpink;
+}
