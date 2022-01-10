@@ -477,7 +477,7 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
                     .select("svg1")
                     .append("svg")
                     .attr("width", total_width)
-                    .attr("height", 20)
+                    .attr("height", 20*keys.length/4)
                     .attr(
                         "transform",
                         "translate(" + start_margin + "," + margin + ")"
@@ -489,8 +489,8 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', (d,i) => i * spacingBeetweenCells)
-            //.attr('y', (d,i) => i * legendCellSize)
+            .attr('x', (d,i) => i%4 * spacingBeetweenCells)
+            .attr('y', (d,i) => parseInt(i/4) * legendCellSize + 10*parseInt(1/4))
             .style("fill", d => d);
     
     legend.selectAll()
