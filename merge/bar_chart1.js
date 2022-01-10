@@ -187,7 +187,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         var xScale = d3
             .scaleBand()
             .domain(d3.range(datas.length))
-            .range([0, distance_between_bars])
+            .range([0, distance_between_bars*datas.length])
             .align(0);
 
         console.log("datasLength : ",datas);
