@@ -201,7 +201,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .range([height, margin]);
 
         
-        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale).tickFormat((d) => hhmmss(d)));
+        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale).tickFormat((d) => {return hhmmss(d);}).orient("bottom"));
         //var y_axis = d3.axisLeft().scale(yScale);
         if (change == "details") {
             if (document.getElementById("details-checkbox").checked) {
