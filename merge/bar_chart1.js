@@ -477,7 +477,7 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
                     .select("svg1")
                     .append("svg")
                     .attr("width", total_width)
-                    .attr("height", 30 * keys.length)
+                    .attr("height", 15 * keys.length)
                     .attr(
                         "transform",
                         "translate(" + start_margin + "," + margin + ")"
