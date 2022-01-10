@@ -1,5 +1,5 @@
 
-function display_graph1(svg_already_exists, svg) {
+function display_graph1(svg_already_exists, svg, change = undefined) {
     var tooltip = d3
         .select("body")
         .append("div")
@@ -311,7 +311,7 @@ function display_graph1(svg_already_exists, svg) {
                     })
             }
         } else {
-            if(!svg_already_exists) {
+            if(change=="details") {
                 groups
                 .selectAll("rect")
                 .data(d => d)
@@ -445,8 +445,7 @@ function display_graph1(svg_already_exists, svg) {
         });
 
         d3.select("#details-checkbox").on("change", (event) => {
-            svg1.remove();
-            display_graph1(false, undefined);
+            display_graph1(true, svg1,"details");
         });
 
 
