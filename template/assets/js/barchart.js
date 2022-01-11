@@ -32,10 +32,15 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         );
         //console.log(TODAY, " | ", inf, " | ", inf2);
         gameTimePerDay = {};
+
         while (inf != TODAY) {
             if (document.getElementById("details-checkbox").checked) {
+                var total_game_duration = "00:00:00";
                 games = [];
                 for (entry of Object.values(data)) {
+                    if (entry.total != undefined) {
+                        total_game_duration = calculate_duration(total_game_duration, entry.total)
+                    }
                     if ((!games.includes(entry.game_name)) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
                     }
@@ -60,7 +65,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                         }
                     }
                 }
-                console.log(games)
             } else {
                 gameTimePerDay[inf] = "0:0:0";
                 for (entry of Object.keys(data)) {
@@ -79,7 +83,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         datas = [];
         var id = 0;
         var total_game_duration = "00:00:00";
-        var lat_game;
         if (document.getElementById("details-checkbox").checked) {
             gamesPlayed = [];
             for (val of Object.values(gameTimePerDay)) {
