@@ -259,11 +259,11 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 })
                 .attr("y", function (d) {
                     console.log("playtime : ", d.playtime);
-                    return (d.playtime == 0 ? 0 : yScale(d.playtime));
+                    return (d.playtime == height ? 0 : yScale(d.playtime));
                 })
                 .attr("width", bar_width)
                 .attr("height", function (d) {
-                    return (d.playtime == height ? 0 : height - yScale(d.playtime));
+                    return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                 })
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
@@ -323,10 +323,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     })
                     .attr("y", function (d) {
                         //console.log(d.playtime_forever);
-                        return (d.playtime == 0 ? 0 : yScale(d.playtime));
+                        return (d.playtime == 0 ? height : yScale(d.playtime));
                     })
                     .attr("height", function (d) {
-                        return (d.playtime == 0 ? height : height - yScale(d.playtime));
+                        return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                     })
             }
         } else {
