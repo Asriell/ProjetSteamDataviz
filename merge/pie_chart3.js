@@ -36,7 +36,7 @@ function display_graph3(svg_already_exists,svg3) {
         data = DataCleaning(
             json,
             //document.getElementById("user-select").value
-            "Mak-Dh"
+            "Pyromaniaque"
         );
 
         console.log(data);
