@@ -126,16 +126,14 @@ function display_graph3(svg_already_exists,svg3) {
                             if(game == "total") {
                                 continue;
                             } else {
-                                console.log(gameTimePerDay);
+                                console.log("GTPD : ",gameTimePerDay);
                                 console.log(game,"   ", gameTimePerDay[day]);
                                 tags = gameInfos[game]["genres"];
                                 console.log(tags);
                                 for (tag of tags) {
                                     if (!Object.keys(genreTimePerPeriod).includes(tag.description)) {
-                                        console.log(genreTimePerPeriod,"     ", Object.keys(genreTimePerPeriod) ,"    ",tag.description)
                                         genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
                                     } else {
-                                        console.log(tag.description, "  |  ", genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"])
                                         genreTimePerPeriod[tag.description] = SumDurations(genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"]);
                                     }
                                 }
@@ -151,7 +149,7 @@ function display_graph3(svg_already_exists,svg3) {
                     genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + timeArray[0];
                 }
                 console.log(genreTimePerPeriod);
-                /*
+                
                 datas = [];
                 id = 0;
                 for (game of Object.keys(genreTimePerPeriod)) {
@@ -161,9 +159,9 @@ function display_graph3(svg_already_exists,svg3) {
                     obj["time"] = genreTimePerPeriod[game];
                     datas.push(obj);
                     id ++;
-                }*/
+                }
                 var color = d3.scaleOrdinal()
-                            .domain(Object.keys(genreTimePerPeriod))
+                            .domain([0, d3.max(datas, function (d) { return d.id; })])
                             .range(['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
                                 '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                                 '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
@@ -176,9 +174,9 @@ function display_graph3(svg_already_exists,svg3) {
                                 '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'])
                 var pie = d3.pie()
                 .value(function (d) {
-                    return d.value;
+                    return d.times;
                 })
-                var data_ready = pie(Object.entries(genreTimePerPeriod));
+                var data_ready = pie(datas);
                 console.log("dr : ", data_ready);
 
                 svg3
@@ -187,7 +185,7 @@ function display_graph3(svg_already_exists,svg3) {
                 .enter()
                 .append('path')
                 .attr('d', arcGenerator)
-                .attr('fill', function (d) { return (color(d.data.key)) })
+                .attr('fill', function (d) { return (color(d.data.id)) })
                 .attr("class","pie")
                 /*.on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
