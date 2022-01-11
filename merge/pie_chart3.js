@@ -178,7 +178,7 @@ function display_graph3(svg_already_exists,svg3) {
                 .value(function (d) {
                     return d.value;
                 })
-                var data_ready = pie(d3.entries(genreTimePerPeriod));
+                var data_ready = pie(Object.entries(genreTimePerPeriod));
                 console.log("dr : ", data_ready);
 
                 svg3
