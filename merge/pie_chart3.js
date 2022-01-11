@@ -232,14 +232,14 @@ function display_graph3(svg_already_exists,svg3) {
                 });*/
 
 
-                addLegend_pie(color,datas,total_width,0,0);
+                addLegend_donut(color,datas,total_width,0,0);
 
             });
     });
 
 }
 
-var addLegend_pie = function (colors,keys,total_width,start_margin,margin) {
+var addLegend_donut = function (colors,keys,total_width,start_margin,margin) {
     d3.select("svg3").selectAll(".legendDetails").remove();
     let legendCellSize = 20;
     let maxCarac = d3.max(keys,(d)=> d.genre.length);
