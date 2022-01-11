@@ -101,7 +101,7 @@ function display_graph3(svg_already_exists,svg3) {
                 console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
                 tags = {}
                 for(id of Object.keys(gamesIds)) {
-                    tags[id] = gameDescriptions.genres; 
+                    tags[id] = gameDescriptions[id].genres; 
                 }
                 console.log(tags);
             });
