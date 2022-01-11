@@ -170,14 +170,14 @@ function display_graph3(svg_already_exists,svg3) {
                 })
         
                 var data_ready = pie(genreTimePerPeriod)
-
+                console.log("dr : ", data_ready)
                 svg3
                     .selectAll('arcs')
                     .data(data_ready)
                     .enter()
                     .append('path')
                     .attr('d', arcGenerator)
-                    .attr('fill', function (d) { console.log("pie generation : ", d ); return (d); })
+                    .attr('fill', function (d) { console.log("pie generation : ", d ); return (color(d)); })
                     .attr("class","pie")
                     .on("mousemove", function (e, d) {
                         // on recupere la position de la souris,
