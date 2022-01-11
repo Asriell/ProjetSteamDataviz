@@ -89,58 +89,58 @@ var SumDurations = function (duration1, duration2) {
 var DataCleaning = function (data, user) {
     //console.log("data : ", data, "  user : ", user);
     var datasUser = Object.values(data.players).filter(
-      (player) => player.persona_name == user
-      //document.getElementById("user-select").value
+        (player) => player.persona_name == user
+        //document.getElementById("user-select").value
     );
     //console.log("datasUser : ", datasUser);
     //console.log(data);
     tmpData = {};
     for (var entry in datasUser) {
-      if (!datasUser[entry].game_duration.includes("day")) {
-        if (entry != 0) {
-          date1 = new Date(datasUser[entry - 1].game_end);
-          date2 = new Date(datasUser[entry].game_end);
-          datediff = Math.abs(date2 - date1) / 1000;
-          dureeJeuSecondes = parseInt(
-            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) *
-              3600 +
-              parseInt(ParseDuration(datasUser[entry].game_duration)[1]) *
-                60 +
-              parseInt(ParseDuration(datasUser[entry].game_duration)[2])
-          );
-          if (datediff > 5 && datediff >= dureeJeuSecondes) {
-            /*
-            console.log(
-              datasUser[entry].game_end,
-              "   ",
-              datediff,
-              "   ",
-              ParseDuration(datasUser[entry].game_duration),
-              "  ",
-              dureeJeuSecondes
-            );
-            */
-            tmpData[datasUser[entry].game_end] = datasUser[entry];
-            if (
-              parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
-              12
-            ) {
-              tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+        if (!datasUser[entry].game_duration.includes("day")) {
+            if (entry != 0) {
+                date1 = new Date(datasUser[entry - 1].game_end);
+                date2 = new Date(datasUser[entry].game_end);
+                datediff = Math.abs(date2 - date1) / 1000;
+                dureeJeuSecondes = parseInt(
+                    parseInt(ParseDuration(datasUser[entry].game_duration)[0]) *
+                    3600 +
+                    parseInt(ParseDuration(datasUser[entry].game_duration)[1]) *
+                    60 +
+                    parseInt(ParseDuration(datasUser[entry].game_duration)[2])
+                );
+                if (datediff > 5 && datediff >= dureeJeuSecondes) {
+                    /*
+                    console.log(
+                      datasUser[entry].game_end,
+                      "   ",
+                      datediff,
+                      "   ",
+                      ParseDuration(datasUser[entry].game_duration),
+                      "  ",
+                      dureeJeuSecondes
+                    );
+                    */
+                    tmpData[datasUser[entry].game_end] = datasUser[entry];
+                    if (
+                        parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
+                        12
+                    ) {
+                        tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+                    }
+                }
+            } else {
+                tmpData[datasUser[entry].game_end] = datasUser[entry];
+                if (
+                    parseInt(ParseDuration(datasUser[entry].game_duration)[0]) > 12
+                ) {
+                    tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+                }
             }
-          }
-        } else {
-          tmpData[datasUser[entry].game_end] = datasUser[entry];
-          if (
-            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) > 12
-          ) {
-            tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
-          }
         }
-      }
     }
     //console.log("tmpData : ", tmpData);
     return tmpData;
-  };
+};
 
 
 //var USER = "Asriel";
@@ -150,9 +150,44 @@ const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-
 const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
 
 function get_total_playtime_of_all_data(dataset) {
-  let total = 0;
-  Object.entries(dataset).forEach(([key, value]) => {
-    total += traitement_data(value.playtime);
-  });
-  return total;
+    let total = 0;
+    Object.entries(dataset).forEach(([key, value]) => {
+        total += traitement_data(value.playtime);
+    });
+    return total;
+}
+
+var hhmmss = function (time) {
+    return parseInt(time / 3600) +
+        ":" +
+        parseInt(
+            (time - parseInt(time / 3600) * 3600) / 60
+        ) +
+        ":" +
+        (time -
+            (parseInt(time / 3600) * 3600 +
+                parseInt(
+                    (time - parseInt(time / 3600) * 3600) / 60
+                ) *
+                60));
+}
+
+function calculate_duration(dur1, dur2) {
+
+    var hour=0;
+    var minute=0;
+    var second=0;
+
+    var splitTime1= dur1.split(':');
+    var splitTime2= dur2.split(':');
+
+    hour = parseInt(splitTime1[0])+parseInt(splitTime2[0])
+    minute = parseInt(splitTime1[1])+parseInt(splitTime2[1])
+    hour = hour + minute/60;
+    minute = minute%60;
+    second = parseInt(splitTime1[2])+parseInt(splitTime2[2])
+    minute = minute + second/60;
+    second = second%60;
+
+    return Math.floor(hour).toString() + ":" + Math.floor(minute).toString() + ":" + Math.floor(second).toString()
 }

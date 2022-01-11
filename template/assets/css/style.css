@@ -2,6 +2,15 @@
   fill: #0f9d58  ;
 }
 
+.hidden {
+display: none;
+}
+
+.bar:hover {
+  cursor: pointer !important;
+  fill: #DB4437  !important;
+}
+
 h1, .navbar-brand {
   color: #0f9d58 !important;
   font-size:30px !important;
@@ -72,7 +81,7 @@ a.chart-switch {
   border-top-right-radius: 0 !important;
 }
 .center-switch {
-  border-radius: 0px !important;
+  border-radius: 0 0 !important;
 }
 
 .right-switch {
@@ -90,6 +99,9 @@ a.chart-switch {
   text-transform: uppercase !important;
   color: #0f9d58  !important;
   font-weight: 600 !important;
+}
+.main-card-chart {
+  padding: 10px !important;
 }
 
 .card-value {
@@ -112,6 +124,10 @@ a.chart-switch {
 }
 .game{
   display: none;
+}
+
+.ml-10 {
+  margin-left: 10px !important;
 }
 input[type=checkbox] {
   display: block;

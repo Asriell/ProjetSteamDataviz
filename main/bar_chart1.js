@@ -364,7 +364,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                             "px"
                         )
                         // on recupere le nom de l'etat
-                        .html(
+                        .select('#date-jeu').append('text').text(d.data.date)/*html(
                             d.data.date +
                             " | Jeu : " + Object.keys(d.data).find(key => d.data[key] === d[1] - d[0]) + " | Temps de jeu : " +
                             parseInt((d[1] - d[0]) / 3600) +
@@ -380,7 +380,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                                     ) *
                                     60)) +
                             " s."
-                        );
+                        )*/;
                 })
                 .on("mouseout", function () {
                     tooltip.classed("hidden", true);

@@ -9,7 +9,7 @@ function display_graph2(svg_already_exists) {
         .attr("class", "hidden tooltip");
     let width = 700;
     let height = 550;
-    let margin = 40;
+    let margin = 80;
     let total_height = height * 1.1;
     let total_width = width * 1.1;
 
@@ -17,8 +17,8 @@ function display_graph2(svg_already_exists) {
     let radius = Math.min(width, height) / 2 - margin
 
     var arcGenerator = d3.arc()
-    .innerRadius(0)
-    .outerRadius(radius)
+        .innerRadius(0)
+        .outerRadius(radius)
 
     // append the svg object to the div called 'my_dataviz'
     if(!svg_already_exists) {
@@ -150,8 +150,8 @@ function display_graph2(svg_already_exists) {
                 entry.total_playtime = total_p;
             });
         });
-        
-        console.log(datas);
+
+        //console.log(datas);
 
 
         // Pie : pour chaque jour, je veux le playtime total
@@ -186,6 +186,7 @@ function display_graph2(svg_already_exists) {
             .append('path')
             .attr('d', arcGenerator)
             .attr('fill', function (d) { return (color(d.data.date)) })
+            .attr("class","pie")
             .on("mousemove", function (e, d) {
                 // on recupere la position de la souris,
                 // e est l'object event d
@@ -247,17 +248,17 @@ function display_graph2(svg_already_exists) {
         addLegend_pie(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             display_graph2(true, svg2);
             display_graph1(true, svg1);
 
         });
 
         d3.select("#period-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             display_graph1(true, svg1);
             display_graph2(true, svg2);
-        });            
+        });
     });
 }
 
@@ -272,37 +273,37 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin) {
     }
     //console.log("legend removed");
     let legend = d3
-                    .select("svg2")
-                    .append("svg")
-                    .attr("width", total_width)
-                    .attr("height", 400)
-                    .attr(
-                        "transform",
-                        "translate(" + start_margin + "," + margin + ")"
-                    )
-                    .attr("class","legendDetails");
-        
+        .select("svg2")
+        .append("svg")
+        .attr("width", total_width)
+        .attr("height", 400)
+        .attr(
+            "transform",
+            "translate(" + start_margin + "," + margin + ")"
+        )
+        .attr("class","legendDetails");
+
     legend.selectAll()
         .data(colorsKeys)
         .enter().append('rect')
-            .attr('height', legendCellSize + 'px')
-            .attr('width', legendCellSize + 'px')
-            .attr('x', function (d,i) {
-                return i%4 * spacingBetweenCells;
-            })
-            .attr('y', function (d,i) {
-                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
-            })
-            .style("fill", d => d);
-    
+        .attr('height', legendCellSize + 'px')
+        .attr('width', legendCellSize + 'px')
+        .attr('x', function (d,i) {
+            return i%4 * spacingBetweenCells;
+        })
+        .attr('y', function (d,i) {
+            return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
+        })
+        .style("fill", d => d);
+
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-            .attr("dy", function (d, i) {
-                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
-            }) // Pour centrer le texte par rapport aux carrés
-            .style("font-size", "13px")
-            .style("fill", "grey")
-            .text(d => d.date);
+        .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("dy", function (d, i) {
+            return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+        }) // Pour centrer le texte par rapport aux carrés
+        .style("font-size", "13px")
+        .style("fill", "grey")
+        .text(d => d.date);
 }
