@@ -85,20 +85,25 @@ function display_graph3(svg_already_exists,svg3) {
                 );
             }
             console.log(gameTimePerDay);
-            tags = {}
+            gamesIds = {}
             //apiKey = "F6F2A22B759FEE0F79940A8783603562" 
 
             for(date of Object.values(gameTimePerDay)) {
                 for (game of Object.keys(date)) {
                     if(!Object.keys(tags).includes(game)) {
-                        tags[game] = date[game]["id"];
+                        gamesIds[game] = date[game]["id"];
                     }
                 }
             }
-            console.log(tags);
+            console.log(gamesIds);
 
             d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
                 console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
+                tags = {}
+                for(id of Object.keys(gamesIds)) {
+                    tags[id] = gamesIds[gamesIds][id].genre; 
+                }
+                console.log(tags);
             });
     });
 
