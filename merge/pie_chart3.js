@@ -10,45 +10,47 @@ var DataCleaning2 = function (data, user) {
     var datasUser = data;
     tmpData = {};
     for (var entry in datasUser) {
-      if (!datasUser[entry].game_duration.includes("day")) {
-        if (entry != 0) {
-          date1 = new Date(datasUser[entry - 1].game_end);
-          date2 = new Date(datasUser[entry].game_end);
-          datediff = Math.abs(date2 - date1) / 1000;
-          dureeJeuSecondes = parseInt(
-            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) *
-              3600 +
-              parseInt(ParseDuration(datasUser[entry].game_duration)[1]) *
-                60 +
-              parseInt(ParseDuration(datasUser[entry].game_duration)[2])
-          );
-          if (datediff > 5 && datediff >= dureeJeuSecondes) {
-            /*
-            console.log(
-              datasUser[entry].game_end,
-              "   ",
-              datediff,
-              "   ",
-              ParseDuration(datasUser[entry].game_duration),
-              "  ",
-              dureeJeuSecondes
-            );
-            */
-            tmpData[datasUser[entry].game_end] = datasUser[entry];
-            if (
-              parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
-              12
-            ) {
-              tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
-            }
-          }
-        } else {
-          tmpData[datasUser[entry].game_end] = datasUser[entry];
-          if (
-            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) > 12
-          ) {
-            tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
-          }
+        if (datasUser[entry]!= undefined) {
+            if (!datasUser[entry].game_duration.includes("day")) {
+                if (entry != 0) {
+                  date1 = new Date(datasUser[entry - 1].game_end);
+                  date2 = new Date(datasUser[entry].game_end);
+                  datediff = Math.abs(date2 - date1) / 1000;
+                  dureeJeuSecondes = parseInt(
+                    parseInt(ParseDuration(datasUser[entry].game_duration)[0]) *
+                      3600 +
+                      parseInt(ParseDuration(datasUser[entry].game_duration)[1]) *
+                        60 +
+                      parseInt(ParseDuration(datasUser[entry].game_duration)[2])
+                  );
+                  if (datediff > 5 && datediff >= dureeJeuSecondes) {
+                    /*
+                    console.log(
+                      datasUser[entry].game_end,
+                      "   ",
+                      datediff,
+                      "   ",
+                      ParseDuration(datasUser[entry].game_duration),
+                      "  ",
+                      dureeJeuSecondes
+                    );
+                    */
+                    tmpData[datasUser[entry].game_end] = datasUser[entry];
+                    if (
+                      parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
+                      12
+                    ) {
+                      tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+                    }
+                  }
+                } else {
+                  tmpData[datasUser[entry].game_end] = datasUser[entry];
+                  if (
+                    parseInt(ParseDuration(datasUser[entry].game_duration)[0]) > 12
+                  ) {
+                    tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+                  }
+                }
         }
       }
     }
