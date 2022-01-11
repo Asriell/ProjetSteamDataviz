@@ -1,3 +1,61 @@
+var DataCleaning2 = function (data, user) {
+    //console.log("data : ", data, "  user : ", user);
+    /*
+    var datasUser = Object.values(data.players).filter(
+      (player) => player.persona_name == user
+      //document.getElementById("user-select").value
+    );*/
+    //console.log("datasUser : ", datasUser);
+    //console.log(data);
+    tmpData = {};
+    for (var entry in datasUser) {
+      if (!datasUser[entry].game_duration.includes("day")) {
+        if (entry != 0) {
+          date1 = new Date(datasUser[entry - 1].game_end);
+          date2 = new Date(datasUser[entry].game_end);
+          datediff = Math.abs(date2 - date1) / 1000;
+          dureeJeuSecondes = parseInt(
+            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) *
+              3600 +
+              parseInt(ParseDuration(datasUser[entry].game_duration)[1]) *
+                60 +
+              parseInt(ParseDuration(datasUser[entry].game_duration)[2])
+          );
+          if (datediff > 5 && datediff >= dureeJeuSecondes) {
+            /*
+            console.log(
+              datasUser[entry].game_end,
+              "   ",
+              datediff,
+              "   ",
+              ParseDuration(datasUser[entry].game_duration),
+              "  ",
+              dureeJeuSecondes
+            );
+            */
+            tmpData[datasUser[entry].game_end] = datasUser[entry];
+            if (
+              parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
+              12
+            ) {
+              tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+            }
+          }
+        } else {
+          tmpData[datasUser[entry].game_end] = datasUser[entry];
+          if (
+            parseInt(ParseDuration(datasUser[entry].game_duration)[0]) > 12
+          ) {
+            tmpData[datasUser[entry].game_end].game_duration = "12:00:00";
+          }
+        }
+      }
+    }
+    //console.log("tmpData : ", tmpData);
+    return tmpData;
+  };
+
+
 function display_graph3(svg_already_exists,svg3) {
 
     console.log("=========================SVG3=========================");
@@ -33,7 +91,7 @@ function display_graph3(svg_already_exists,svg3) {
 
     d3.json(urlplayersjson).then((json) => {
         transform_data_for_bar(json);
-        data = DataCleaning(
+        data = DataCleaning2(
             json,
             document.getElementById("user-select").value
         );
