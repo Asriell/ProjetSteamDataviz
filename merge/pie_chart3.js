@@ -131,6 +131,7 @@ function display_graph3(svg_already_exists,svg3) {
                                 console.log(tags);
                                 for (tag of tags) {
                                     if (!Object.keys(genreTimePerPeriod).includes(tag.description)) {
+                                        console.log(genreTimePerPeriod,"     ", Object.keys(genreTimePerPeriod) ,"    ",tag.description)
                                         genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
                                     } else {
                                         console.log(tag.description, "  |  ", genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"])
