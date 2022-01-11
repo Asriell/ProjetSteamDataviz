@@ -182,20 +182,20 @@ function sleeper(ms) {
 
 function ChargeGameInfos() {
   d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
-    for(id of Object.keys(gamesIds)) {
+    for(id of Object.keys(gameDescriptions)) {
       if (id != "total") {
           //console.log(id);
           gameInfos[id] = {}
-          gameInfos[id]["genres"] = gameDescriptions[gamesIds[id]].genres; 
-          gameInfos[id]["is_free"] = gameDescriptions[gamesIds[id]].is_free; 
-          gameInfos[id]["controller_support"] = gameDescriptions[gamesIds[id]].controller_support; 
-          gameInfos[id]["header_image"] = gameDescriptions[gamesIds[id]].header_image; 
-          gameInfos[id]["developers"] = gameDescriptions[gamesIds[id]].developers; 
-          gameInfos[id]["price_overview"] = gameDescriptions[gamesIds[id]].price_overview; 
-          gameInfos[id]["platforms"] = gameDescriptions[gamesIds[id]].platforms; 
-          gameInfos[id]["metacritic"] = gameDescriptions[gamesIds[id]].metacritic; 
-          gameInfos[id]["movies"] = gameDescriptions[gamesIds[id]].movies; 
-          gameInfos[id]["mp4"] = gameDescriptions[gamesIds[id]].mp4; 
+          gameInfos[id]["genres"] = gameDescriptions[id].genres; 
+          gameInfos[id]["is_free"] = gameDescriptions[id].is_free; 
+          gameInfos[id]["controller_support"] = gameDescriptions[id].controller_support; 
+          gameInfos[id]["header_image"] = gameDescriptions[id].header_image; 
+          gameInfos[id]["developers"] = gameDescriptions[id].developers; 
+          gameInfos[id]["price_overview"] = gameDescriptions[id].price_overview; 
+          gameInfos[id]["platforms"] = gameDescriptions[id].platforms; 
+          gameInfos[id]["metacritic"] = gameDescriptions[id].metacritic; 
+          gameInfos[id]["movies"] = gameDescriptions[id].movies; 
+          gameInfos[id]["mp4"] = gameDescriptions[id].mp4; 
       }
     }
   });
