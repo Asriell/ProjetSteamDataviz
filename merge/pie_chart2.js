@@ -1,5 +1,6 @@
 function display_graph2(svg_already_exists) {
 
+    console.log("=========================SVG2=========================");
     if(svg_already_exists) {
         svg2.selectAll('*').remove();
     }
@@ -172,11 +173,13 @@ function display_graph2(svg_already_exists) {
         // Compute the position of each group on the pie:
         var pie = d3.pie()
             .value(function (d) {
+                console.log(d)
                 return d.total_playtime;
             })
 
         var data_ready = pie(datas)
-        //console.log(data_ready);
+        console.log("datas : ", datas);
+        console.log(data_ready);
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         svg2
