@@ -92,11 +92,14 @@ function display_graph3(svg_already_exists,svg3) {
                 for (game of Object.keys(date)) {
                     if(!Object.keys(tags).includes(game)) {
                         tags[game] = date[game]["id"];
-                        //url = "https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
                     }
                 }
             }
             console.log(tags);
+
+            d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
+                console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
+            });
     });
 
 
