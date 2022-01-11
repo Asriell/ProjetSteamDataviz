@@ -1,6 +1,5 @@
 function display_graph2(svg_already_exists) {
 
-    console.log("=========================SVG2=========================");
     if(svg_already_exists) {
         svg2.selectAll('*').remove();
     }
@@ -10,7 +9,7 @@ function display_graph2(svg_already_exists) {
         .attr("class", "hidden tooltip");
     let width = 700;
     let height = 550;
-    let margin = 40;
+    let margin = 80;
     let total_height = height * 1.1;
     let total_width = width * 1.1;
 
@@ -18,8 +17,8 @@ function display_graph2(svg_already_exists) {
     let radius = Math.min(width, height) / 2 - margin
 
     var arcGenerator = d3.arc()
-    .innerRadius(100)
-    .outerRadius(radius)
+        .innerRadius(100)
+        .outerRadius(radius)
 
     // append the svg object to the div called 'my_dataviz'
     if(!svg_already_exists) {
@@ -151,7 +150,7 @@ function display_graph2(svg_already_exists) {
                 entry.total_playtime = total_p;
             });
         });
-        
+
         //console.log(datas);
 
 
@@ -199,16 +198,29 @@ function display_graph2(svg_already_exists) {
                     .classed("hidden", false)
                     // on positionne le tooltip en fonction
                     // de la position de la souris
-                    .attr(
-                        "style",
-                        "left:" +
-                        (mousePosition[0] + 15) +
-                        "px; top:" +
-                        (mousePosition[1] - 35) +
-                        "px"
-                    )
+
+
+                d3.select('#date-jeu').text(theData.date);
+                d3.select('#duree2-jeu').text(
+                    parseInt(theData.total_playtime / 3600) +
+                    " h " +
+                    parseInt(
+                        (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                    ) +
+                    " m " +
+                    (theData.total_playtime -
+                        (parseInt(theData.total_playtime / 3600) * 3600 +
+                            parseInt(
+                                (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                            ) *
+                            60)) +
+                    " s."
+                );
+                d3.select("#nom-jeu").text(" -- ");
+                /*d3.select("#nom-jeu").text( Object.keys(theData).find(key => theData[key] === theData.total_playtime));*/
+
                     // on recupere le nom de l'etat
-                    .html(
+                    /*.html(
                         theData.date +
                         " | Temps de jeu : " +
                         parseInt(theData.total_playtime / 3600) +
@@ -224,7 +236,7 @@ function display_graph2(svg_already_exists) {
                                 ) *
                                 60)) +
                         " s."
-                    );
+                    )*/;
             })
             .on("mouseout", function () {
                 tooltip.classed("hidden", true);
@@ -259,7 +271,7 @@ function display_graph2(svg_already_exists) {
             //console.log("change");
             display_graph1(true, svg1);
             display_graph2(true, svg2);
-        });            
+        });
     });
 }
 
@@ -274,37 +286,37 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin) {
     }
     //console.log("legend removed");
     let legend = d3
-                    .select("svg2")
-                    .append("svg")
-                    .attr("width", total_width)
-                    .attr("height", 400)
-                    .attr(
-                        "transform",
-                        "translate(" + start_margin + "," + margin + ")"
-                    )
-                    .attr("class","legendDetails");
-        
+        .select("svg2")
+        .append("svg")
+        .attr("width", total_width)
+        .attr("height", 400)
+        .attr(
+            "transform",
+            "translate(" + start_margin + "," + margin + ")"
+        )
+        .attr("class","legendDetails");
+
     legend.selectAll()
         .data(colorsKeys)
         .enter().append('rect')
-            .attr('height', legendCellSize + 'px')
-            .attr('width', legendCellSize + 'px')
-            .attr('x', function (d,i) {
-                return i%4 * spacingBetweenCells;
-            })
-            .attr('y', function (d,i) {
-                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
-            })
-            .style("fill", d => d);
-    
+        .attr('height', legendCellSize + 'px')
+        .attr('width', legendCellSize + 'px')
+        .attr('x', function (d,i) {
+            return i%4 * spacingBetweenCells;
+        })
+        .attr('y', function (d,i) {
+            return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
+        })
+        .style("fill", d => d);
+
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-            .attr("dy", function (d, i) {
-                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
-            }) // Pour centrer le texte par rapport aux carrés
-            .style("font-size", "13px")
-            .style("fill", "grey")
-            .text(d => d.date);
+        .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("dy", function (d, i) {
+            return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+        }) // Pour centrer le texte par rapport aux carrés
+        .style("font-size", "13px")
+        .style("fill", "grey")
+        .text(d => d.date);
 }
