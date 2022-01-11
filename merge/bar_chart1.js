@@ -1,5 +1,5 @@
 
-function display_graph1(svg_already_exists, svg) {
+function display_graph1(svg_already_exists, svg, change = undefined) {
     var tooltip = d3
         .select("body")
         .append("div")
@@ -171,9 +171,16 @@ function display_graph1(svg_already_exists, svg) {
                     .domain(datas.map(d => d.date))
                     .range([0, distance_between_bars])
 
-            var y = d3.scaleLinear()
+            //console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
+            if (series.length != 0) {
+                var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
                         .range([height, margin]);
+            } else {
+                var y = d3.scaleLinear()
+                        .domain([0,0])
+                        .range([height, margin]);
+            }
             svg1.selectAll(".games").selectAll("rect").remove();
             svg1.selectAll(".games").remove();
             var groups = svg1.selectAll("g.games")
@@ -185,11 +192,13 @@ function display_graph1(svg_already_exists, svg) {
         }
 
         var xScale = d3
-            .scaleLinear()
+            .scaleBand()
             .domain(d3.range(datas.length))
-            .range([0, distance_between_bars]);
+            .range([0, distance_between_bars*datas.length])
+            .align(0);
 
-        var x_axis = d3.axisBottom().scale(xScale);
+        //console.log("datasLength : ",datas);
+        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
 
         /*console.log(
             "max : ",
@@ -201,9 +210,19 @@ function display_graph1(svg_already_exists, svg) {
             .range([height, margin]);
 
         
-        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y):d3.axisLeft().scale(yScale));
+        var y_axis = (document.getElementById("details-checkbox").checked ? d3.axisLeft().scale(y).tickFormat((d) =>  hhmmss(d)):d3.axisLeft().scale(yScale).tickFormat((d) =>  hhmmss(d)));
         //var y_axis = d3.axisLeft().scale(yScale);
-        console.log(xScale(5));
+        if (change == "details") {
+            if (document.getElementById("details-checkbox").checked) {
+                //console.log("checked");
+                svg1.selectAll(".bar").classed("hidden", true);
+                svg1.selectAll(".games").classed("hidden", false);
+            } else {
+                //console.log("unchecked");
+                svg1.selectAll(".bar").classed("hidden", false);
+                svg1.selectAll(".games").classed("hidden", true);
+            }
+        }
 
         if (!svg_already_exists) {
         svg1
@@ -239,12 +258,12 @@ function display_graph1(svg_already_exists, svg) {
                     return xScale(d.id) + start_margin;
                 })
                 .attr("y", function (d) {
-                    //console.log(d.playtime_forever);
-                    return yScale(d.playtime);
+                    //console.log("playtime : ", d.playtime);
+                    return (d.playtime == height ? 0 : yScale(d.playtime));
                 })
                 .attr("width", bar_width)
                 .attr("height", function (d) {
-                    return height - yScale(d.playtime);
+                    return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                 })
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
@@ -304,14 +323,14 @@ function display_graph1(svg_already_exists, svg) {
                     })
                     .attr("y", function (d) {
                         //console.log(d.playtime_forever);
-                        return yScale(d.playtime);
+                        return (d.playtime == 0 ? height : yScale(d.playtime));
                     })
                     .attr("height", function (d) {
-                        return height - yScale(d.playtime);
+                        return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                     })
             }
         } else {
-            if(!svg_already_exists) {
+            if(change=="details") {
                 groups
                 .selectAll("rect")
                 .data(d => d)
@@ -324,6 +343,7 @@ function display_graph1(svg_already_exists, svg) {
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]))
+                .attr("class","rectGames")
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
                     // e est l'object event d
@@ -374,11 +394,11 @@ function display_graph1(svg_already_exists, svg) {
                 .append("rect")
                 .transition()
                 .duration(1000)
-                .attr("x",(d) => {console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d); return xScale(d.data.id) + start_margin;})
+                .attr("x",(d) => {/*console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d);*/ return xScale(d.data.id) + start_margin;})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
-                .attr("height", (d)=> height - y(d[1]-d[0]));
-
+                .attr("height", (d)=> height - y(d[1]-d[0]))
+                .attr("class","rectGames")
                 groups
                 .selectAll("rect")
                 .on("mousemove", function (e, d) {
@@ -427,10 +447,10 @@ function display_graph1(svg_already_exists, svg) {
 
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
-        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,0,margin);
+        if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
         
         d3.select("#user-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph2(true);
             display_graph1(true, svg1);
@@ -438,15 +458,14 @@ function display_graph1(svg_already_exists, svg) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph1(true, svg1);
             display_graph2(true);
         });
 
         d3.select("#details-checkbox").on("change", (event) => {
-            svg1.remove();
-            display_graph1(false, undefined);
+            display_graph1(true, svg1,"details");
         });
 
 
@@ -455,7 +474,7 @@ function display_graph1(svg_already_exists, svg) {
 }
 
 
-function addLegend(colors,keys,total_width,start_margin,margin) {
+function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 4) {
     legendCellSize = 20,
     maxCarac = d3.max(keys,(d)=> d.length);
     spacingBeetweenCells = legendCellSize + maxCarac * 7 + 5;
@@ -468,10 +487,10 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
                     .select("svg1")
                     .append("svg")
                     .attr("width", total_width)
-                    .attr("height", 20)
+                    .attr("height", 30 * (Math.floor(keys.length/legendPerLines) + 1)+15)
                     .attr(
                         "transform",
-                        "translate(" + start_margin + "," + margin + ")"
+                        "translate(" + 2*start_margin + "," + margin + ")"
                     )
                     .attr("class","legendDetails");
         
@@ -480,15 +499,15 @@ function addLegend(colors,keys,total_width,start_margin,margin) {
         .enter().append('rect')
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
-            .attr('x', (d,i) => i * spacingBeetweenCells)
-            //.attr('y', (d,i) => i * legendCellSize)
+            .attr('x', (d,i) => i%legendPerLines * spacingBeetweenCells)
+            .attr('y', (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10)
             .style("fill", d => d);
     
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-            .attr("dy", legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
+            .attr("transform", (d,i) => "translate(" + (i%legendPerLines * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("dy", (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
             .text(d => d);
