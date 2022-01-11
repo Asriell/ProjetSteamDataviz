@@ -95,7 +95,6 @@ function display_graph3(svg_already_exists,svg3) {
                 }
             }
             console.log(gamesIds);
-            await new Promise(r => setTimeout(r, 1000));
     });
     d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
                 //console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
@@ -233,7 +232,7 @@ function display_graph3(svg_already_exists,svg3) {
                 });*/
 
 
-                //addLegend_pie(color,datas,total_width,0,0);
+                addLegend_pie(color,datas,total_width,0,0);
             });
 
 }
