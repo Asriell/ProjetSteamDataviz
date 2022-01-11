@@ -232,10 +232,55 @@ function display_graph3(svg_already_exists,svg3) {
                 });*/
 
 
-                addLegend_pie(color,datas,total_width,0,0);
+                //addLegend_pie(color,datas,total_width,0,0);
             });
     });
 
-
-
 }
+
+var addLegend_pie = function (colors,keys,total_width,start_margin,margin) {
+    d3.select("svg3").selectAll(".legendDetails").remove();
+    let legendCellSize = 20;
+    let maxCarac = d3.max(keys,(d)=> d.date.length);
+    var spacingBetweenCells = legendCellSize + maxCarac * 7 + 5;
+    colorsKeys = [];
+    for (let i=0;i<keys.length;++i) {
+        colorsKeys.push(colors(keys[i].date));
+    }
+    //console.log("legend removed");
+    let legend = d3
+                    .select("svg3")
+                    .append("svg")
+                    .attr("width", total_width)
+                    .attr("height", 400)
+                    .attr(
+                        "transform",
+                        "translate(" + start_margin + "," + margin + ")"
+                    )
+                    .attr("class","legendDetails");
+        
+    legend.selectAll()
+        .data(colorsKeys)
+        .enter().append('rect')
+            .attr('height', legendCellSize + 'px')
+            .attr('width', legendCellSize + 'px')
+            .attr('x', function (d,i) {
+                return i%4 * spacingBetweenCells;
+            })
+            .attr('y', function (d,i) {
+                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
+            })
+            .style("fill", d => d);
+    
+    legend.selectAll()
+        .data(keys)
+        .enter().append('text')
+            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("dy", function (d, i) {
+                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+            }) // Pour centrer le texte par rapport aux carrés
+            .style("font-size", "13px")
+            .style("fill", "grey")
+            .text(d => d.genre);
+
+        }
