@@ -1,5 +1,6 @@
 function display_graph2(svg_already_exists) {
 
+    console.log("=========================SVG2=========================");
     if(svg_already_exists) {
         svg2.selectAll('*').remove();
     }
