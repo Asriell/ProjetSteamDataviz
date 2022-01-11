@@ -133,7 +133,7 @@ function display_graph3(svg_already_exists,svg3) {
                                     if (!Object.keys(genreTimePerPeriod).includes()) {
                                         genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
                                     } else {
-                                        genreTimePerPeriod[tag.description] = SumDurations(genreTimePerPeriod[tag], gameTimePerDay[day][game]["time"]);
+                                        genreTimePerPeriod[tag.description] = SumDurations(genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"]);
                                     }
                                 }
                             }
