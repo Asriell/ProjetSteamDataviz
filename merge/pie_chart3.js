@@ -1,5 +1,3 @@
-
-
 function display_graph3(svg_already_exists,svg3) {
 
     console.log("=========================SVG3=========================");
@@ -35,13 +33,10 @@ function display_graph3(svg_already_exists,svg3) {
 
     d3.json(urlplayersjson).then((json) => {
         transform_data_for_bar(json);
-        
-        data2 = DataCleaning(
+        data = DataCleaning(
             json,
             document.getElementById("user-select").value
         );
-
-        data = json;
 
         console.log(data);
         inf = "1970-01-01";
@@ -57,8 +52,7 @@ function display_graph3(svg_already_exists,svg3) {
         gameTimePerDay = {};
         while (inf != TODAY) {
                 games = [];
-                for (entry of Object.values(data.players)) {
-                    console.log(entry);
+                for (entry of Object.values(data)) {
                     if ((!games.includes(entry.game_name)) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
                     }
@@ -96,7 +90,7 @@ function display_graph3(svg_already_exists,svg3) {
             for(date of Object.values(gameTimePerDay)) {
                 for (game of Object.keys(date)) {
                     if(!Object.keys(tags).includes(game)) {
-                        tags[game] = date[game]["id"];
+                        tags[game] = date[game]["id"]
                         //url = "https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
                     }
                 }
