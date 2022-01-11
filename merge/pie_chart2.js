@@ -151,7 +151,7 @@ function display_graph2(svg_already_exists) {
             });
         });
         
-        console.log(datas);
+        //console.log(datas);
 
 
         // Pie : pour chaque jour, je veux le playtime total
@@ -248,14 +248,14 @@ function display_graph2(svg_already_exists) {
         addLegend_pie(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             display_graph2(true, svg2);
             display_graph1(true, svg1);
 
         });
 
         d3.select("#period-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             display_graph1(true, svg1);
             display_graph2(true, svg2);
         });            

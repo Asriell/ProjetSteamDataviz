@@ -171,7 +171,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .domain(datas.map(d => d.date))
                     .range([0, distance_between_bars])
 
-            console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
+            //console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
             if (series.length != 0) {
                 var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
@@ -197,7 +197,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .range([0, distance_between_bars*datas.length])
             .align(0);
 
-        console.log("datasLength : ",datas);
+        //console.log("datasLength : ",datas);
         var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
 
         /*console.log(
@@ -214,11 +214,11 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         //var y_axis = d3.axisLeft().scale(yScale);
         if (change == "details") {
             if (document.getElementById("details-checkbox").checked) {
-                console.log("checked");
+                //console.log("checked");
                 svg1.selectAll(".bar").classed("hidden", true);
                 svg1.selectAll(".games").classed("hidden", false);
             } else {
-                console.log("unchecked");
+                //console.log("unchecked");
                 svg1.selectAll(".bar").classed("hidden", false);
                 svg1.selectAll(".games").classed("hidden", true);
             }
@@ -258,7 +258,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     return xScale(d.id) + start_margin;
                 })
                 .attr("y", function (d) {
-                    console.log("playtime : ", d.playtime);
+                    //console.log("playtime : ", d.playtime);
                     return (d.playtime == height ? 0 : yScale(d.playtime));
                 })
                 .attr("width", bar_width)
@@ -394,7 +394,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .append("rect")
                 .transition()
                 .duration(1000)
-                .attr("x",(d) => {console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d); return xScale(d.data.id) + start_margin;})
+                .attr("x",(d) => {/*console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d);*/ return xScale(d.data.id) + start_margin;})
                 .attr("width", bar_width)
                 .attr("y",(d)=> y(d[1]))
                 .attr("height", (d)=> height - y(d[1]-d[0]))
@@ -450,7 +450,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
         
         d3.select("#user-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph2(true);
             display_graph1(true, svg1);
@@ -458,7 +458,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            console.log("change");
+            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph1(true, svg1);
             display_graph2(true);
