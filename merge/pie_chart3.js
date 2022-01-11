@@ -123,9 +123,10 @@ function display_graph3(svg_already_exists,svg3) {
                         continue;
                     } else {
                         for(game of Object.keys(gameTimePerDay[day])) {
-                            if(game == "total" || game == 0) {
+                            if(game == "total") {
                                 continue;
                             } else {
+                                console.log(gameTimePerDay);
                                 console.log(game,"   ", gameTimePerDay[day]);
                                 tags = gameInfos[game]["genres"];
                                 console.log(tags);
@@ -150,6 +151,7 @@ function display_graph3(svg_already_exists,svg3) {
                     genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + timeArray[0];
                 }
                 console.log(genreTimePerPeriod);
+                /*
                 datas = [];
                 id = 0;
                 for (game of Object.keys(genreTimePerPeriod)) {
@@ -159,9 +161,9 @@ function display_graph3(svg_already_exists,svg3) {
                     obj["time"] = genreTimePerPeriod[game];
                     datas.push(obj);
                     id ++;
-                }
+                }*/
                 var color = d3.scaleOrdinal()
-                            .domain([0, d3.max(datas, function (d) { return d.time; })])
+                            .domain(genreTimePerPeriod)
                             .range(['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
                                 '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                                 '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
@@ -174,9 +176,9 @@ function display_graph3(svg_already_exists,svg3) {
                                 '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'])
                 var pie = d3.pie()
                 .value(function (d) {
-                    return d.time;
+                    return d.value;
                 })
-                var data_ready = pie(datas);
+                var data_ready = pie(d3.entries(genreTimePerPeriod));
                 console.log("dr : ", data_ready);
 
                 svg3
@@ -185,15 +187,16 @@ function display_graph3(svg_already_exists,svg3) {
                 .enter()
                 .append('path')
                 .attr('d', arcGenerator)
-                .attr('fill', function (d) { return (color(d.genre)) })
+                .attr('fill', function (d) { return (color(d.data.key)) })
                 .attr("class","pie")
-                .on("mousemove", function (e, d) {
+                /*.on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
                     // e est l'object event d
                     theData = d.data;
                     var mousePosition = [e.x, e.y];
                     //console.log(mousePosition);
                     // on affiche le toolip
+
                     tooltip
                         .classed("hidden", false)
                         // on positionne le tooltip en fonction
@@ -227,7 +230,7 @@ function display_graph3(svg_already_exists,svg3) {
                 })
                 .on("mouseout", function () {
                     tooltip.classed("hidden", true);
-                });
+                });*/
             });
     });
 
