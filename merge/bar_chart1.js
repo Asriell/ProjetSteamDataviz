@@ -1,4 +1,3 @@
-
 function display_graph1(svg_already_exists, svg, change = undefined) {
     var tooltip = d3
         .select("body")

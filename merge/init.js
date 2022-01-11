@@ -1,7 +1,6 @@
 var svg1;
 var svg2;
 var svg3;
-var gameInfos = {};
 
 function traitement_data(x) {
     return parseInt(x);
@@ -178,32 +177,4 @@ function sleeper(ms) {
   return function(x) {
     return new Promise(resolve => setTimeout(() => resolve(x), ms));
   };
-}
-
-function ChargeGameInfos() {
-  d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
-    for(id of Object.keys(gameDescriptions)) {
-      if (id != "total") {
-          //console.log(id);
-          gameInfos[id] = {}
-          gameInfos[id]["genres"] = gameDescriptions[id].genres; 
-          gameInfos[id]["is_free"] = gameDescriptions[id].is_free; 
-          gameInfos[id]["controller_support"] = gameDescriptions[id].controller_support; 
-          gameInfos[id]["header_image"] = gameDescriptions[id].header_image; 
-          gameInfos[id]["developers"] = gameDescriptions[id].developers; 
-          gameInfos[id]["price_overview"] = gameDescriptions[id].price_overview; 
-          gameInfos[id]["platforms"] = gameDescriptions[id].platforms; 
-          gameInfos[id]["metacritic"] = gameDescriptions[id].metacritic; 
-          gameInfos[id]["movies"] = gameDescriptions[id].movies; 
-          gameInfos[id]["mp4"] = gameDescriptions[id].mp4; 
-      }
-    }
-  });
-}
-
-async function display() {
-  await ChargeGameInfos();
-  display_graph1(false, undefined);
-  display_graph2(false);
-  display_graph3();
 }
