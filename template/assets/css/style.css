@@ -29,6 +29,12 @@ div.tooltip {
 footer{
   position:absolute;
   margin-bottom:0px;
+  text-align:center;
+}
+
+.copyright{
+  display:inline-block;
+  text-align: center;
 }
 
 .user-info {
