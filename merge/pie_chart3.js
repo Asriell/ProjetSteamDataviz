@@ -36,7 +36,7 @@ function display_graph3(svg_already_exists,svg3) {
     d3.json(urlplayersjson).then((json) => {
         transform_data_for_bar(json);
         
-        data2 = DataCleaning2(
+        data2 = DataCleaning(
             json,
             document.getElementById("user-select").value
         );
