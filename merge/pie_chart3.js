@@ -98,14 +98,24 @@ function display_graph3(svg_already_exists,svg3) {
 
             d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
                 console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
-                tags = {}
+                gameInfos = {}
                 for(id of Object.keys(gamesIds)) {
                     if (id != "total") {
                         console.log(id);
-                        tags[id] = gameDescriptions[gamesIds[id]].genres; 
+                        gameInfos[id] = {}
+                        gameInfos[id]["genres"] = gameDescriptions[gamesIds[id]].genres; 
+                        gameInfos[id]["is_free"] = gameDescriptions[gamesIds[id]].is_free; 
+                        gameInfos[id]["controller_support"] = gameDescriptions[gamesIds[id]].controller_support; 
+                        gameInfos[id]["header_image"] = gameDescriptions[gamesIds[id]].header_image; 
+                        gameInfos[id]["developers"] = gameDescriptions[gamesIds[id]].developers; 
+                        gameInfos[id]["price_overview"] = gameDescriptions[gamesIds[id]].price_overview; 
+                        gameInfos[id]["platforms"] = gameDescriptions[gamesIds[id]].platforms; 
+                        gameInfos[id]["metacritic"] = gameDescriptions[gamesIds[id]].metacritic; 
+                        gameInfos[id]["movies"] = gameDescriptions[gamesIds[id]].movies; 
+                        gameInfos[id]["mp4"] = gameDescriptions[gamesIds[id]].mp4; 
                     }
                 }
-                console.log(tags);
+                console.log("game infos : ", gameInfos);
             });
     });
 
