@@ -90,7 +90,7 @@ function display_graph3(svg_already_exists,svg3) {
 
             for(date of Object.values(gameTimePerDay)) {
                 for (game of Object.keys(date)) {
-                    if(!Object.keys(tags).includes(game)) {
+                    if(!Object.keys(gamesIds).includes(game)) {
                         gamesIds[game] = date[game]["id"];
                     }
                 }
