@@ -165,61 +165,11 @@ function display_graph3(svg_already_exists,svg3) {
                                 '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'])
                 var pie = d3.pie()
                 .value(function (d) {
-                    console.log("pie value : " + d);
-                    return Object.value(d);
+                    return Object.values(d)[0];
                 })
         
                 var data_ready = pie(genreTimePerPeriod);
                 console.log("dr : ", data_ready);
-                svg3
-                    .selectAll('arcs')
-                    .data(data_ready)
-                    .enter()
-                    .append('path')
-                    .attr('d', arcGenerator)
-                    .attr('fill', function (d) { console.log("pie generation : ", d ); return (color(d)); })
-                    .attr("class","pie")
-                    .on("mousemove", function (e, d) {
-                        // on recupere la position de la souris,
-                        // e est l'object event d
-                        theData = d.data;
-                        var mousePosition = [e.x, e.y];
-                        //console.log(mousePosition);
-                        // on affiche le toolip
-                        tooltip
-                            .classed("hidden", false)
-                            // on positionne le tooltip en fonction
-                            // de la position de la souris
-                            .attr(
-                                "style",
-                                "left:" +
-                                (mousePosition[0] + 15) +
-                                "px; top:" +
-                                (mousePosition[1] - 35) +
-                                "px"
-                            )
-                            // on recupere le nom de l'etat
-                            .html(
-                                theData.date +
-                                " | Temps de jeu : " +
-                                parseInt(theData.total_playtime / 3600) +
-                                " h " +
-                                parseInt(
-                                    (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
-                                ) +
-                                " m " +
-                                (theData.total_playtime -
-                                    (parseInt(theData.total_playtime / 3600) * 3600 +
-                                        parseInt(
-                                            (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
-                                        ) *
-                                        60)) +
-                                " s."
-                            );
-                    })
-                    .on("mouseout", function () {
-                        tooltip.classed("hidden", true);
-                    });
                 
             });
     });
