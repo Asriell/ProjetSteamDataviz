@@ -174,7 +174,7 @@ function display_graph3(svg_already_exists,svg3) {
                                 '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'])
                 var pie = d3.pie()
                 .value(function (d) {
-                    return d.times;
+                    return d.time;
                 })
                 var data_ready = pie(datas);
                 console.log("dr : ", data_ready);
