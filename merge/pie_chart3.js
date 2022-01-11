@@ -90,6 +90,8 @@ function display_graph3(svg_already_exists,svg3) {
             for(date of Object.values(gameTimePerDay)) {
                 for (game of Object.keys(date)) {
                     if(!Object.keys(tags).includes(game)) {
+                        console.log(date);
+                        console.log(game)
                         url = "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
                         console.log(url)
                         $.get(url, {}, function(data) {
