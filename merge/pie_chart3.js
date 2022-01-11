@@ -60,6 +60,7 @@ function display_graph3(svg_already_exists,svg3) {
                     gameTimePerDay[inf]["total"] = "0:0:0";
                     if (games.length != 0) {
                         for (game of games) {
+                            gameTimePerDay[inf][game] = {}
                             gameTimePerDay[inf][game]["time"] = "0:0:0";
                             for (entry of Object.keys(data)) {
                                 if (data[entry].game_end.includes(inf) && game == data[entry].game_name) {
