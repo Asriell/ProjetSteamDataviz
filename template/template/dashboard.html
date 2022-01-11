@@ -44,11 +44,6 @@
   <div class="wrapper">
     <div class="sidebar" data="transparent">
       <div class="sidebar-wrapper mb-5">
-        <div class="logo">
-          <a href="javascript:void(0)" class="simple-text logo-normal text-center" style="font-size: 16px;">
-            Données de l'utilisateur
-          </a>
-        </div>
         <div class="col-lg-12 ">
           <div class="card card-chart user-info">
             <div class="card-header">
@@ -95,9 +90,17 @@
         </div>
       </div>
     </div>
+    <div class="sidebar" data="transparent" id="sidebar2">
+        <div class="image_container">
+          <div class="image_block">
+            <img id="game_image" src="https://wallpaperaccess.com/full/322057.png">
+          </div>
+        </div>
+    </div>
+
     <div class="main-panel" data="blue">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent" style="height: 60px">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -115,26 +118,6 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav ml-auto">
-              <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <div class="photo">
-                    <img src="" alt="Profile Photo">
-                  </div>
-                  <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out
-                  </p>
-                </a>
-                <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
-                  <li class="dropdown-divider"></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
-                </ul>
-              </li>
-              <li class="separator d-lg-none"></li>
-            </ul>
           </div>
         </div>
       </nav>
@@ -154,7 +137,7 @@
       <div class="content">
         <div class="row">
           <div class="col-12">
-            <div class="card card-chart">
+            <div class="card card-chart" style="padding: 10px">
               <div class="card-header ">
                 <!--  Partie pour changer la vizu affichée-->
                 <div class="row mb-5">
@@ -234,7 +217,7 @@
                   </div>
                   <!-- Debut -->
                   <div class="col-sm-3">
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Jeu</h4>
@@ -244,7 +227,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Temps de jeu</h4>
@@ -254,7 +237,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Date</h4>
@@ -264,7 +247,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Prix</h4>
@@ -274,7 +257,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Plateforme</h4>
@@ -284,7 +267,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Spécificités</h4>
@@ -294,13 +277,43 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-12 ">
+                    <div class="col-lg-12 game">
                       <div class="card card-chart">
                         <div class="card-header">
                           <h4 class="card-title">Metascore</h4>
                         </div>
                         <div class="card-body custom-card">
                           <p class="card-value">xxx</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 general">
+                      <div class="card card-chart">
+                        <div class="card-header">
+                          <h4 class="card-title" >Date</h4>
+                        </div>
+                        <div class="card-body custom-card">
+                          <p class="card-value" id="date-jeu">12/12/2021</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 general">
+                      <div class="card card-chart">
+                        <div class="card-header">
+                          <h4 class="card-title" >Nom du jeu</h4>
+                        </div>
+                        <div class="card-body custom-card">
+                          <p class="card-value" id="nom-jeu">Dota 2</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 general">
+                      <div class="card card-chart">
+                        <div class="card-header">
+                          <h4 class="card-title" id="duree-jeu"> Durée de jeu</h4>
+                        </div>
+                        <div class="card-body custom-card">
+                          <p class="card-value">5h</p>
                         </div>
                       </div>
                     </div>
