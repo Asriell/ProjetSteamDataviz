@@ -58,6 +58,7 @@ function display_graph3(svg_already_exists,svg3) {
         while (inf != TODAY) {
                 games = [];
                 for (entry of Object.values(data.players)) {
+                    console.log(entry);
                     if ((!games.includes(entry.game_name)) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
                     }
