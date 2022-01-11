@@ -11,7 +11,12 @@
         <script src="pie_chart2.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="pie_chart3.js"></script>
-
+        <script>
+            document.getElementById("user-select").value = "Asriel";
+            document.getElementById("period-select").value = "mois";
+            document.getElementById("details-checkbox").checked = false;
+            display();
+        </script>
         <title>Graphes Vapeur</title>
 
         <h1>Visualisation des activités Steam par joueur</h1>
@@ -44,23 +49,15 @@
         <div id="visu-activite1">
             <h3 id="legende1">hello</h3>
             <svg1></svg1>
-            <script>
-                document.getElementById("user-select").value = "Asriel";
-                document.getElementById("period-select").value = "mois";
-                document.getElementById("details-checkbox").checked = false;
-                display_graph1(false, undefined);
-            </script>
         </div>
 
         <div id="visu-activite2">
             <h3>Votre temps total réparti sur la période</h3>
             <svg2 width="600" height="500"></svg2>
-            <script>display_graph2()</script>
         </div>
         <div id="visu-activite3">
             <h3>Les catégories les plus populaires</h3>
             <svg3 width="600" height="500"></svg3>
-            <script>display_graph3()</script>
         </div>
 
     </body>
