@@ -11,6 +11,14 @@ display: none;
   fill: #DB4437  !important;
 }
 
+.rectGames:hover {
+  fill: #DB4437 ;
+}
+
+.pie:hover {
+  transform: scale(1.1);
+}
+
 h1, .navbar-brand {
   color: #0f9d58 !important;
   font-size:30px !important;
