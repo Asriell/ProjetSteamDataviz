@@ -10,7 +10,7 @@ var DataCleaning2 = function (data, user) {
     var datasUser = data;
     tmpData = {};
     for (var entry in datasUser) {
-        if (datasUser[entry]!= undefined) {
+        if (datasUser[entry].game_duration!= undefined) {
             if (!datasUser[entry].game_duration.includes("day")) {
                 if (entry != 0) {
                   date1 = new Date(datasUser[entry - 1].game_end);
