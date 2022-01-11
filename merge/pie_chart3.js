@@ -150,9 +150,18 @@ function display_graph3(svg_already_exists,svg3) {
                     genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + timeArray[0];
                 }
                 console.log(genreTimePerPeriod);
-
+                datas = [];
+                id = 0;
+                for (game of Object.keys(genreTimePerPeriod)) {
+                    obj = {}
+                    obj["id"] = id;
+                    obj["title"] = game;
+                    obj["time"] = genreTimePerPeriod[game];
+                    datas.push(obj);
+                    id ++;
+                }
                 var color = d3.scaleOrdinal()
-                            .domain([0, d3.max(datas, function (d) { return d; })])
+                            .domain([0, d3.max(datas, function (d) { return d.id; })])
                             .range(['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
                                 '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                                 '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
@@ -165,10 +174,10 @@ function display_graph3(svg_already_exists,svg3) {
                                 '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'])
                 var pie = d3.pie()
                 .value(function (d) {
-                    return Object.values(d)[0];
+                    return d.time;
                 })
         
-                var data_ready = pie(genreTimePerPeriod);
+                var data_ready = pie(datas);
                 console.log("dr : ", data_ready);
                 
             });
