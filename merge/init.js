@@ -204,6 +204,6 @@ function ChargeGameInfos() {
 async function display() {
   await ChargeGameInfos();
   display_graph1(false, undefined);
-  display_graph2(false, undefined);
+  display_graph2(false);
   display_graph3();
 }
