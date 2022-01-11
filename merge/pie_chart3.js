@@ -35,8 +35,7 @@ function display_graph3(svg_already_exists,svg3) {
         transform_data_for_bar(json);
         data = DataCleaning(
             json,
-            //document.getElementById("user-select").value
-            "Pyromaniaque"
+            document.getElementById("user-select").value
         );
 
         console.log(data);
