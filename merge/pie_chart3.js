@@ -31,7 +31,7 @@ function display_graph3(svg_already_exists,svg3) {
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     }
 
-    var datasPlayer = d3.json(urlplayersjson).then((json) => {
+    d3.json(urlplayersjson).then((json) => {
         transform_data_for_bar(json);
         data = DataCleaning(
             json,
@@ -95,9 +95,8 @@ function display_graph3(svg_already_exists,svg3) {
                 }
             }
             console.log(gamesIds);
-    });
 
-    d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then(await datasPlayer();).then((gameDescriptions) => {
+            d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then(sleeper(1000)).then((gameDescriptions) => {
                 //console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
                 console.log("GTPD : ", gameTimePerDay);
                 gameInfos = {}
@@ -233,8 +232,9 @@ function display_graph3(svg_already_exists,svg3) {
                 });*/
 
 
-                //addLegend_pie(color,datas,total_width,0,0);
+                addLegend_pie(color,datas,total_width,0,0);
             });
+    });
 
 }
 
@@ -271,7 +271,7 @@ var addLegend_pie = function (colors,keys,total_width,start_margin,margin) {
                 return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
             })
             .style("fill", d => d);
-    console.log("keys : ", keys)
+    
     legend.selectAll()
         .data(keys)
         .enter().append('text')
