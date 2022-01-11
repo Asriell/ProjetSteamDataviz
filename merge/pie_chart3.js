@@ -35,7 +35,8 @@ function display_graph3(svg_already_exists,svg3) {
         transform_data_for_bar(json);
         data = DataCleaning(
             json,
-            document.getElementById("user-select").value
+            //document.getElementById("user-select").value
+            "Superbuddy"
         );
 
         console.log(data);
@@ -90,7 +91,7 @@ function display_graph3(svg_already_exists,svg3) {
             for(date of Object.values(gameTimePerDay)) {
                 for (game of Object.keys(date)) {
                     if(!Object.keys(tags).includes(game)) {
-                        tags[game] = date[game]["id"]
+                        tags[game] = date[game]["id"];
                         //url = "https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
                     }
                 }
