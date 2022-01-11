@@ -77,6 +77,9 @@ function display_graph3(svg_already_exists,svg3) {
                         }
                     }
                 }
+                inf = formatDate(
+                    new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
+                );
             }
             console.log(gameTimePerDay);
 
