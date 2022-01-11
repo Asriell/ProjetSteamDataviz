@@ -241,11 +241,11 @@ function display_graph3(svg_already_exists,svg3) {
 var addLegend_pie = function (colors,keys,total_width,start_margin,margin) {
     d3.select("svg3").selectAll(".legendDetails").remove();
     let legendCellSize = 20;
-    let maxCarac = d3.max(keys,(d)=> d.date.length);
+    let maxCarac = d3.max(keys,(d)=> d.genre);
     var spacingBetweenCells = legendCellSize + maxCarac * 7 + 5;
     colorsKeys = [];
     for (let i=0;i<keys.length;++i) {
-        colorsKeys.push(colors(keys[i].date));
+        colorsKeys.push(colors(keys[i].id));
     }
     //console.log("legend removed");
     let legend = d3
