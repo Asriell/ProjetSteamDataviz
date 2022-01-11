@@ -96,7 +96,7 @@ function display_graph3(svg_already_exists,svg3) {
             }
             console.log(gamesIds);
 
-            d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then(sleeper(100)).then((gameDescriptions) => {
+            d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then(sleeper(1000)).then((gameDescriptions) => {
                 //console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
                 console.log("GTPD : ", gameTimePerDay);
                 gameInfos = {}
@@ -227,9 +227,12 @@ function display_graph3(svg_already_exists,svg3) {
                             " s."
                         );
                 })
-                .on("mouseout", function () {
+                /*.on("mouseout", function () {
                     tooltip.classed("hidden", true);
-                });
+                });*/
+
+
+                addLegend_pie(color,datas,total_width,0,0);
             });
     });
 
