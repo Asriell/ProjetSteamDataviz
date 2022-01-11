@@ -171,9 +171,16 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .domain(datas.map(d => d.date))
                     .range([0, distance_between_bars])
 
-            var y = d3.scaleLinear()
+            console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
+            if (series.length != 0) {
+                var y = d3.scaleLinear()
                         .domain([0, d3.max(series[series.length - 1], d => d[1])])
                         .range([height, margin]);
+            } else {
+                var y = d3.scaleLinear()
+                        .domain([0,0])
+                        .range([height, margin]);
+            }
             svg1.selectAll(".games").selectAll("rect").remove();
             svg1.selectAll(".games").remove();
             var groups = svg1.selectAll("g.games")
@@ -251,12 +258,12 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     return xScale(d.id) + start_margin;
                 })
                 .attr("y", function (d) {
-                    //console.log(d.playtime_forever);
-                    return yScale(d.playtime);
+                    console.log("playtime : ", d.playtime);
+                    return (d.playtime == height ? 0 : yScale(d.playtime));
                 })
                 .attr("width", bar_width)
                 .attr("height", function (d) {
-                    return height - yScale(d.playtime);
+                    return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                 })
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
@@ -316,10 +323,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     })
                     .attr("y", function (d) {
                         //console.log(d.playtime_forever);
-                        return yScale(d.playtime);
+                        return (d.playtime == 0 ? height : yScale(d.playtime));
                     })
                     .attr("height", function (d) {
-                        return height - yScale(d.playtime);
+                        return (d.playtime == 0 ? 0 : height - yScale(d.playtime));
                     })
             }
         } else {
