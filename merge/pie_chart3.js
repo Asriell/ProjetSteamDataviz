@@ -130,9 +130,9 @@ function display_graph3(svg_already_exists,svg3) {
                                 console.log(tags);
                                 for (tag of tags) {
                                     if (!Object.keys(genreTimePerPeriod).includes()) {
-                                        genreTimePerPeriod[tag] = gameTimePerDay[day][game]["time"];
+                                        genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
                                     } else {
-                                        genreTimePerPeriod[tag] = SumDurations(genreTimePerPeriod[tag], gameTimePerDay[day][game]["time"]);
+                                        genreTimePerPeriod[tag.description] = SumDurations(genreTimePerPeriod[tag], gameTimePerDay[day][game]["time"]);
                                     }
                                 }
                             }
