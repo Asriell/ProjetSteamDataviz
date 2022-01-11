@@ -7,6 +7,7 @@ var DataCleaning2 = function (data, user) {
     );*/
     //console.log("datasUser : ", datasUser);
     //console.log(data);
+    var datasUser = data;
     tmpData = {};
     for (var entry in datasUser) {
       if (!datasUser[entry].game_duration.includes("day")) {
