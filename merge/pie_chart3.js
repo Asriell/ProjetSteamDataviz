@@ -35,11 +35,11 @@ function display_graph3(svg_already_exists,svg3) {
 
     d3.json(urlplayersjson).then((json) => {
         transform_data_for_bar(json);
-        /*
-        data = DataCleaning2(
+        
+        data2 = DataCleaning2(
             json,
             document.getElementById("user-select").value
-        );*/
+        );
 
         data = json;
 
@@ -57,7 +57,7 @@ function display_graph3(svg_already_exists,svg3) {
         gameTimePerDay = {};
         while (inf != TODAY) {
                 games = [];
-                for (entry of Object.values(data)) {
+                for (entry of Object.values(data.players)) {
                     if ((!games.includes(entry.game_name)) && entry.game_end.includes(inf)) {
                         games.push(entry.game_name)
                     }
