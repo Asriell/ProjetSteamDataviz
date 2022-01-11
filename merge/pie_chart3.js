@@ -97,11 +97,11 @@ function display_graph3(svg_already_exists,svg3) {
             console.log(gamesIds);
 
             d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
-                console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
+                //console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
                 gameInfos = {}
                 for(id of Object.keys(gamesIds)) {
                     if (id != "total") {
-                        console.log(id);
+                        //console.log(id);
                         gameInfos[id] = {}
                         gameInfos[id]["genres"] = gameDescriptions[gamesIds[id]].genres; 
                         gameInfos[id]["is_free"] = gameDescriptions[gamesIds[id]].is_free; 
@@ -116,6 +116,30 @@ function display_graph3(svg_already_exists,svg3) {
                     }
                 }
                 console.log("game infos : ", gameInfos);
+
+                genreTimePerPeriod = {};
+                for(day of Object.keys(gameTimePerDay)) {
+                    if(gameTimePerDay[day].total == "0:0:0") {
+                        continue;
+                    } else {
+                        for(game of Object.keys(gameTimePerDay[day])) {
+                            if(game == "total") {
+                                continue;
+                            } else {
+                                tags = gamesInfos[game]["genres"];
+                                console.log(tags);
+                                for (tag of tags) {
+                                    if (!Object.keys(genreTimePerPeriod).includes()) {
+                                        genreTimePerPeriod[tag] = gameTimePerDay[day][game]["time"];
+                                    } else {
+                                        genreTimePerPeriod[tag] = SumDurations(genreTimePerPeriod[tag], gameTimePerDay[day][game]["time"]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                console.log(genreTimePerPeriod);
             });
     });
 
