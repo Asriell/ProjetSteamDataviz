@@ -85,18 +85,13 @@ function display_graph3(svg_already_exists,svg3) {
             }
             console.log(gameTimePerDay);
             tags = {}
-            apiKey = "F6F2A22B759FEE0F79940A8783603562" 
+            //apiKey = "F6F2A22B759FEE0F79940A8783603562" 
 
             for(date of Object.values(gameTimePerDay)) {
                 for (game of Object.keys(date)) {
                     if(!Object.keys(tags).includes(game)) {
-                        console.log(date);
-                        console.log(game)
-                        url = "https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
-                        console.log(url)
-                        $.get(url, {}, function(data) {
-                            tags[game] = data;
-                        });
+                        tags[game] = date[game]["id"];
+                        //url = "https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
                     }
                 }
             }
