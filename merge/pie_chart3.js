@@ -103,7 +103,7 @@ function display_graph3(svg_already_exists,svg3) {
                 for(id of Object.keys(gamesIds)) {
                     if (id != "total") {
                         console.log(id);
-                        tags[id] = gameDescriptions[id].genres; 
+                        tags[id] = gameDescriptions[gamesIds[id]].genres; 
                     }
                 }
                 console.log(tags);
