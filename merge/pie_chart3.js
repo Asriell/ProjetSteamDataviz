@@ -130,10 +130,10 @@ function display_graph3(svg_already_exists,svg3) {
                                 tags = gameInfos[game]["genres"];
                                 console.log(tags);
                                 for (tag of tags) {
-                                    if (!Object.keys(genreTimePerPeriod).includes()) {
+                                    if (!Object.keys(genreTimePerPeriod).includes(tag.description)) {
                                         genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
                                     } else {
-                                        console.log(tag.description, "  |  ", genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"])
+                                        //console.log(tag.description, "  |  ", genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"])
                                         genreTimePerPeriod[tag.description] = SumDurations(genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"]);
                                     }
                                 }
