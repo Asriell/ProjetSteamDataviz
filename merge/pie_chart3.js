@@ -144,7 +144,10 @@ function display_graph3(svg_already_exists,svg3) {
                 }
                 delete genreTimePerPeriod["Early Access"];
                 delete genreTimePerPeriod["Free to Play"];
-                Object.values(genreTimePerPeriod).map((d) => {let timeArray = d.split(":"); return timeArray[0]*3600 + timeArray[1] * 60 + timeArray[2]})
+                for(genre of Object.keys(genreTimePerPeriod)) {
+                    timeArray = genreTimePerPeriod[genre].split(":");
+                    genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + timeArray[0];
+                }
                 console.log(genreTimePerPeriod);
             });
     });
