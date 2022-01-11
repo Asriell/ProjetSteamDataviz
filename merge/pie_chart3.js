@@ -155,13 +155,13 @@ function display_graph3(svg_already_exists,svg3) {
                 for (game of Object.keys(genreTimePerPeriod)) {
                     obj = {}
                     obj["id"] = id;
-                    obj["title"] = game;
+                    obj["genre"] = game;
                     obj["time"] = genreTimePerPeriod[game];
                     datas.push(obj);
                     id ++;
                 }
                 var color = d3.scaleOrdinal()
-                            .domain([0, d3.max(datas, function (d) { return d.id; })])
+                            .domain([0, d3.max(datas, function (d) { return d.time; })])
                             .range(['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
                                 '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
                                 '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
@@ -176,7 +176,6 @@ function display_graph3(svg_already_exists,svg3) {
                 .value(function (d) {
                     return d.time;
                 })
-        
                 var data_ready = pie(datas);
                 console.log("dr : ", data_ready);
 
@@ -186,7 +185,7 @@ function display_graph3(svg_already_exists,svg3) {
                 .enter()
                 .append('path')
                 .attr('d', arcGenerator)
-                .attr('fill', function (d) { return (color(d.id)) })
+                .attr('fill', function (d) { return (color(d.genre)) })
                 .attr("class","pie")
                 .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
