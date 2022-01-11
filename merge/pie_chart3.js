@@ -84,7 +84,7 @@ function display_graph3(svg_already_exists,svg3) {
                 );
             }
             console.log("GTPD : ", gameTimePerDay);
-            gamesIds = {}
+            var gamesIds = {}
             //apiKey = "F6F2A22B759FEE0F79940A8783603562" 
 
             for(date of Object.values(gameTimePerDay)) {
