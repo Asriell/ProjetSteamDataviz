@@ -166,11 +166,11 @@ function display_graph3(svg_already_exists,svg3) {
                 var pie = d3.pie()
                 .value(function (d) {
                     console.log("pie value : " + d);
-                    return d.total_playtime;
+                    return d;
                 })
         
-                var data_ready = pie(genreTimePerPeriod)
-                console.log("dr : ", data_ready)
+                var data_ready = pie(genreTimePerPeriod);
+                console.log("dr : ", data_ready);
                 svg3
                     .selectAll('arcs')
                     .data(data_ready)
