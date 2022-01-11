@@ -60,11 +60,11 @@ function display_graph3(svg_already_exists,svg3) {
                     gameTimePerDay[inf]["total"] = "0:0:0";
                     if (games.length != 0) {
                         for (game of games) {
-                            gameTimePerDay[inf][game] = "0:0:0";
+                            gameTimePerDay[inf][game]["time"] = "0:0:0";
                             for (entry of Object.keys(data)) {
                                 if (data[entry].game_end.includes(inf) && game == data[entry].game_name) {
-                                    gameTimePerDay[inf][game] = SumDurations(
-                                        gameTimePerDay[inf][game],
+                                    gameTimePerDay[inf][game]["time"] = SumDurations(
+                                        gameTimePerDay[inf][game]["time"],
                                         data[entry].game_duration
                                     );
 
@@ -72,6 +72,7 @@ function display_graph3(svg_already_exists,svg3) {
                                         gameTimePerDay[inf]["total"],
                                         data[entry].game_duration
                                     );
+                                    gameTimePerDay[inf][game]["id"] = data[entry].id;
                                 }
                             }
                         }
