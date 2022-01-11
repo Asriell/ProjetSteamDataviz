@@ -38,7 +38,7 @@ function display_graph3(svg_already_exists,svg3) {
             document.getElementById("user-select").value
         );
 
-
+        console.log(data);
         inf = "1970-01-01";
         nbJours = get_nb_days_to_display();
         todate = new Date(TODAY);
