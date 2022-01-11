@@ -92,7 +92,7 @@ function display_graph3(svg_already_exists,svg3) {
                     if(!Object.keys(tags).includes(game)) {
                         console.log(date);
                         console.log(game)
-                        url = "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
+                        url = "https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid="+date[game]["id"]+"&count=3&maxlength=300&format=json";
                         console.log(url)
                         $.get(url, {}, function(data) {
                             tags[game] = data;
