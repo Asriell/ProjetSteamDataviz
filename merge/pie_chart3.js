@@ -188,7 +188,7 @@ function display_graph3(svg_already_exists,svg3) {
                 .attr('d', arcGenerator)
                 .attr('fill', function (d) { return (color(d.data.id)) })
                 .attr("class","pie")
-                /*.on("mousemove", function (e, d) {
+                .on("mousemove", function (e, d) {
                     // on recupere la position de la souris,
                     // e est l'object event d
                     theData = d.data;
@@ -210,18 +210,18 @@ function display_graph3(svg_already_exists,svg3) {
                         )
                         // on recupere le nom de l'etat
                         .html(
-                            theData.date +
-                            " | Temps de jeu : " +
-                            parseInt(theData.total_playtime / 3600) +
+                            theData.genre +
+                            " | Temps total : " +
+                            parseInt(theData.time / 3600) +
                             " h " +
                             parseInt(
-                                (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                                (theData.time - parseInt(theData.time / 3600) * 3600) / 60
                             ) +
                             " m " +
-                            (theData.total_playtime -
-                                (parseInt(theData.total_playtime / 3600) * 3600 +
+                            (theData.time -
+                                (parseInt(theData.time / 3600) * 3600 +
                                     parseInt(
-                                        (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                                        (theData.time - parseInt(theData.time / 3600) * 3600) / 60
                                     ) *
                                     60)) +
                             " s."
@@ -229,7 +229,7 @@ function display_graph3(svg_already_exists,svg3) {
                 })
                 .on("mouseout", function () {
                     tooltip.classed("hidden", true);
-                });*/
+                });
             });
     });
 
