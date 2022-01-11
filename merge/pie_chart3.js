@@ -166,7 +166,7 @@ function display_graph3(svg_already_exists,svg3) {
                 var pie = d3.pie()
                 .value(function (d) {
                     console.log("pie value : " + d);
-                    return d;
+                    return Object.value(d);
                 })
         
                 var data_ready = pie(genreTimePerPeriod);
