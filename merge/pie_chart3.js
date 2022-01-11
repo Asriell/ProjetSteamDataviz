@@ -142,6 +142,8 @@ function display_graph3(svg_already_exists,svg3) {
                         }
                     }
                 }
+                delete genreTimePerPeriod["Early Access"];
+                delete genreTimePerPeriod["Free to Play"];
                 console.log(genreTimePerPeriod);
             });
     });
