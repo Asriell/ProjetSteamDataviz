@@ -83,7 +83,7 @@ function display_graph3(svg_already_exists,svg3) {
                     new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
                 );
             }
-            console.log(gameTimePerDay);
+            console.log("GTPD : ", gameTimePerDay);
             gamesIds = {}
             //apiKey = "F6F2A22B759FEE0F79940A8783603562" 
 
@@ -98,6 +98,7 @@ function display_graph3(svg_already_exists,svg3) {
 
             d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
                 //console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
+                console.log("GTPD : ", gameTimePerDay);
                 gameInfos = {}
                 for(id of Object.keys(gamesIds)) {
                     if (id != "total") {
@@ -116,7 +117,7 @@ function display_graph3(svg_already_exists,svg3) {
                     }
                 }
                 console.log("game infos : ", gameInfos);
-
+                console.log("GTPD : ", gameTimePerDay);
                 genreTimePerPeriod = {};
                 for(day of Object.keys(gameTimePerDay)) {
                     if(gameTimePerDay[day].total == "0:0:0") {
