@@ -73,7 +73,7 @@ function display_graph3(svg_already_exists,svg3) {
                                         gameTimePerDay[inf]["total"],
                                         data[entry].game_duration
                                     );
-                                    gameTimePerDay[inf][game]["id"] = data[entry].id;
+                                    gameTimePerDay[inf][game]["id"] = data[entry].game_id;
                                 }
                             }
                         }
