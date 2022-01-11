@@ -17,7 +17,7 @@ function display_graph2(svg_already_exists) {
     let radius = Math.min(width, height) / 2 - margin
 
     var arcGenerator = d3.arc()
-        .innerRadius(0)
+        .innerRadius(100)
         .outerRadius(radius)
 
     // append the svg object to the div called 'my_dataviz'
@@ -198,16 +198,29 @@ function display_graph2(svg_already_exists) {
                     .classed("hidden", false)
                     // on positionne le tooltip en fonction
                     // de la position de la souris
-                    .attr(
-                        "style",
-                        "left:" +
-                        (mousePosition[0] + 15) +
-                        "px; top:" +
-                        (mousePosition[1] - 35) +
-                        "px"
-                    )
+
+
+                d3.select('#date-jeu').text(theData.date);
+                d3.select('#duree2-jeu').text(
+                    parseInt(theData.total_playtime / 3600) +
+                    " h " +
+                    parseInt(
+                        (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                    ) +
+                    " m " +
+                    (theData.total_playtime -
+                        (parseInt(theData.total_playtime / 3600) * 3600 +
+                            parseInt(
+                                (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                            ) *
+                            60)) +
+                    " s."
+                );
+                d3.select("#nom-jeu").text(" -- ");
+                /*d3.select("#nom-jeu").text( Object.keys(theData).find(key => theData[key] === theData.total_playtime));*/
+
                     // on recupere le nom de l'etat
-                    .html(
+                    /*.html(
                         theData.date +
                         " | Temps de jeu : " +
                         parseInt(theData.total_playtime / 3600) +
@@ -223,7 +236,7 @@ function display_graph2(svg_already_exists) {
                                 ) *
                                 60)) +
                         " s."
-                    );
+                    )*/;
             })
             .on("mouseout", function () {
                 tooltip.classed("hidden", true);
