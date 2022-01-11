@@ -233,6 +233,7 @@ function display_graph3(svg_already_exists,svg3) {
 
 
                 addLegend_pie(color,datas,total_width,0,0);
+
             });
     });
 
@@ -265,6 +266,7 @@ var addLegend_pie = function (colors,keys,total_width,start_margin,margin) {
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
             .attr('x', function (d,i) {
+                console.log(i);
                 return i%4 * spacingBetweenCells;
             })
             .attr('y', function (d,i) {
