@@ -12,9 +12,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="pie_chart3.js"></script>
         <script>
-            document.getElementById("user-select").value = "Asriel";
-            document.getElementById("period-select").value = "mois";
-            document.getElementById("details-checkbox").checked = false;
             display();
         </script>
         <title>Graphes Vapeur</title>
@@ -48,7 +45,11 @@
         <!--Un div pour chaque chart qu'on fait-->
         <div id="visu-activite1">
             <h3 id="legende1">hello</h3>
-            <svg1></svg1>
+            <svg1>
+                document.getElementById("user-select").value = "Asriel";
+                document.getElementById("period-select").value = "mois";
+                document.getElementById("details-checkbox").checked = false;
+            </svg1>
         </div>
 
         <div id="visu-activite2">
