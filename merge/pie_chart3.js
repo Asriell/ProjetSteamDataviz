@@ -123,7 +123,7 @@ function display_graph3(svg_already_exists,svg3) {
                         continue;
                     } else {
                         for(game of Object.keys(gameTimePerDay[day])) {
-                            if(game == "total") {
+                            if(game == "total" || game == 0) {
                                 continue;
                             } else {
                                 console.log(game,"   ", gameTimePerDay[day]);
