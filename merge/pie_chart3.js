@@ -126,6 +126,7 @@ function display_graph3(svg_already_exists,svg3) {
                             if(game == "total") {
                                 continue;
                             } else {
+                                console.log(gameInfos[game]);
                                 tags = gameInfos[game]["genres"];
                                 console.log(tags);
                                 for (tag of tags) {
