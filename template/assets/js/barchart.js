@@ -515,7 +515,7 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
         .attr("transform", (d,i) => "translate(" + (i%legendPerLines * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
         .attr("dy", (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
         .style("font-size", "13px")
-        .style("fill", "grey")
+        .style("fill", axisColor)
         .text(d => d);
 
 }

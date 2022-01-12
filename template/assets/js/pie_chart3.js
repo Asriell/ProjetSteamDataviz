@@ -303,7 +303,7 @@ var addLegend_donut = function (colors,keys,total_width,start_margin,margin) {
                 return Math.floor(i/3)*legendCellSize+Math.floor(i/3)*10 + legendCellSize / 1.6;
             }) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
-            .style("fill", "grey")
+            .style("fill", axisColor)
             .text(d => d.genre);
 
         }

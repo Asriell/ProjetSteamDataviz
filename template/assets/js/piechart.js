@@ -175,7 +175,28 @@ function display_graph2(svg_already_exists) {
                 return d.total_playtime;
             })
 
-        console.log("formatted data : ", datas);
+        console.log("before formatted data : ", datas);
+        if (datas.length > 7) {
+            formattedDatas = [];
+            currentWeek = 0;
+            element = {}
+            for(data in datas) {
+                if(data%7 == 0) {
+                    element["id"] = currentWeek;
+                    element["date"] = datas[data].date;
+                    element["playtime"] = datas[data].playtime;
+                } else {
+                    element["playtime"] =  parseInt(element["playtime"]) + parseInt(datas[data].playtime);
+                    if ((data+1)%7 == 0 || (data+1) == datas.length) {
+                        formattedDatas.push(element);
+                        element = {};
+                        currentWeek ++;
+                    }
+                }
+            }
+            datas = formattedDatas;
+        }
+        console.log("after formatted data : ", datas);
         var data_ready = pie(datas)
         //console.log(data_ready);
 
