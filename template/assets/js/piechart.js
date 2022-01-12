@@ -280,12 +280,12 @@ function display_graph2(svg_already_exists) {
             .style("text-anchor", "middle")
             .style("font-size", 17)
 
-        addLegend_pie(color,datas,total_width,0,0);
+        addLegend_pie(color,datas,total_width,0,0,document.getElementById("period-select").value);
 
     });
 }
 
-function addLegend_pie(colors,keys,total_width,start_margin,margin) {
+function addLegend_pie(colors,keys,total_width,start_margin,margin,period) {
     d3.select("svg2").selectAll(".legendDetails").remove();
     let legendCellSize = 20;
     let maxCarac = d3.max(keys,(d)=> d.date.length);
@@ -319,7 +319,8 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin) {
         })
         .style("fill", d => d);
 
-    legend.selectAll()
+    if (period == "mois") {
+        legend.selectAll()
         .data(keys)
         .enter().append('text')
         .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
@@ -328,5 +329,18 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin) {
         }) // Pour centrer le texte par rapport aux carrés
         .style("font-size", "13px")
         .style("fill", axisColor)
-        .text(d => d.date);
+        .text(d => "semaine du " + d.date.split("-")[2]+ "/" + d.date.split("-")[1] + "/" + d.date.split("-")[0]);
+    } else {
+        legend.selectAll()
+        .data(keys)
+        .enter().append('text')
+        .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("dy", function (d, i) {
+            return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+        }) // Pour centrer le texte par rapport aux carrés
+        .style("font-size", "13px")
+        .style("fill", axisColor)
+        .text(d => d.date.split("-")[2]+ "/" + d.date.split("-")[1] + "/" + d.date.split("-")[0]);
+    }
+    
 }
