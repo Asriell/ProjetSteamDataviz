@@ -460,20 +460,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         d3.select("svg1").selectAll(".legendDetails").remove();
         if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
 
-        d3.select("#user-select").on("change", (event) => {
-            //console.log("change");
-            //svg2.selectAll('*').remove();
-            display_graph2(true);
-            display_graph1(true, svg1);
-
-        });
-
-        d3.select("#period-select").on("change", (event) => {
-            //console.log("change");
-            //svg2.selectAll('*').remove();
-            display_graph1(true, svg1);
-            display_graph2(true);
-        });
 
         d3.select("#details-checkbox").on("change", (event) => {
             display_graph1(true, svg1,"details");
