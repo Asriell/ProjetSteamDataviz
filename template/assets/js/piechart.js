@@ -224,16 +224,16 @@ function display_graph2(svg_already_exists) {
 
                 d3.select('#date-jeu').text(theData.date);
                 d3.select('#duree2-jeu').text(
-                    parseInt(theData.total_playtime / 3600) +
+                    parseInt(theData.playtime / 3600) +
                     " h " +
                     parseInt(
-                        (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                        (theData.playtime - parseInt(theData.playtime / 3600) * 3600) / 60
                     ) +
                     " m " +
-                    (theData.total_playtime -
-                        (parseInt(theData.total_playtime / 3600) * 3600 +
+                    (theData.playtime -
+                        (parseInt(theData.playtime / 3600) * 3600 +
                             parseInt(
-                                (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
+                                (theData.playtime - parseInt(theData.playtime / 3600) * 3600) / 60
                             ) *
                             60)) +
                     " s."
