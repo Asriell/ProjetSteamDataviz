@@ -396,6 +396,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                         d3.select("#game_image").attr("src", () => {
                             for (game of Object.values(json.games)) {
                                 if(game.name == document.getElementById("nom-jeu").value) {
+                                    console.log(game.header_image);
                                     return game.header_image;
                                 }
                             }
