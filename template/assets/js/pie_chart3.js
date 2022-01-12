@@ -196,10 +196,18 @@ function display_graph3(svg_already_exists,svg3) {
                 d3.select('#date-jeu').text("--");
                 d3.select('#duree2-jeu').text(
                     parseInt(theData.time / 3600) +
-                    "," +
-                    parseInt(
-                        (theData.time - parseInt(theData.time / 3600) * 3600) / 60 / 60 * 100
-                    ) + " h"
+                            " h " +
+                            parseInt(
+                                (theData.time - parseInt(theData.time / 3600) * 3600) / 60
+                            ) +
+                            " m " +
+                            (theData.time -
+                                (parseInt(theData.time / 3600) * 3600 +
+                                    parseInt(
+                                        (theData.time - parseInt(theData.time / 3600) * 3600) / 60
+                                    ) *
+                                    60)) +
+                            " s."
                 );
                 console.log("temps" + theData.time);
                 d3.select("#nom-jeu").text(theData.genre);
@@ -245,7 +253,7 @@ function display_graph3(svg_already_exists,svg3) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            display_graph1(true, svg3);
+            display_graph3(true, svg3);
         });
     });
 
