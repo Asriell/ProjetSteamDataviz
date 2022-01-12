@@ -191,6 +191,7 @@ function display_graph2(svg_already_exists) {
                     element["playtime"] =  parseInt(element["playtime"]) + parseInt(datas[data].playtime);
                     element["total_playtime"] =  parseInt(element["total_playtime"]) + parseInt(datas[data].total_playtime);
                     if ((data+1)%7 == 0 || (data+1) == datas.length) {
+                        console.log("-----------------");
                         formattedDatas.push(element);
                         element = {};
                         currentWeek ++;
