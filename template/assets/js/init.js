@@ -191,3 +191,11 @@ function calculate_duration(dur1, dur2) {
 
     return Math.floor(hour).toString() + ":" + Math.floor(minute).toString() + ":" + Math.floor(second).toString()
 }
+
+var changeLabel = function(change) {
+    if (change == 1) {
+        document.getElementById("NomDuJeu").innerHTML = "Genre";
+    } else {
+        document.getElementById("NomDuJeu").innerHTML = "Nom du jeu";
+    }
+}

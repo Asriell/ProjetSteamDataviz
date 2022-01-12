@@ -267,7 +267,7 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin) {
     d3.select("svg2").selectAll(".legendDetails").remove();
     let legendCellSize = 20;
     let maxCarac = d3.max(keys,(d)=> d.date.length);
-    var spacingBetweenCells = legendCellSize + maxCarac * 7 + 5;
+    var spacingBetweenCells = legendCellSize + maxCarac * 8 + 5;
     colorsKeys = [];
     for (let i=0;i<keys.length;++i) {
         colorsKeys.push(colors(keys[i].date));
