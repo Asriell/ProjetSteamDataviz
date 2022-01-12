@@ -398,6 +398,8 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                                 if(json.games[game].name == document.getElementById("nom-jeu").value) {
                                     console.log(json.games[game].header_image);
                                     console.log(json.games[game]);
+                                    console.log(game);
+                                    console.log(json.games);
                                     return json.games[game].header_image;
                                 }
                             }
