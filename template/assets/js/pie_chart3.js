@@ -2,6 +2,10 @@ function display_graph3(svg_already_exists,svg3) {
 
     console.log("=========================SVG3=========================");
 
+    if(svg_already_exists) {
+        svg3.selectAll('*').remove();
+    }
+
     var tooltip = d3
         .select("body")
         .append("div")
