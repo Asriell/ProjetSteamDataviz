@@ -264,6 +264,7 @@ function display_graph2(svg_already_exists) {
             //console.log("change");
             display_graph2(true, svg2);
             display_graph1(true, svg1);
+            display_graph3(true, svg3);
 
         });
 
@@ -271,6 +272,7 @@ function display_graph2(svg_already_exists) {
             //console.log("change");
             display_graph1(true, svg1);
             display_graph2(true, svg2);
+            display_graph3(true, svg3);
         }); 
     });
 }
