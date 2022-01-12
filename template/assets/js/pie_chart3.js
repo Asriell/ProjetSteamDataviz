@@ -239,6 +239,14 @@ function display_graph3(svg_already_exists,svg3) {
                 tooltip.classed("hidden", true);
             });*/
         addLegend_donut(color,datas,total_width,0,0);
+
+        d3.select("#user-select").on("change", (event) => {
+            display_graph3(true, svg3);
+        });
+
+        d3.select("#period-select").on("change", (event) => {
+            display_graph1(true, svg3);
+        });
     });
 
 }
