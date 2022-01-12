@@ -12,6 +12,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
     var height = 650;
     var total_height = height * 1.1;
     var total_width = width * 1.1;
+    var axisColor = "#ffffff";
     d3.json(urlplayersjson).then((json) => {
         //console.log(json);
         transform_data_for_bar(json);
@@ -259,7 +260,8 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
         }
 
-
+        svg1.selectAll(".abscisses").selectAll(".tick").select("line").attr("stroke",axisColor);
+        svg1.selectAll(".abscisses").selectAll(".tick").select("text").attr("fill",axisColor);
 
         if (!document.getElementById("details-checkbox").checked) {
             if(!svg_already_exists) {
