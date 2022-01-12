@@ -198,7 +198,7 @@ function display_graph2(svg_already_exists) {
         }
         console.log("after formatted data : ", datas);
         var data_ready = pie(datas)
-        //console.log(data_ready);
+        console.log("dr : ",data_ready);
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         svg2
