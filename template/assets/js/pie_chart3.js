@@ -241,15 +241,19 @@ function display_graph3(svg_already_exists) {
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
+            d3.select("svg3").select("svg").selectAll("*").remove()
             display_graph3(true);
+            d3.select("svg2").select("svg").selectAll("*").remove()
             display_graph2(true);
-            display_graph1(true, svg1);
+            display_graph1(true,d3.select("svg1").select("svg"));
         });
 
         d3.select("#period-select").on("change", (event) => {
+            d3.select("svg3").select("svg").selectAll("*").remove()
             display_graph3(true);
+            d3.select("svg2").select("svg").selectAll("*").remove()
             display_graph2(true);
-            display_graph1(true, svg1);
+            display_graph1(true,d3.select("svg1").select("svg"));
         });
     });
 
