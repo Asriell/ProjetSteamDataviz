@@ -446,6 +446,14 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                             " s."
                         )
                         d3.select("#nom-jeu").text( Object.keys(d.data).find(key => d.data[key] === d[1] - d[0]))
+                        d3.select("#game_image").attr("src", () => {
+
+                            for (g of Object.keys(json.games)) {
+                                if(json.games[g].name == $('#nom-jeu').html()) {
+                                    return json.games[g].header_image;
+                                }
+                            }
+                        });
                     })
                     .on("mouseout", function () {
                         tooltip.classed("hidden", true);
