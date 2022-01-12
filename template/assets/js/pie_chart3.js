@@ -20,7 +20,7 @@ function display_graph3(svg_already_exists,svg3) {
 
     // append the svg object to the div called 'my_dataviz'
     if(!svg_already_exists) {
-        var svg3 = d3.select("svg3")
+        svg3 = d3.select("svg3")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -243,7 +243,7 @@ function display_graph3(svg_already_exists,svg3) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            display_graph1(true, svg3);
+            display_graph3(true, svg3);
         });
 
     });
