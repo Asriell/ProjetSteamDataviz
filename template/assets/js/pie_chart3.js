@@ -289,18 +289,18 @@ var addLegend_donut = function (colors,keys,total_width,start_margin,margin) {
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
             .attr('x', function (d,i) {
-                return i%4 * spacingBetweenCells;
+                return i%3 * spacingBetweenCells;
             })
             .attr('y', function (d,i) {
-                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
+                return Math.floor(i/3)*legendCellSize+Math.floor(i/3)*10;
             })
             .style("fill", d => d);
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-            .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+            .attr("transform", (d,i) => "translate(" + (i%3 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
             .attr("dy", function (d, i) {
-                return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+                return Math.floor(i/3)*legendCellSize+Math.floor(i/3)*10 + legendCellSize / 1.6;
             }) // Pour centrer le texte par rapport aux carrés
             .style("font-size", "13px")
             .style("fill", "grey")
