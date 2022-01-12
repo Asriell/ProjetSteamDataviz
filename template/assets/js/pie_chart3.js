@@ -95,8 +95,6 @@ function display_graph3(svg_already_exists,svg3) {
         console.log(gamesIds);
 
     gameDescriptions = json.games;
-        console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
-        console.log("GTPD : ", gameTimePerDay);
         gameInfos = {}
         for(id of Object.keys(gamesIds)) {
             if (id != "total") {
@@ -115,7 +113,6 @@ function display_graph3(svg_already_exists,svg3) {
             }
         }
         console.log("game infos : ", gameInfos);
-        console.log("GTPD : ", gameTimePerDay);
         genreTimePerPeriod = {};
         for(day of Object.keys(gameTimePerDay)) {
             if(gameTimePerDay[day].total == "0:0:0") {
@@ -125,10 +122,7 @@ function display_graph3(svg_already_exists,svg3) {
                     if(game == "total") {
                         continue;
                     } else {
-                        console.log("GTPD : ",gameTimePerDay);
-                        console.log(game,"   ", gameTimePerDay[day]);
                         tags = gameInfos[game]["genres"];
-                        console.log(tags);
                         for (tag of tags) {
                             if (!Object.keys(genreTimePerPeriod).includes(tag.description)) {
                                 genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
@@ -176,7 +170,6 @@ function display_graph3(svg_already_exists,svg3) {
             return d.time;
         })
         var data_ready = pie(datas);
-        console.log("dr : ", data_ready);
 
             svg3
             .selectAll('arcs')
@@ -209,7 +202,6 @@ function display_graph3(svg_already_exists,svg3) {
                                     60)) +
                             " s."
                 );
-                console.log("temps" + theData.time);
                 d3.select("#nom-jeu").text(theData.genre);
 
                 /*tooltip
@@ -249,10 +241,12 @@ function display_graph3(svg_already_exists,svg3) {
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
+            console.log("#user-select");
             display_graph3(true, svg3);
         });
 
         d3.select("#period-select").on("change", (event) => {
+            console.log("#period-select");
             display_graph3(true, svg3);
         });
     });
@@ -268,7 +262,7 @@ var addLegend_donut = function (colors,keys,total_width,start_margin,margin) {
     for (let i=0;i<keys.length;++i) {
         colorsKeys.push(colors(keys[i].id));
     }
-    //console.log("legend removed");
+
     let legend = d3
                     .select("svg3")
                     .append("svg")
@@ -286,14 +280,12 @@ var addLegend_donut = function (colors,keys,total_width,start_margin,margin) {
             .attr('height', legendCellSize + 'px')
             .attr('width', legendCellSize + 'px')
             .attr('x', function (d,i) {
-                console.log(i);
                 return i%4 * spacingBetweenCells;
             })
             .attr('y', function (d,i) {
                 return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10;
             })
             .style("fill", d => d);
-    console.log("keys : ", keys)
     legend.selectAll()
         .data(keys)
         .enter().append('text')
