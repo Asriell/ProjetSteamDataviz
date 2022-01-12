@@ -238,6 +238,7 @@ function display_graph3(svg_already_exists,svg3) {
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
+            console.log("changement")
             display_graph3(true, svg3);
         });
 
