@@ -475,9 +475,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             //console.log("change");
             //svg2.selectAll('*').remove();
             d3.select("svg3").select("svg").selectAll("*").remove()
-            display_graph3(true);
+            display_graph3(false);
             d3.select("svg2").select("svg").selectAll("*").remove()
-            display_graph2(true);
+            display_graph2(false);
             display_graph1(true,svg1);
         });
 

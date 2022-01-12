@@ -272,9 +272,9 @@ function display_graph2(svg_already_exists) {
         d3.select("#period-select").on("change", (event) => {
             //console.log("change");
             d3.select("svg3").select("svg").selectAll("*").remove()
-            display_graph3(true);
+            display_graph3(false);
             d3.select("svg2").select("svg").selectAll("*").remove()
-            display_graph2(true);
+            display_graph2(false);
             display_graph1(true,d3.select("svg1").select("svg"));
         });
     });
