@@ -306,6 +306,6 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin) {
             return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
         }) // Pour centrer le texte par rapport aux carrés
         .style("font-size", "13px")
-        .style("fill", "grey")
+        .style("fill", axisColor)
         .text(d => d.date);
 }

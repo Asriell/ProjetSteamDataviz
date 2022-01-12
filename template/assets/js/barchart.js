@@ -12,7 +12,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
     var height = 650;
     var total_height = height * 1.1;
     var total_width = width * 1.1;
-    var axisColor = "#FFE4B5";
     d3.json(urlplayersjson).then((json) => {
         //console.log(json);
         transform_data_for_bar(json);
