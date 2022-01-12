@@ -262,21 +262,16 @@ function display_graph2(svg_already_exists) {
 
         d3.select("#user-select").on("change", (event) => {
             //console.log("change");
-            d3.select("svg3").select("svg").selectAll("*").remove()
-            display_graph3(true);
-            d3.select("svg2").select("svg").selectAll("*").remove()
-            display_graph2(true);
-            display_graph1(true,d3.select("svg1").select("svg"));
+            display_graph2(true, svg2);
+            display_graph1(true, svg1);
+
         });
 
         d3.select("#period-select").on("change", (event) => {
             //console.log("change");
-            d3.select("svg3").select("svg").selectAll("*").remove()
-            display_graph3(false);
-            d3.select("svg2").select("svg").selectAll("*").remove()
-            display_graph2(false);
-            display_graph1(true,d3.select("svg1").select("svg"));
-        });
+            display_graph1(true, svg1);
+            display_graph2(true, svg2);
+        }); 
     });
 }
 
