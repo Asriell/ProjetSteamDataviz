@@ -262,7 +262,6 @@ function display_graph2(svg_already_exists) {
 
         d3.select("#user-select").on("change", (event) => {
             //console.log("change");
-            display_graph3(true, svg3);
             display_graph1(true, svg1);
             display_graph2(true, svg2);
 
@@ -270,7 +269,6 @@ function display_graph2(svg_already_exists) {
 
         d3.select("#period-select").on("change", (event) => {
             //console.log("change");
-            display_graph3(true, svg3);
             display_graph1(true, svg1);
             display_graph2(true, svg2);
         }); 
