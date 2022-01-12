@@ -1,11 +1,6 @@
 var svg1;
 var svg2;
-var svg3 = d3.select("svg3")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+var svg3;
 
 function traitement_data(x) {
     return parseInt(x);
