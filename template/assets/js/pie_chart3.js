@@ -23,7 +23,7 @@ function display_graph3(svg_already_exists,svg3) {
 
     // append the svg object to the div called 'my_dataviz'
     if(!svg_already_exists) {
-        svg3 = d3.select("svg3")
+        var svg3 = d3.select("svg3")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -241,6 +241,7 @@ function display_graph3(svg_already_exists,svg3) {
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
+            console.log("ok")
             display_graph3(true, svg3);
         });
 
