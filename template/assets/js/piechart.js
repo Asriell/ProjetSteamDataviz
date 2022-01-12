@@ -185,8 +185,10 @@ function display_graph2(svg_already_exists) {
                     element["id"] = currentWeek;
                     element["date"] = datas[data].date;
                     element["playtime"] = datas[data].playtime;
+                    element["total_playtime"] = datas[data].total_playtime;
                 } else {
                     element["playtime"] =  parseInt(element["playtime"]) + parseInt(datas[data].playtime);
+                    element["total_playtime"] =  parseInt(element["total_playtime"]) + parseInt(datas[data].total_playtime);
                     if ((data+1)%7 == 0 || (data+1) == datas.length) {
                         formattedDatas.push(element);
                         element = {};
@@ -224,16 +226,16 @@ function display_graph2(svg_already_exists) {
 
                 d3.select('#date-jeu').text(theData.date);
                 d3.select('#duree2-jeu').text(
-                    parseInt(theData.playtime / 3600) +
+                    parseInt(theData.total_playtime / 3600) +
                     " h " +
                     parseInt(
-                        (theData.playtime - parseInt(theData.playtime / 3600) * 3600) / 60
+                        (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
                     ) +
                     " m " +
-                    (theData.playtime -
-                        (parseInt(theData.playtime / 3600) * 3600 +
+                    (theData.total_playtime -
+                        (parseInt(theData.total_playtime / 3600) * 3600 +
                             parseInt(
-                                (theData.playtime - parseInt(theData.playtime / 3600) * 3600) / 60
+                                (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
                             ) *
                             60)) +
                     " s."
