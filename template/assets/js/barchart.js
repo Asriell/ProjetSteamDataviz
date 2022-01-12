@@ -264,6 +264,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         svg1.selectAll(".abscisses").selectAll(".tick").select("line").attr("stroke",axisColor);
         svg1.selectAll(".abscisses").selectAll(".tick").select("text").attr("fill",axisColor);
 
+        svg1.selectAll(".ordonnees").selectAll("path").attr("stroke",axisColor);
+        svg1.selectAll(".ordonnes").selectAll(".tick").select("line").attr("stroke",axisColor);
+        svg1.selectAll(".ordonnes").selectAll(".tick").select("text").attr("fill",axisColor);
+
         if (!document.getElementById("details-checkbox").checked) {
             if(!svg_already_exists) {
                 svg1
