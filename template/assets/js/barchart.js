@@ -92,7 +92,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 }
 
 
-                console.log(total_game_duration)
+                //console.log(total_game_duration)
                 element = {}
                 element["date"] = Object.keys(gameTimePerDay)[id];
                 element["id"] = id
