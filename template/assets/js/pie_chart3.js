@@ -255,6 +255,10 @@ function display_graph3(svg_already_exists,svg3) {
         d3.select("#period-select").on("change", (event) => {
             display_graph3(true, svg3);
         });
+
+        d3.select("#details-checkbox").on("change", (event) => {
+            display_graph3(true, svg3);
+        });
     });
 
 }
