@@ -145,9 +145,7 @@ function display_graph3(svg_already_exists,svg3) {
         id = 0;
         for(genre of Object.keys(genreTimePerPeriod)) {
             timeArray = genreTimePerPeriod[genre].split(":");
-            console.log("TA : " , timeArray)
-            genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + timeArray[2];
-            console.log(genreTimePerPeriod[genre]);
+            genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
         }
         console.log("GTPP : " , genreTimePerPeriod);
         
