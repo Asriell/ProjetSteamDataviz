@@ -95,7 +95,8 @@ function display_graph3(svg_already_exists,svg3) {
             console.log(gamesIds);
 
             gameDescriptions2 = json.games;
-            console.log(gameDescriptions2)
+            console.log(json);
+            console.log("games description : ",gameDescriptions2);
             d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
                 console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
                 console.log("GTPD : ", gameTimePerDay);
