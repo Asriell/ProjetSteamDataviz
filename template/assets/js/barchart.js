@@ -397,6 +397,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                             for (game of Object.values(json.games)) {
                                 if(game.name == document.getElementById("nom-jeu").value) {
                                     console.log(game.header_image);
+                                    console.log(game);
                                     return game.header_image;
                                 }
                             }
