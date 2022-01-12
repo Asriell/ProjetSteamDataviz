@@ -175,6 +175,7 @@ function display_graph2(svg_already_exists) {
                 return d.total_playtime;
             })
 
+        console.log("formatted data : ", datas);
         var data_ready = pie(datas)
         //console.log(data_ready);
 
