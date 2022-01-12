@@ -193,8 +193,17 @@ function display_graph3(svg_already_exists,svg3) {
                 var mousePosition = [e.x, e.y];
                 //console.log(mousePosition);
                 // on affiche le toolip
+                d3.select('#date-jeu').text("--");
+                d3.select('#duree2-jeu').text(
+                    parseInt(theData.time / 3600) +
+                    "," +
+                    parseInt(
+                        (theData.time - parseInt(theData.time / 3600) * 3600) / 60 / 60 * 100
+                    ) + " h"
+                );
+                d3.select("#nom-jeu").text(theData.genre);
 
-                tooltip
+                /*tooltip
                     .classed("hidden", false)
                     // on positionne le tooltip en fonction
                     // de la position de la souris
@@ -223,7 +232,7 @@ function display_graph3(svg_already_exists,svg3) {
                                 ) *
                                 60)) +
                         " s."
-                    );
+                    );*/
             })
             /*.on("mouseout", function () {
                 tooltip.classed("hidden", true);
