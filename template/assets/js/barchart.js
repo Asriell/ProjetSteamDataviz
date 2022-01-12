@@ -393,7 +393,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                             " s."
                         )
                         d3.select("#nom-jeu").text( Object.keys(d.data).find(key => d.data[key] === d[1] - d[0]))
-                        s3.select("#game_image").attr("src", (d) => {
+                        d3.select("#game_image").attr("src", (d) => {
                             for (game of Object.values(json.games)) {
                                 if(game.name == Object.keys(d.data).find(key => d.data[key] === d[1] - d[0])) {
                                     return game.header_image;
