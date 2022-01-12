@@ -463,8 +463,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         d3.select("#user-select").on("change", (event) => {
             //console.log("change");
             //svg2.selectAll('*').remove();
-
-
+            display_graph3(true);
             display_graph2(true);
             display_graph1(true, svg1);
 

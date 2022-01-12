@@ -1,4 +1,4 @@
-function display_graph3(svg_already_exists,svg3) {
+function display_graph3(svg_already_exists) {
 
     console.log("=========================SVG3=========================");
     if(svg_already_exists) {
@@ -241,12 +241,15 @@ function display_graph3(svg_already_exists,svg3) {
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
-            console.log("ok")
-            display_graph3(true, svg3);
+            display_graph3(true);
+            display_graph2(true);
+            display_graph1(true, svg1);
         });
 
         d3.select("#period-select").on("change", (event) => {
-            display_graph1(true, svg3);
+            display_graph3(true);
+            display_graph2(true);
+            display_graph1(true, svg1);
         });
     });
 
