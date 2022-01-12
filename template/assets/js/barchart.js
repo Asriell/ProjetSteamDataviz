@@ -394,11 +394,14 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                         )
                         d3.select("#nom-jeu").text( Object.keys(d.data).find(key => d.data[key] === d[1] - d[0]))
                         d3.select("#game_image").attr("src", () => {
-                            for (game of Object.keys(json.games)) {
-                                if(json.games[game].name == document.getElementById("nom-jeu").value) {
-                                    console.log(json.games[game].header_image);
-                                    console.log(json.games[game]);
-                                    return json.games[game].header_image;
+                            for (g of Object.keys(json.games)) {
+                                console.log("g ", g)
+                                if(json.games[g].name == document.getElementById("nom-jeu").value) {
+                                    console.log(json.games[String(g)].header_image);
+                                    console.log(json.games[parseInt(g)]);
+                                    console.log(g);
+                                    console.log(json.games);
+                                    return json.games[g].header_image;
                                 }
                             }
                         });
