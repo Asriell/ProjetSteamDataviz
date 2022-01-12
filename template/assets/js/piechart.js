@@ -187,6 +187,7 @@ function display_graph2(svg_already_exists) {
                     element["playtime"] = datas[data].playtime;
                     element["total_playtime"] = datas[data].total_playtime;
                 } else {
+                    console.log(data,"   ", datas[data].total_playtime);
                     element["playtime"] =  parseInt(element["playtime"]) + parseInt(datas[data].playtime);
                     element["total_playtime"] =  parseInt(element["total_playtime"]) + parseInt(datas[data].total_playtime);
                     if ((data+1)%7 == 0 || (data+1) == datas.length) {
