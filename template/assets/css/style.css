@@ -6,6 +6,15 @@
 display: none;
 }
 
+.bar, .rectGames {
+  transition:  fill 0.5s;
+
+}
+
+.pie {
+  transition: transform 1s, fill 0.5s;
+
+}
 .bar:hover {
   cursor: pointer !important;
   fill: #DB4437  !important;
@@ -13,9 +22,12 @@ display: none;
 
 .rectGames:hover {
   fill: #DB4437 ;
+  cursor: pointer;
 }
 
 .pie:hover {
+  cursor: pointer;
+  fill: #DB4437;
   transform: scale(1.1);
 }
 

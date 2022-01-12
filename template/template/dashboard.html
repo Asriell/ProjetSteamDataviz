@@ -158,7 +158,7 @@
                 <div class="row">
                   <div class="col-sm-6 text-left">
                     <h5 class="card-category" id="card-category-title">Bar chart</h5>
-                    <h2 id="chart-type-title">Titre</h2>
+                    <h2 id="chart-type-title">Historique du temps de jeu d'un joueur</h2>
                   </div>
                   <div class="offset-sm-1"></div>
                   <div class="col-sm-1">
@@ -210,14 +210,12 @@
                     </div>
                     <div class="tab-pane fade" id="piechart" role="tabpanel" aria-labelledby="pills-piechart-tab">
                       <div id="visu-activite2">
-                        <h3 class="ml-10">Votre temps total réparti sur la période</h3>
                         <svg2 width="600" height="500"></svg2>
                         <script>display_graph2()</script>
                       </div>
                     </div>
                     <div class="tab-pane fade" id="piechart2" role="tabpanel" aria-labelledby="pills-piechart2-tab">
                       <div id="visu-activite3">
-                        <h3 class="ml-10">3eme Pie chart</h3>
                         <svg3 width="600" height="500"></svg3>
                         <script>display_graph3()</script>
                       </div>
@@ -359,8 +357,10 @@
   <script>
     $(document).ready(function() {
 
-      bar_chart_title="Bar chart title";
-      pie_chart_title="Pie chart title";
+      bar_chart_title="Historique du temps de jeu d'un joueur ";
+      pie_chart_title="Proportion destemps de jeu d'un joueur";
+      pie2_chart_title="Proportion des categories d'un jeu";
+
       $().ready(function() {
         $sidebar = $('.sidebar');
         $navbar = $('.navbar');
@@ -392,7 +392,8 @@
             chart_title.html(bar_chart_title)
             chart_small_title.html("Bar chart")
           } else {
-
+            chart_title.html(pie2_chart_title)
+            chart_small_title.html("Pie chart")
           }
 
         });
