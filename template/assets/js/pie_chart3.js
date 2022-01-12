@@ -201,6 +201,7 @@ function display_graph3(svg_already_exists,svg3) {
                         (theData.time - parseInt(theData.time / 3600) * 3600) / 60 / 60 * 100
                     ) + " h"
                 );
+                console.log("temps" + theData.time);
                 d3.select("#nom-jeu").text(theData.genre);
 
                 /*tooltip
