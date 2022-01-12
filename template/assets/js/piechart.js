@@ -323,9 +323,9 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin,period) {
         legend.selectAll()
         .data(keys)
         .enter().append('text')
-        .attr("transform", (d,i) => "translate(" + (i%4 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("transform", (d,i) => "translate(" + (i%1 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
         .attr("dy", function (d, i) {
-            return Math.floor(i/4)*legendCellSize+Math.floor(i/4)*10 + legendCellSize / 1.6;
+            return Math.floor(i/1)*legendCellSize+Math.floor(i/1)*10 + legendCellSize / 1.6;
         }) // Pour centrer le texte par rapport aux carrés
         .style("font-size", "13px")
         .style("fill", axisColor)
