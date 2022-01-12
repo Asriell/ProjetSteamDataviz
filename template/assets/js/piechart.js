@@ -306,7 +306,37 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin,period) {
         )
         .attr("class","legendDetails");
 
-    legend.selectAll()
+    
+
+    if (period == "mois") {
+        
+        legend.selectAll()
+        .data(colorsKeys)
+        .enter().append('rect')
+        .attr('height', legendCellSize + 'px')
+        .attr('width', legendCellSize + 'px')
+        .attr('x', function (d,i) {
+            return i%1 * spacingBetweenCells;
+        })
+        .attr('y', function (d,i) {
+            return Math.floor(i/1)*legendCellSize+Math.floor(i/1)*10;
+        })
+        .style("fill", d => d);
+
+
+        legend.selectAll()
+        .data(keys)
+        .enter().append('text')
+        .attr("transform", (d,i) => "translate(" + (i%1 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("dy", function (d, i) {
+            return Math.floor(i/1)*legendCellSize+Math.floor(i/1)*10 + legendCellSize / 1.6;
+        }) // Pour centrer le texte par rapport aux carrés
+        .style("font-size", "13px")
+        .style("fill", axisColor)
+        .text(d => "semaine du " + d.date.split("-")[2]+ "/" + d.date.split("-")[1] + "/" + d.date.split("-")[0]);
+    } else {
+
+        legend.selectAll()
         .data(colorsKeys)
         .enter().append('rect')
         .attr('height', legendCellSize + 'px')
@@ -319,18 +349,6 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin,period) {
         })
         .style("fill", d => d);
 
-    if (period == "mois") {
-        legend.selectAll()
-        .data(keys)
-        .enter().append('text')
-        .attr("transform", (d,i) => "translate(" + (i%1 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
-        .attr("dy", function (d, i) {
-            return Math.floor(i/1)*legendCellSize+Math.floor(i/1)*10 + legendCellSize / 1.6;
-        }) // Pour centrer le texte par rapport aux carrés
-        .style("font-size", "13px")
-        .style("fill", axisColor)
-        .text(d => "semaine du " + d.date.split("-")[2]+ "/" + d.date.split("-")[1] + "/" + d.date.split("-")[0]);
-    } else {
         legend.selectAll()
         .data(keys)
         .enter().append('text')
