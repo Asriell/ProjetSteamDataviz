@@ -172,7 +172,7 @@ function display_graph2(svg_already_exists) {
         // Compute the position of each group on the pie:
         var pie = d3.pie()
             .value(function (d) {
-                return d.total_playtime;
+                return d. playtime;
             })
 
         console.log("before formatted data : ", datas);
