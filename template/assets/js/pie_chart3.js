@@ -178,7 +178,6 @@ function display_graph3(svg_already_exists,svg3) {
         var data_ready = pie(datas);
         console.log("dr : ", data_ready);
 
-<<<<<<< HEAD
             svg3
             .selectAll('arcs')
             .data(data_ready)
@@ -238,60 +237,6 @@ function display_graph3(svg_already_exists,svg3) {
             /*.on("mouseout", function () {
                 tooltip.classed("hidden", true);
             });*/
-=======
-        svg3
-        .selectAll('arcs')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', arcGenerator)
-        .attr('fill', function (d) { return (color(d.data.id)) })
-        .attr("class","pie")
-        .on("mousemove", function (e, d) {
-            // on recupere la position de la souris,
-            // e est l'object event d
-            theData = d.data;
-            var mousePosition = [e.x, e.y];
-            //console.log(mousePosition);
-            // on affiche le toolip
-
-            tooltip
-                .classed("hidden", false)
-                // on positionne le tooltip en fonction
-                // de la position de la souris
-                .attr(
-                    "style",
-                    "left:" +
-                    (mousePosition[0] + 15) +
-                    "px; top:" +
-                    (mousePosition[1] - 35) +
-                    "px"
-                )
-                // on recupere le nom de l'etat
-                .html(
-                    theData.genre +
-                    " | Temps total : " +
-                    parseInt(theData.time / 3600) +
-                    " h " +
-                    parseInt(
-                        (theData.time - parseInt(theData.time / 3600) * 3600) / 60
-                    ) +
-                    " m " +
-                    (theData.time -
-                        (parseInt(theData.time / 3600) * 3600 +
-                            parseInt(
-                                (theData.time - parseInt(theData.time / 3600) * 3600) / 60
-                            ) *
-                            60)) +
-                    " s."
-                );
-        })
-        /*.on("mouseout", function () {
-            tooltip.classed("hidden", true);
-        });*/
-
->>>>>>> 4191c5c765685f72479695650480df0c4f50116d
-
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
