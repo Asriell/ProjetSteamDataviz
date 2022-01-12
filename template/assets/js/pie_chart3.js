@@ -31,7 +31,7 @@ function display_graph3(svg_already_exists,svg3) {
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     }
 
-    var datasPlayer = d3.json(urlplayersjson).then((json) => {
+    d3.json(urlplayersjson).then((json) => {
         transform_data_for_bar(json);
         data = DataCleaning(
             json,
@@ -94,10 +94,10 @@ function display_graph3(svg_already_exists,svg3) {
             }
             console.log(gamesIds);
 
-
-
+            gameDescriptions2 = json.games;
+            console.log(gameDescriptions2)
             d3.json("https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/DescriptionsJeuxJson/gamesDescription.json").then((gameDescriptions) => {
-                //console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
+                console.log(Object.keys(gameDescriptions),"   ",Object.keys(gameDescriptions).length)
                 console.log("GTPD : ", gameTimePerDay);
                 gameInfos = {}
                 for(id of Object.keys(gamesIds)) {
