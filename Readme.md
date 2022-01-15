@@ -1,5 +1,5 @@
 # ProjetSteamDataviz
-Lien Github pages : https://asriell.github.io/ProjetSteamDataviz/main/index.html
+Lien Github pages : https://asriell.github.io/ProjetSteamDataviz/template/template/dashboard.html
 
 ### Tests de l'API Steam
 ##### Doc Steam API
