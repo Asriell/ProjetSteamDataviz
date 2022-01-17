@@ -4,10 +4,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         .select("body")
         .append("div")
         .attr("class", "hidden tooltip");
-    var distance_between_bars = 50;
-    var bar_width = 30;
-    var start_margin = 40;
-    var margin = 20;
+    var distance_between_bars = 20;
+    var bar_width = 15;
+    var start_margin = 30;
+    var margin = 10;
     var width = 8000;
     var height = 650;
     var total_height = height * 1.1;
