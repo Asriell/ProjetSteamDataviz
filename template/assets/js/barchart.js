@@ -246,6 +246,10 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("transform", "translate(" + start_margin + "," + height + ")")
                 .attr("class","abscisses")
                 .call(x_axis)
+                .selectAll("text").
+                style("text-anchor", "start")
+                .attr("dx", "-3em")
+                .attr("dy", "1em")
                 .attr("transform", function (d) {
                     return "rotate(-30)";
                 });
@@ -258,7 +262,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("class","ordonnees")
             //.text("Time played");
         } else {
-            svg1.selectAll(".abscisses").transition().duration(1000).call(x_axis).attr("transform", function (d) {
+            svg1.selectAll(".abscisses").transition().duration(1000).call(x_axis).selectAll("text").style("text-anchor", "start").attr("dx", "-3em").attr("dy", "1em").attr("transform", function (d) {
                 return "rotate(-30)";
             });
             svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
