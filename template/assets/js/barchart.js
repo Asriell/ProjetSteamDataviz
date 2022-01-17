@@ -214,7 +214,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .align(0);
 
         //console.log("datasLength : ",datas);
-        var x_axis = fc.axisLabelRotate(d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)}));
+        var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
 
         /*console.log(
             "max : ",
@@ -246,6 +246,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("transform", "translate(" + start_margin + "," + height + ")")
                 .attr("class","abscisses")
                 .call(x_axis)
+                .attr("transform", function (d) {
+                    return "rotate(-30)";
+                });
             //.text("Day");
 
             svg1
@@ -255,7 +258,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("class","ordonnees")
             //.text("Time played");
         } else {
-            svg1.selectAll(".abscisses").transition().duration(1000).call(x_axis)
+            svg1.selectAll(".abscisses").transition().duration(1000).call(x_axis).attr("transform", function (d) {
+                return "rotate(-30)";
+            });
             svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
         }
 
