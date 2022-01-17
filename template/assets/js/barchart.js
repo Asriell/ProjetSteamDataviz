@@ -4,12 +4,12 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         .select("body")
         .append("div")
         .attr("class", "hidden tooltip");
-    var distance_between_bars = 20;
-    var bar_width = 15;
-    var start_margin = 30;
-    var margin = 10;
-    var width = 8000;
-    var height = 650;
+    var distance_between_bars = 25;
+    var bar_width = 20;
+    var start_margin = 60;
+    var margin = 0;
+    var width = 1500;
+    var height = 500;
     var total_height = height * 1.1;
     var total_width = width * 1.1;
     d3.json(urlplayersjson).then((json) => {
