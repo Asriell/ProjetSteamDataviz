@@ -190,7 +190,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             //console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
             if (series.length != 0) {
                 var y = d3.scaleLinear()
-                    .domain([0, d3.max(series[series.length - 1], d => d[1])])
+                    .domain([d3.min(series[series.length - 1], d => d[1]), d3.max(series[series.length - 1], d => d[1])])
                     .range([height, margin]);
             } else {
                 var y = d3.scaleLinear()
@@ -222,7 +222,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         );*/
         var yScale = d3
             .scaleLinear()
-            .domain([0, d3.max(datas, (d) => d.playtime)])
+            .domain([d3.min(datas, (d) => d.playtime), d3.max(datas, (d) => d.playtime)])
             .range([height, margin]);
 
 
