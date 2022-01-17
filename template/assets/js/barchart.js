@@ -247,7 +247,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 .attr("class","abscisses")
                 .call(x_axis)
                 .attr("transform", function (d) {
-                    return "rotate(-30)";
+                    return "rotate(0)";
                 });
             //.text("Day");
 
@@ -259,7 +259,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             //.text("Time played");
         } else {
             svg1.selectAll(".abscisses").transition().duration(1000).call(x_axis).attr("transform", function (d) {
-                return "rotate(-30)";
+                return "rotate(0)";
             });
             svg1.selectAll(".ordonnees").transition().duration(1000).call(y_axis)
         }

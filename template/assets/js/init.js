@@ -93,12 +93,17 @@ var DataCleaning = function (data, user) {
         (player) => player.persona_name == user
         //document.getElementById("user-select").value
     );
-    //console.log("datasUser : ", datasUser);
+
     //console.log(data);
     tmpData = {};
+    console.log(Object.keys(datasUser).length)
     for (var entry in datasUser) {
         if (!datasUser[entry].game_duration.includes("day")) {
             if (entry != 0) {
+                if (!check_duration(datasUser[entry].game_duration)) {
+                    console.log(datasUser[entry].game_duration)
+                    continue
+                }
                 date1 = new Date(datasUser[entry - 1].game_end);
                 date2 = new Date(datasUser[entry].game_end);
                 datediff = Math.abs(date2 - date1) / 1000;
@@ -139,7 +144,7 @@ var DataCleaning = function (data, user) {
             }
         }
     }
-    //console.log("tmpData : ", tmpData);
+    console.log(Object.keys(tmpData).length)
     return tmpData;
 };
 
@@ -173,6 +178,13 @@ var hhmmss = function (time) {
                 60));
 }
 
+function check_duration(str_duration) {
+    hh_mm_ss = str_duration.split(":")
+    if ((parseInt(hh_mm_ss[0]) == 0) && (parseInt(hh_mm_ss[1]) <= 5)) {
+        return false;
+    }
+    return true;
+}
 function calculate_duration(dur1, dur2) {
 
     var hour=0;
