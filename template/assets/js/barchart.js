@@ -80,7 +80,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        //console.log("GTPD : ",gameTimePerDay);
+        console.log("GTPD11111 : ",gameTimePerDay);
         datas = [];
         var id = 0;
         var total_game_duration = "00:00:00";
