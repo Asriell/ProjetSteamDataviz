@@ -491,7 +491,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 }
 
 
-function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 4) {
+function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 1) {
     legendCellSize = 20,
         maxCarac = d3.max(keys,(d)=> d.length);
     spacingBeetweenCells = legendCellSize + maxCarac * 7 + 5;
@@ -503,7 +503,7 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
     let legend = d3
         .select("svg1")
         .append("svg")
-        .attr("width", total_width)
+        .attr("width", spacingBeetweenCells)
         .attr("height", 30 * (Math.floor(keys.length/legendPerLines) + 1)+15)
         .attr(
             "transform",
