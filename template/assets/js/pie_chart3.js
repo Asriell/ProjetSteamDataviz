@@ -1,4 +1,4 @@
-function display_graph3(svg_already_exists,svg3) {
+function display_graph3(svg_already_exists) {
     if(svg_already_exists) {
         svg3.selectAll('*').remove();
     }

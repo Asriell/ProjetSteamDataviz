@@ -1,4 +1,4 @@
-function display_graph4(svg_already_exists,svg4) {
+function display_graph4(svg_already_exists) {
 
     if(svg_already_exists) {
         svg4.selectAll('*').remove();
@@ -221,16 +221,16 @@ function display_graph4(svg_already_exists,svg4) {
             //svg2.selectAll('*').remove();
             display_graph2(true);
             display_graph1(true, svg1);
-            display_graph3(true,d3.select("svg3").select("svg"));
-            display_graph4(true,svg4);
+            display_graph3(true);
+            display_graph4(true);
         });
 
         d3.select("#period-select").on("change", (event) => {
             //svg2.selectAll('*').remove();
             display_graph1(true, svg1);
             display_graph2(true);
-            display_graph3(true,d3.select("svg3").select("svg"));
-            display_graph4(true,svg4);
+            display_graph3(true);
+            display_graph4(true);
         });
 
     });
