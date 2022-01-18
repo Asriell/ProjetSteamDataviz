@@ -1,6 +1,7 @@
 var svg1;
 var svg2;
 var svg3;
+var svg4;
 var axisColor = "#FFE4B5";
 
 function traitement_data(x) {
