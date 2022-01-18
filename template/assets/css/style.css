@@ -1,8 +1,13 @@
-
+body {
+  overflow: hidden;
+}
 .bar {
   fill: #0f9d58  ;
 }
 
+footer {
+  padding-bottom: 0px !important;
+}
 .hidden {
 display: none;
 }

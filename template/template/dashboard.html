@@ -316,7 +316,7 @@
                     <div class="col-lg-12 general">
                       <div class="card card-chart">
                         <div class="card-header">
-                          <h4 class="card-title" >Nom du jeu</h4>
+                          <h4 class="card-title" id="nom-jeu-change">Nom du jeu</h4>
                         </div>
                         <div class="card-body custom-card">
                           <p class="card-value" id="nom-jeu"> -- </p>
@@ -370,6 +370,7 @@
       bar_chart_title="Historique du temps de jeu d'un joueur ";
       pie_chart_title="Proportion destemps de jeu d'un joueur";
       pie2_chart_title="Proportion des categories d'un jeu";
+      pie3_chart_title="Temps de jeu par moment de la journée"
 
       $().ready(function() {
         $sidebar = $('.sidebar');
@@ -398,12 +399,23 @@
           if (active_chart == "#piechart") {
             chart_title.html(pie_chart_title)
             chart_small_title.html("Pie chart")
+            $("#nom-jeu-change").html("Nom du jeu")
+
           } else if (active_chart == "#barchart") {
             chart_title.html(bar_chart_title)
             chart_small_title.html("Bar chart")
-          } else {
+            $("#nom-jeu-change").html("Nom du jeu")
+
+          } else if (active_chart == "#piechart2") {
+            console.log("here 2")
             chart_title.html(pie2_chart_title)
             chart_small_title.html("Pie chart")
+            $("#nom-jeu-change").html("Categorie")
+          } else {
+            chart_title.html(pie3_chart_title)
+            chart_small_title.html("Pie chart")
+            $("#nom-jeu-change").html("Moment de la journée")
+
           }
 
         });
