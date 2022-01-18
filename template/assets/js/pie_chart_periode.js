@@ -78,21 +78,6 @@ function display_graph4(svg_already_exists) {
                     }
                 }
             }
-            console.log("ddddata : ",data)
-            for (entry of Object.values(data)) {
-                day_period = check_day_period(entry.game_end)
-                if (day_period == 0) {
-                    gameTimePerPeriod["matin"] = SumDurations(gameTimePerPeriod["matin"], entry.game_duration)
-                } else if (day_period == 1) {
-                    gameTimePerPeriod["apres-midi"] = SumDurations(gameTimePerPeriod["apres-midi"], entry.game_duration)
-                } else if (day_period == 2) {
-                    gameTimePerPeriod["soir"] = SumDurations(gameTimePerPeriod["soir"], entry.game_duration)
-                } else {
-                    gameTimePerPeriod["nuit"] = SumDurations(gameTimePerPeriod["nuit"], entry.game_duration)
-                }
-            }
-
-
             inf = formatDate(
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
@@ -153,6 +138,19 @@ function display_graph4(svg_already_exists) {
             genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
         }
 
+        console.log("ddddata : ",data)
+        for (entry of Object.values(data)) {
+            day_period = check_day_period(entry.game_end)
+            if (day_period == 0) {
+                gameTimePerPeriod["matin"] = SumDurations(gameTimePerPeriod["matin"], entry.game_duration)
+            } else if (day_period == 1) {
+                gameTimePerPeriod["apres-midi"] = SumDurations(gameTimePerPeriod["apres-midi"], entry.game_duration)
+            } else if (day_period == 2) {
+                gameTimePerPeriod["soir"] = SumDurations(gameTimePerPeriod["soir"], entry.game_duration)
+            } else {
+                gameTimePerPeriod["nuit"] = SumDurations(gameTimePerPeriod["nuit"], entry.game_duration)
+            }
+        }
         console.log(gameTimePerPeriod)
         datas = [];
         id = 0;
