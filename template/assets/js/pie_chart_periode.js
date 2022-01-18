@@ -78,6 +78,7 @@ function display_graph4(svg_already_exists) {
                     }
                 }
             }
+            console.log("ddddata : ",data)
             for (entry of Object.values(data)) {
                 day_period = check_day_period(entry.game_end)
                 if (day_period == 0) {
