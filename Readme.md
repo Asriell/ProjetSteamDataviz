@@ -6,9 +6,10 @@ Lien Github pages : https://asriell.github.io/ProjetSteamDataviz/template/templa
 Nos scripts utilisés pour le scraping de données dans le dossier scrapingScript. Un readme y est associé pour plus de précisions.
 
 #### La VM pour le data scraping
-
+```
 address : 192.168.74.201
 password : steam
+```
 
 
 ### A Propos de l'API Steam 
