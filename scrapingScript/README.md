@@ -29,3 +29,12 @@ Database URL: 'https://steam-players-data-default-rtdb.firebaseio.com/'
 
 ##  Errors and bugs
 All errors' logs are in ``errors.log`` file (the file will be created once an error occurs).
+
+## Autorun script
+
+We run the script automatically, with autorun.sh, executed by crontab, each minute : 
+``
+* * * * * autorun.sh
+``
+
+autorun checks if the script is not running and run it in this case.
