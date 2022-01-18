@@ -181,6 +181,7 @@ function display_graph4(svg_already_exists,svg4) {
                 return d.time;
             })
         var data_ready = pie(datas);
+        console.log("data ready : ",data_ready);
         svg4
             .selectAll('arcs')
             .data(data_ready)

@@ -160,6 +160,7 @@ function display_graph3(svg_already_exists,svg3) {
         .value(function (d) {
             return d.time;
         })
+        console.log("datas pie 3 ", datas)
         var data_ready = pie(datas);
 
             svg3
