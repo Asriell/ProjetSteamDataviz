@@ -164,18 +164,18 @@ function get_total_playtime_of_all_data(dataset) {
 }
 
 var hhmmss = function (time) {
-    return parseInt(time / 3600) +
+    return String(parseInt(time / 3600)).padStart(2, "0") +
         ":" +
-        parseInt(
+        String(parseInt(
             (time - parseInt(time / 3600) * 3600) / 60
-        ) +
+        )).padStart(2, "0") +
         ":" +
-        (time -
+        String((time -
             (parseInt(time / 3600) * 3600 +
                 parseInt(
                     (time - parseInt(time / 3600) * 3600) / 60
                 ) *
-                60));
+                60))).padStart(2, "0");
 }
 
 function check_duration(str_duration) {
