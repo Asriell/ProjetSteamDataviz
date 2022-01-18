@@ -19,8 +19,9 @@ json = {
   "Monster Hunter: World": "582010", 
   "Dota 2": "570",
   "Apex Legends": "1172470",
-  "Total War: NAPOLEON - Definitive Edition": "34030"
+  "Total War: NAPOLEON - Definitive Edition": "34030",
+  "PUBG: BATTLEGROUND" : "578080"
 }
 
 
-steam.getGameDetails("1466860").then((data) => fs.writeFileSync('1466860.json', JSON.stringify(data)));
+steam.getGameDetails("578080").then((data) => fs.writeFileSync('578080.json', JSON.stringify(data)));
