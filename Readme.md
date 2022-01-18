@@ -1,4 +1,16 @@
 # ProjetSteamDataviz
+```
+Projet de data visualisation du groupe 6 : Données d'utilisation des jeux vidéos.
+
+Outils utilisés : Javacript (avec bibliothèque D3js), html/css, Python, Shell, Cron, Firebase Realtime Database, Steam API.
+
+```
+
+### Problématiques auquelles Nos visualisations vont apporter des réponses : 
++ A quelle fréquence joue-t-on aux jeux vidéos par unité de temps ?
++ Qui est le joueur qui joue le plus ? (Comparaison du temps de jeu de chaque membre du groupe)
++ Quelles sont les catégories les plus populaires ? Quelles sont les tendances ?
+
 
 ### Nos visualisations 
 * Lien Github pages : https://asriell.github.io/ProjetSteamDataviz/template/template/dashboard.html
