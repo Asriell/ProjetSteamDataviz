@@ -159,7 +159,7 @@ function display_graph4(svg_already_exists,svg4) {
             obj = {}
             obj["id"] = id;
             obj["period"] = period;
-            obj["time"] = gameTimePerPeriod[period];
+            obj["time"] = ParseInt(gameTimePerPeriod[period].split(":")[0])*3600 + ParseInt(gameTimePerPeriod[period].split(":")[1])*60 + ParseInt(gameTimePerPeriod[period].split(":")[2]);
             datas.push(obj);
             id ++;
         }
@@ -216,21 +216,6 @@ function display_graph4(svg_already_exists,svg4) {
             })
 
         addLegend_donut2(color,datas,total_width,0,0);
-
-        d3.select("#user-select").on("change", (event) => {
-            //svg2.selectAll('*').remove();
-            display_graph2(true);
-            display_graph1(true, svg1);
-            display_graph3(true,svg4);
-
-        });
-
-        d3.select("#period-select").on("change", (event) => {
-            //svg2.selectAll('*').remove();
-            display_graph1(true, svg1);
-            display_graph2(true);
-            display_graph3(true,svg4);
-        });
 
     });
 
