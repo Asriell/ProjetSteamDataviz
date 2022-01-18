@@ -159,7 +159,7 @@ function display_graph4(svg_already_exists,svg4) {
             obj = {}
             obj["id"] = id;
             obj["period"] = period;
-            obj["time"] = ParseInt(gameTimePerPeriod[period].split(":")[0])*3600 + ParseInt(gameTimePerPeriod[period].split(":")[1])*60 + ParseInt(gameTimePerPeriod[period].split(":")[2]);
+            obj["time"] = parseInt(gameTimePerPeriod[period].split(":")[0])*3600 + parseInt(gameTimePerPeriod[period].split(":")[1])*60 + parseInt(gameTimePerPeriod[period].split(":")[2]);
             datas.push(obj);
             id ++;
         }
@@ -248,18 +248,18 @@ var addLegend_donut2 = function (colors,keys,total_width,start_margin,margin) {
         .attr('height', legendCellSize + 'px')
         .attr('width', legendCellSize + 'px')
         .attr('x', function (d,i) {
-            return i%3 * spacingBetweenCells;
+            return i%1 * spacingBetweenCells;
         })
         .attr('y', function (d,i) {
-            return Math.floor(i/3)*legendCellSize+Math.floor(i/3)*10;
+            return Math.floor(i/1)*legendCellSize+Math.floor(i/1)*10;
         })
         .style("fill", d => d);
     legend.selectAll()
         .data(keys)
         .enter().append('text')
-        .attr("transform", (d,i) => "translate(" + (i%3 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("transform", (d,i) => "translate(" + (i%1 * spacingBetweenCells + legendCellSize + 5) + ", " + 0 + ")")
         .attr("dy", function (d, i) {
-            return Math.floor(i/3)*legendCellSize+Math.floor(i/3)*10 + legendCellSize / 1.6;
+            return Math.floor(i/1)*legendCellSize+Math.floor(i/1)*10 + legendCellSize / 1.6;
         }) // Pour centrer le texte par rapport aux carrés
         .style("font-size", "13px")
         .style("fill", axisColor)
