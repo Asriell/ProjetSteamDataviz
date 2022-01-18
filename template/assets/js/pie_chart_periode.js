@@ -152,16 +152,18 @@ function display_graph4(svg_already_exists,svg4) {
             genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
         }
 
+        console.log(gameTimePerPeriod)
         datas = [];
         id = 0;
         for (game of Object.keys(genreTimePerPeriod)) {
             obj = {}
             obj["id"] = id;
-            obj["genre"] = game;
+            obj["period"] = game;
             obj["time"] = genreTimePerPeriod[game];
             datas.push(obj);
             id ++;
         }
+        console.log(datas);
         var color = d3.scaleOrdinal()
             .domain([0, d3.max(datas, function (d) { return d.id; })])
             .range(['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
@@ -179,7 +181,6 @@ function display_graph4(svg_already_exists,svg4) {
                 return d.time;
             })
         var data_ready = pie(datas);
-        console.log(gameTimePerPeriod)
         svg4
             .selectAll('arcs')
             .data(data_ready)
@@ -276,6 +277,6 @@ var addLegend_donut2 = function (colors,keys,total_width,start_margin,margin) {
         }) // Pour centrer le texte par rapport aux carrés
         .style("font-size", "13px")
         .style("fill", axisColor)
-        .text(d => d.genre);
+        .text(d => d.period);
 
 }
