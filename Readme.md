@@ -4,9 +4,9 @@
 * Lien Github pages : https://asriell.github.io/ProjetSteamDataviz/template/template/dashboard.html
 
 * Nos visualisations sont disponibles dans la branche gh-pages, dossier template : 
-** Notre code javascript est disponible dans assets/js
-** Notre code css est disponible dans assets/css/style.css
-** Notre code html est disponible dans template/dashboard.html
+* * Notre code javascript est disponible dans assets/js
+* * Notre code css est disponible dans assets/css/style.css
+* * Notre code html est disponible dans template/dashboard.html
 
 ### Le Data Scraping 
 
