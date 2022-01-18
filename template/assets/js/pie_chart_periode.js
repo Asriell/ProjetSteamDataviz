@@ -43,10 +43,10 @@ function display_graph4(svg_already_exists) {
         );
 
         gameTimePerPeriod = {
-            "matin": "00:00:00",
-            "apres-midi": "00:00:00",
-            "soir": "00:00:00",
-            "nuit": "00:00:00"
+            "matin": 0,
+            "apres-midi": 0,
+            "soir": 0,
+            "nuit": 0
         }
         gameTimePerDay = {};
         while (inf != TODAY) {
@@ -81,13 +81,13 @@ function display_graph4(svg_already_exists) {
             for (entry of Object.values(data)) {
                 day_period = check_day_period(entry.game_end)
                 if (day_period == 0) {
-                    gameTimePerPeriod["matin"] = calculate_duration(gameTimePerPeriod["matin"], entry.game_duration)
+                    gameTimePerPeriod["matin"] = gameTimePerPeriod["matin"] + parseInt(entry.game_duration.split(":")[0])*3600 + parseInt(entry.game_duration.split(":")[1])*60 + parseInt(entry.game_duration.split(":")[2])
                 } else if (day_period == 1) {
-                    gameTimePerPeriod["apres-midi"] = calculate_duration(gameTimePerPeriod["apres-midi"], entry.game_duration)
+                    gameTimePerPeriod["apres-midi"] = gameTimePerPeriod["apres-midi"] + parseInt(entry.game_duration.split(":")[0])*3600 + parseInt(entry.game_duration.split(":")[1])*60 + parseInt(entry.game_duration.split(":")[2])
                 } else if (day_period == 2) {
-                    gameTimePerPeriod["soir"] = calculate_duration(gameTimePerPeriod["soir"], entry.game_duration)
+                    gameTimePerPeriod["soir"] = gameTimePerPeriod["soir"] + parseInt(entry.game_duration.split(":")[0])*3600 + parseInt(entry.game_duration.split(":")[1])*60 + parseInt(entry.game_duration.split(":")[2])
                 } else {
-                    gameTimePerPeriod["nuit"] = calculate_duration(gameTimePerPeriod["nuit"], entry.game_duration)
+                    gameTimePerPeriod["nuit"] = gameTimePerPeriod["nuit"] + parseInt(entry.game_duration.split(":")[0])*3600 + parseInt(entry.game_duration.split(":")[1])*60 + parseInt(entry.game_duration.split(":")[2])
                 }
             }
 
@@ -159,7 +159,7 @@ function display_graph4(svg_already_exists) {
             obj = {}
             obj["id"] = id;
             obj["period"] = period;
-            obj["time"] = parseInt(gameTimePerPeriod[period].split(":")[0])*3600 + parseInt(gameTimePerPeriod[period].split(":")[1])*60 + parseInt(gameTimePerPeriod[period].split(":")[2]);
+            obj["time"] = gameTimePerPeriod[period];
             datas.push(obj);
             id ++;
         }
