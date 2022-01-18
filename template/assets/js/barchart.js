@@ -8,7 +8,8 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
     var bar_width = 20;
     var start_margin = 60;
     var margin = 0;
-    var width = 1500;
+    //var width = 1500;
+    var width = 750;
     var height = 500;
     var total_height = height * 1.1;
     var total_width = width * 1.1;
@@ -122,7 +123,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 
                 // Date formatting
                 element["date"] = Object.keys(gameTimePerDay)[id];
-
                 splitVal = val.split(":");
                 valInSeconds =
                     splitVal[2] * Math.pow(60, 0) +
@@ -135,7 +135,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             }
             d3.select("#played-games").text("--")
             d3.select("#total-game-duration").text(total_game_duration)
-            d3.select("#last-game-date").text(datas.pop().date)
+            d3.select("#last-game-date").text(datas[datas.length-1].date)
 
         }
         if(!svg_already_exists){
@@ -475,6 +475,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             }
         }
 
+        //console.log("datas  ",datas);
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
         if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
@@ -490,7 +491,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 }
 
 
-function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 4) {
+function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines = 1) {
     legendCellSize = 20,
         maxCarac = d3.max(keys,(d)=> d.length);
     spacingBeetweenCells = legendCellSize + maxCarac * 7 + 5;
@@ -502,7 +503,7 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
     let legend = d3
         .select("svg1")
         .append("svg")
-        .attr("width", total_width)
+        .attr("width", spacingBeetweenCells)
         .attr("height", 30 * (Math.floor(keys.length/legendPerLines) + 1)+15)
         .attr(
             "transform",
