@@ -211,7 +211,7 @@ function display_graph4(svg_already_exists,svg4) {
                             60)) +
                     " s."
                 );
-                d3.select("#nom-jeu").text(theData.genre);
+                d3.select("#nom-jeu").text(theData.period);
             })
 
         addLegend_donut2(color,datas,total_width,0,0);
