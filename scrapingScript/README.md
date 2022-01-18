@@ -15,7 +15,7 @@ main.py and mainScript.py are the same scripts, excepted that mainScript.py save
 
 ## VM access : 
 
-address : 192.168.74.201 .
+address : 192.168.74.201
 password : steam
 
 ##  Collecting data from multiple steam IDs
