@@ -14,13 +14,11 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
     var total_height = height * 1.1;
     var total_width = width * 1.1;
     d3.json(urlplayersjson).then((json) => {
-        //console.log(json);
         transform_data_for_bar(json);
         data = DataCleaning(
             json,
             document.getElementById("user-select").value
         );
-        //console.log(data);
 
         inf = "1970-01-01";
         nbJours = get_nb_days_to_display();
@@ -31,7 +29,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         inf2 = formatDate(
             new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
         );
-        //console.log(TODAY, " | ", inf, " | ", inf2);
         gameTimePerDay = {};
 
         while (inf != TODAY) {
@@ -80,7 +77,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        //console.log("GTPD : ",gameTimePerDay);
         datas = [];
         var id = 0;
         var total_game_duration = "00:00:00";
@@ -93,7 +89,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 }
 
 
-                //console.log(total_game_duration)
                 element = {}
                 element["date"] = Object.keys(gameTimePerDay)[id];
                 element["id"] = id
@@ -129,7 +124,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     splitVal[1] * Math.pow(60, 1) +
                     splitVal[0] * Math.pow(60, 2);
                 element["playtime"] = valInSeconds;
-                //console.log(splitVal, " | ", valInSeconds);
                 datas.push(element);
                 id++;
             }
@@ -168,7 +162,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF']);
             //.range(["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"])
             color.domain([0,gamesPlayed.length]);
-            //console.log("datas : ", datas, " gamesPlayes : ", gamesPlayed);
             datas.map((d) => {
                 for (game of gamesPlayed) {
                     if (!Object.keys(d).includes(game)) {
@@ -176,18 +169,15 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     }
                 }
             });
-            //console.log("datas : ", datas);
             const stack = d3.stack()
                 .keys(gamesPlayed)
                 .order(d3.stackOrderNone)
                 .offset(d3.stackOffsetNone);
             var series = stack(datas);
-            //console.log(series);
             var x = d3.scaleBand()
                 .domain(datas.map(d => d.date))
                 .range([0, distance_between_bars])
 
-            //console.log("series : ", series, " series.length : ", series.length-1, " series.series.length-1 : ",series[series.length - 1], datas )
             if (series.length != 0) {
                 var y = d3.scaleLinear()
                     .domain([d3.min(series[series.length - 1], d => d[1]), d3.max(series[series.length - 1], d => d[1])])
@@ -213,13 +203,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             .range([0, distance_between_bars*datas.length])
             .align(0);
 
-        //console.log("datasLength : ",datas);
         var x_axis = d3.axisBottom().scale(xScale).ticks(datas.length).tickFormat((d) => {let date = datas[d].date.split('-'); return date[2]+"/"+date[1]+"/"+date[0].substring(2,4)});
 
-        /*console.log(
-            "max : ",
-            d3.max(datas, (d) => d.playtime)
-        );*/
+
         var yScale = d3
             .scaleLinear()
             .domain([d3.min(datas, (d) => d.playtime), d3.max(datas, (d) => d.playtime)])
@@ -230,11 +216,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
         //var y_axis = d3.axisLeft().scale(yScale);
         if (change == "details") {
             if (document.getElementById("details-checkbox").checked) {
-                //console.log("checked");
                 svg1.selectAll(".bar").classed("hidden", true);
                 svg1.selectAll(".games").classed("hidden", false);
             } else {
-                //console.log("unchecked");
                 svg1.selectAll(".bar").classed("hidden", false);
                 svg1.selectAll(".games").classed("hidden", true);
             }
@@ -285,11 +269,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .append("rect")
                     .attr("class", "bar")
                     .attr("x", function (d) {
-                        //console.log(xScale(d.id));
                         return xScale(d.id) + start_margin;
                     })
                     .attr("y", function (d) {
-                        //console.log("playtime : ", d.playtime);
                         return (d.playtime == height ? 0 : yScale(d.playtime));
                     })
                     .attr("width", bar_width)
@@ -299,9 +281,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .on("mousemove", function (e, d) {
                         // on recupere la position de la souris,
                         // e est l'object event d
-                        //console.log(d);
                         var mousePosition = [e.x, e.y];
-                        //console.log(mousePosition);
                         // on affiche le toolip
                         d3.select('#date-jeu').text(d.date);
 
@@ -357,11 +337,9 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .transition()
                     .duration(1000)
                     .attr("x", function (d) {
-                        //console.log(xScale(d.id));
                         return xScale(d.id) + start_margin;
                     })
                     .attr("y", function (d) {
-                        //console.log(d.playtime_forever);
                         return (d.playtime == 0 ? height : yScale(d.playtime));
                     })
                     .attr("height", function (d) {
@@ -377,7 +355,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .append("rect")
                     //.attr("class","bar")
                     .attr("x",(d) => {
-                        //console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d);
                         return xScale(d.data.id) + start_margin;})
                     .attr("width", bar_width)
                     .attr("y",(d)=> y(d[1]))
@@ -386,9 +363,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .on("mousemove", function (e, d) {
                         // on recupere la position de la souris,
                         // e est l'object event d
-                        //console.log(d);
                         var mousePosition = [e.x, e.y];
-                        //console.log(mousePosition);
                         // on affiche le toolip
 
                         d3.select('#date-jeu').text(d.data.date);
@@ -429,7 +404,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .append("rect")
                     .transition()
                     .duration(1000)
-                    .attr("x",(d) => {/*console.log("scale xScale : ",xScale(d.data.id), "   id : ",d.data.id, "   d : ", d);*/ return xScale(d.data.id) + start_margin;})
+                    .attr("x",(d) => {return xScale(d.data.id) + start_margin;})
                     .attr("width", bar_width)
                     .attr("y",(d)=> y(d[1]))
                     .attr("height", (d)=> height - y(d[1]-d[0]))
@@ -439,9 +414,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                     .on("mousemove", function (e, d) {
                         // on recupere la position de la souris,
                         // e est l'object event d
-                        //console.log(d);
                         var mousePosition = [e.x, e.y];
-                        //console.log(mousePosition);
                         // on affiche le toolip
                         d3.select('#date-jeu').text(d.data.date);
                         d3.select('#duree2-jeu').text(
@@ -475,7 +448,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             }
         }
 
-        //console.log("datas  ",datas);
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
         if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
@@ -499,7 +471,6 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
     for (var i in keys) {
         colorsKeys.push(colors(i));
     }
-    //console.log("legend removed");
     let legend = d3
         .select("svg1")
         .append("svg")

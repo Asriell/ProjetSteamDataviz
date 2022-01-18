@@ -1,7 +1,5 @@
 function display_graph4(svg_already_exists,svg4) {
 
-    console.log("=========================svg4=========================");
-
     if(svg_already_exists) {
         svg4.selectAll('*').remove();
     }
@@ -34,7 +32,6 @@ function display_graph4(svg_already_exists,svg4) {
             document.getElementById("user-select").value
         );
 
-        console.log(data);
         inf = "1970-01-01";
         nbJours = get_nb_days_to_display();
         todate = new Date(TODAY);
@@ -44,7 +41,13 @@ function display_graph4(svg_already_exists,svg4) {
         inf2 = formatDate(
             new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
         );
-        //console.log(TODAY, " | ", inf, " | ", inf2);
+
+        gameTimePerPeriod = {
+            "matin": "00:00:00",
+            "apres-midi": "00:00:00",
+            "soir": "00:00:00",
+            "nuit": "00:00:00"
+        }
         gameTimePerDay = {};
         while (inf != TODAY) {
             games = [];
@@ -75,10 +78,25 @@ function display_graph4(svg_already_exists,svg4) {
                     }
                 }
             }
+            for (entry of Object.values(data)) {
+                day_period = check_day_period(entry.game_end)
+                if (day_period == 0) {
+                    gameTimePerPeriod["matin"] = calculate_duration(gameTimePerPeriod["matin"], entry.game_duration)
+                } else if (day_period == 1) {
+                    gameTimePerPeriod["apres-midi"] = calculate_duration(gameTimePerPeriod["apres-midi"], entry.game_duration)
+                } else if (day_period == 2) {
+                    gameTimePerPeriod["soir"] = calculate_duration(gameTimePerPeriod["soir"], entry.game_duration)
+                } else {
+                    gameTimePerPeriod["nuit"] = calculate_duration(gameTimePerPeriod["nuit"], entry.game_duration)
+                }
+            }
+
+
             inf = formatDate(
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
+
         var gamesIds = {}
         for(date of Object.values(gameTimePerDay)) {
             for (game of Object.keys(date)) {
@@ -92,7 +110,6 @@ function display_graph4(svg_already_exists,svg4) {
         gameInfos = {}
         for(id of Object.keys(gamesIds)) {
             if (id != "total") {
-                //console.log(id);
                 gameInfos[id] = {}
                 gameInfos[id]["genres"] = gameDescriptions[gamesIds[id]].genres;
                 gameInfos[id]["is_free"] = gameDescriptions[gamesIds[id]].is_free;
@@ -134,7 +151,6 @@ function display_graph4(svg_already_exists,svg4) {
             timeArray = genreTimePerPeriod[genre].split(":");
             genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
         }
-        console.log("GTPP : " , genreTimePerPeriod);
 
         datas = [];
         id = 0;
@@ -163,7 +179,7 @@ function display_graph4(svg_already_exists,svg4) {
                 return d.time;
             })
         var data_ready = pie(datas);
-
+        console.log(gameTimePerPeriod)
         svg4
             .selectAll('arcs')
             .data(data_ready)
@@ -177,7 +193,6 @@ function display_graph4(svg_already_exists,svg4) {
                 // e est l'object event d
                 theData = d.data;
                 var mousePosition = [e.x, e.y];
-                //console.log(mousePosition);
                 // on affiche le toolip
                 d3.select('#date-jeu').text("--");
                 d3.select('#duree2-jeu').text(
@@ -201,7 +216,6 @@ function display_graph4(svg_already_exists,svg4) {
         addLegend_donut2(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
-            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph2(true);
             display_graph1(true, svg1);
@@ -210,7 +224,6 @@ function display_graph4(svg_already_exists,svg4) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph1(true, svg1);
             display_graph2(true);

@@ -31,13 +31,11 @@ function display_graph2(svg_already_exists) {
     }
 
     d3.json(urlplayersjson).then((json) => {
-        //console.log(json);
         transform_data_for_bar(json);
         data = DataCleaning(
             json,
             document.getElementById("user-select").value
         );
-        //console.log(data);
 
         inf = "1970-01-01";
         nbJours = get_nb_days_to_display();
@@ -48,7 +46,6 @@ function display_graph2(svg_already_exists) {
         inf2 = formatDate(
             new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
         );
-        //console.log(TODAY, " | ", inf, " | ", inf2);
         gameTimePerDay = {};
         while (inf != TODAY) {
             if (document.getElementById("details-checkbox").checked) {
@@ -86,9 +83,6 @@ function display_graph2(svg_already_exists) {
                             gameTimePerDay[inf],
                             data[entry].game_duration
                         );
-                        //console.log(
-                        // "inf : " + inf + "   " + data[entry].game_duration
-                        //);
                     }
                 }
             }
@@ -96,7 +90,6 @@ function display_graph2(svg_already_exists) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        //console.log("GTPD : ", gameTimePerDay);
         datas = [];
         var id = 0;
         if (document.getElementById("details-checkbox").checked) {
@@ -133,7 +126,6 @@ function display_graph2(svg_already_exists) {
                     splitVal[1] * Math.pow(60, 1) +
                     splitVal[0] * Math.pow(60, 2);
                 element["playtime"] = valInSeconds;
-                //console.log(splitVal, " | ", valInSeconds);
                 datas.push(element);
                 id++;
             }
@@ -146,12 +138,10 @@ function display_graph2(svg_already_exists) {
                 if (d != "id" && d != "date") {
                     total_p += parseInt(entry[d]);
                 }
-                //console.log(entry[d]);
                 entry.total_playtime = total_p;
             });
         });
 
-        //console.log(datas);
 
 
         // Pie : pour chaque jour, je veux le playtime total
@@ -175,7 +165,6 @@ function display_graph2(svg_already_exists) {
                 return d.total_playtime;
             })
 
-        console.log("before formatted data : ", datas);
         if (datas.length > 7) {
             formattedDatas = [];
             currentWeek = 0;
@@ -187,12 +176,10 @@ function display_graph2(svg_already_exists) {
                     element["playtime"] = datas[data].playtime;
                     element["total_playtime"] = datas[data].total_playtime;
                 } else {
-                    console.log(data,"   ", datas[data].total_playtime);
                     element["playtime"] =  parseInt(element["playtime"]) + parseInt(datas[data].playtime);
                     element["total_playtime"] =  parseInt(element["total_playtime"]) + parseInt(datas[data].total_playtime);
                     if ((parseInt(data)+1)%7 == 0 || (parseInt(data)+1) == datas.length) {
-                        console.log(data,"   ", (data+1)%7, "  |  ", (data+1),  datas.length)
-                        console.log("-----------------");
+
                         formattedDatas.push(element);
                         element = {};
                         currentWeek ++;
@@ -201,9 +188,7 @@ function display_graph2(svg_already_exists) {
             }
             datas = formattedDatas;
         }
-        console.log("after formatted data : ", datas);
         var data_ready = pie(datas)
-        console.log("dr : ",data_ready);
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         svg2
@@ -219,7 +204,6 @@ function display_graph2(svg_already_exists) {
                 // e est l'object event d
                 theData = d.data;
                 var mousePosition = [e.x, e.y];
-                //console.log(mousePosition);
                 // on affiche le toolip
                 tooltip
                     .classed("hidden", false)
@@ -244,26 +228,6 @@ function display_graph2(svg_already_exists) {
                     " s."
                 );
                 d3.select("#nom-jeu").text(" -- ");
-                /*d3.select("#nom-jeu").text( Object.keys(theData).find(key => theData[key] === theData.total_playtime));*/
-
-                    // on recupere le nom de l'etat
-                    /*.html(
-                        theData.date +
-                        " | Temps de jeu : " +
-                        parseInt(theData.total_playtime / 3600) +
-                        " h " +
-                        parseInt(
-                            (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
-                        ) +
-                        " m " +
-                        (theData.total_playtime -
-                            (parseInt(theData.total_playtime / 3600) * 3600 +
-                                parseInt(
-                                    (theData.total_playtime - parseInt(theData.total_playtime / 3600) * 3600) / 60
-                                ) *
-                                60)) +
-                        " s."
-                    )*/;
             })
             .on("mouseout", function () {
                 tooltip.classed("hidden", true);
@@ -299,7 +263,6 @@ function addLegend_pie(colors,keys,total_width,start_margin,margin,period) {
     for (let i=0;i<keys.length;++i) {
         colorsKeys.push(colors(keys[i].date));
     }
-    //console.log("legend removed");
     let legend = d3
         .select("svg2")
         .append("svg")

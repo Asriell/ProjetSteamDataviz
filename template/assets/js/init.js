@@ -9,11 +9,9 @@ function traitement_data(x) {
 
 
 function transform_data_for_bar(dataset) {
-    //console.log(dataset.players);
     Object.entries(dataset).forEach(([key, value]) => {
         value.playtime = traitement_data(value.playtime);
     });
-    //console.log(dataset);
 }
 
 function set_legende_graph1(datas) {
@@ -35,7 +33,6 @@ function transform_data_for_pie(dataset) {
         element.id = newId;
         newId++;
     });
-    //console.log(dataset);
 }
 
 
@@ -88,20 +85,16 @@ var SumDurations = function (duration1, duration2) {
 };
 
 var DataCleaning = function (data, user) {
-    //console.log("data : ", data, "  user : ", user);
     var datasUser = Object.values(data.players).filter(
         (player) => player.persona_name == user
         //document.getElementById("user-select").value
     );
 
-    //console.log(data);
     tmpData = {};
-    console.log(Object.keys(datasUser).length)
     for (var entry in datasUser) {
         if (!datasUser[entry].game_duration.includes("day")) {
             if (entry != 0) {
                 if (!check_duration(datasUser[entry].game_duration)) {
-                    console.log(datasUser[entry].game_duration)
                     continue
                 }
                 date1 = new Date(datasUser[entry - 1].game_end);
@@ -115,17 +108,6 @@ var DataCleaning = function (data, user) {
                     parseInt(ParseDuration(datasUser[entry].game_duration)[2])
                 );
                 if (datediff > 5 && datediff >= dureeJeuSecondes) {
-                    /*
-                    console.log(
-                      datasUser[entry].game_end,
-                      "   ",
-                      datediff,
-                      "   ",
-                      ParseDuration(datasUser[entry].game_duration),
-                      "  ",
-                      dureeJeuSecondes
-                    );
-                    */
                     tmpData[datasUser[entry].game_end] = datasUser[entry];
                     if (
                         parseInt(ParseDuration(datasUser[entry].game_duration)[0]) >
@@ -144,7 +126,6 @@ var DataCleaning = function (data, user) {
             }
         }
     }
-    console.log(Object.keys(tmpData).length)
     return tmpData;
 };
 
@@ -203,4 +184,38 @@ function calculate_duration(dur1, dur2) {
     second = second%60;
 
     return Math.floor(hour).toString() + ":" + Math.floor(minute).toString() + ":" + Math.floor(second).toString()
+}
+
+function check_day_period(daytime) {
+
+    var hours = parseInt(daytime.split(" ")[1].split(":")[0])
+
+    if (hours >= 5 && hours < 12) {
+        return 0
+    } else if (hours >= 12 && hours < 17) {
+        return 1
+    } else if (hours >= 17 && hours < 22) {
+        return 2
+    } else if ( hours < 5  && hours >= 22) {
+        return 3
+    }
+}
+
+function hours_to_days(time) {
+    time = time.split(":")
+    var hours = time[0]
+    var mn = time[1]
+    var s = time[2]
+
+    hours = parseInt(hours) %24
+    var days =  parseInt(hours) / 24
+    return days + "day " + hours + ":" + mn + ":" + s;
+}
+function string_to_date(string_date) {
+    time = new Date(currentDate.getTime());
+    time.setHours(string_date.split(":")[0]);
+    time.setMinutes(string_date.split(":")[1]);
+    time.setSeconds(string_date.split(":")[2]);
+
+    return time;
 }

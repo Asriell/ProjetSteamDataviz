@@ -1,7 +1,4 @@
 function display_graph3(svg_already_exists,svg3) {
-
-    console.log("=========================SVG3=========================");
-
     if(svg_already_exists) {
         svg3.selectAll('*').remove();
     }
@@ -39,7 +36,6 @@ function display_graph3(svg_already_exists,svg3) {
             document.getElementById("user-select").value
         );
 
-        console.log(data);
         inf = "1970-01-01";
         nbJours = get_nb_days_to_display();
         todate = new Date(TODAY);
@@ -49,7 +45,6 @@ function display_graph3(svg_already_exists,svg3) {
         inf2 = formatDate(
             new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
         );
-        //console.log(TODAY, " | ", inf, " | ", inf2);
         gameTimePerDay = {};
         while (inf != TODAY) {
             games = [];
@@ -84,7 +79,6 @@ function display_graph3(svg_already_exists,svg3) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        console.log("GTPD : ", gameTimePerDay);
         var gamesIds = {}
         for(date of Object.values(gameTimePerDay)) {
             for (game of Object.keys(date)) {
@@ -93,13 +87,11 @@ function display_graph3(svg_already_exists,svg3) {
                 }
             }
         }
-        console.log(gamesIds);
 
     gameDescriptions = json.games;
         gameInfos = {}
         for(id of Object.keys(gamesIds)) {
             if (id != "total") {
-                //console.log(id);
                 gameInfos[id] = {}
                 gameInfos[id]["genres"] = gameDescriptions[gamesIds[id]].genres; 
                 gameInfos[id]["is_free"] = gameDescriptions[gamesIds[id]].is_free; 
@@ -113,7 +105,6 @@ function display_graph3(svg_already_exists,svg3) {
                 gameInfos[id]["mp4"] = gameDescriptions[gamesIds[id]].mp4; 
             }
         }
-        console.log("game infos : ", gameInfos);
         genreTimePerPeriod = {};
         for(day of Object.keys(gameTimePerDay)) {
             if(gameTimePerDay[day].total == "0:0:0") {
@@ -142,8 +133,7 @@ function display_graph3(svg_already_exists,svg3) {
             timeArray = genreTimePerPeriod[genre].split(":");
             genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
         }
-        console.log("GTPP : " , genreTimePerPeriod);
-        
+
         datas = [];
         id = 0;
         for (game of Object.keys(genreTimePerPeriod)) {
@@ -185,7 +175,6 @@ function display_graph3(svg_already_exists,svg3) {
                 // e est l'object event d
                 theData = d.data;
                 var mousePosition = [e.x, e.y];
-                //console.log(mousePosition);
                 // on affiche le toolip
                 d3.select('#date-jeu').text("--");
                 d3.select('#duree2-jeu').text(
@@ -242,7 +231,6 @@ function display_graph3(svg_already_exists,svg3) {
         addLegend_donut(color,datas,total_width,0,0);
 
         d3.select("#user-select").on("change", (event) => {
-            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph2(true);
             display_graph1(true, svg1);
@@ -251,7 +239,6 @@ function display_graph3(svg_already_exists,svg3) {
         });
 
         d3.select("#period-select").on("change", (event) => {
-            //console.log("change");
             //svg2.selectAll('*').remove();
             display_graph1(true, svg1);
             display_graph2(true);
