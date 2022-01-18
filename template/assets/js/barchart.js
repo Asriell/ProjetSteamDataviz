@@ -96,6 +96,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 //console.log(total_game_duration)
                 element = {}
                 element["date"] = Object.keys(gameTimePerDay)[id];
+                console.log(element["date"])
                 element["id"] = id
                 for (game of Object.keys(val)) {
                     if (game != "total") {
@@ -123,7 +124,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 
                 // Date formatting
                 element["date"] = Object.keys(gameTimePerDay)[id];
-
+                console.log(element["date"])
                 splitVal = val.split(":");
                 valInSeconds =
                     splitVal[2] * Math.pow(60, 0) +
