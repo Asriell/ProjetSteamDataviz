@@ -5,8 +5,18 @@ pip3 install -r requirements.txt
 
 ##  Running the script
 ``
-python3 main.py
+python3 mainScript.py steamIds.txt 
+
+or 
+
+python3 main.py steamIds.txt 
 ``
+main.py and mainScript.py are the same scripts, excepted that mainScript.py saves the current state of each variable in files and not main.py . In our VM, we run mainScript.py.
+
+## VM access : 
+
+address : 192.168.74.201 .
+password : steam
 
 ##  Collecting data from multiple steam IDs
 
