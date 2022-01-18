@@ -38,3 +38,7 @@ We run the script automatically, with autorun.sh, executed by crontab, each minu
 ```
 
 autorun checks if the script is not running and run it in this case.
+
+## ExtractionDescription
+
+To get more informations about games, we need to extract these from Steam API. ExtractionDescription.js is a node program which extract several game datas from the API, using the game Id.
