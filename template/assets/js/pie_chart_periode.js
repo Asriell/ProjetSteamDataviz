@@ -155,11 +155,11 @@ function display_graph4(svg_already_exists,svg4) {
         console.log(gameTimePerPeriod)
         datas = [];
         id = 0;
-        for (game of Object.keys(genreTimePerPeriod)) {
+        for (period of Object.keys(gameTimePerPeriod)) {
             obj = {}
             obj["id"] = id;
-            obj["period"] = game;
-            obj["time"] = genreTimePerPeriod[game];
+            obj["period"] = period;
+            obj["time"] = gameTimePerPeriod[period];
             datas.push(obj);
             id ++;
         }
@@ -238,7 +238,7 @@ function display_graph4(svg_already_exists,svg4) {
 var addLegend_donut2 = function (colors,keys,total_width,start_margin,margin) {
     d3.select("svg4").selectAll(".legendDetails").remove();
     let legendCellSize = 20;
-    let maxCarac = d3.max(keys,(d)=> d.genre.length);
+    let maxCarac = d3.max(keys,(d)=> d.period.length);
     var spacingBetweenCells = legendCellSize + maxCarac * 7 + 5;
     colorsKeys = [];
     for (let i=0;i<keys.length;++i) {
