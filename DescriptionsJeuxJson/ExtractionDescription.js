@@ -20,8 +20,9 @@ json = {
   "Dota 2": "570",
   "Apex Legends": "1172470",
   "Total War: NAPOLEON - Definitive Edition": "34030",
-  "PUBG: BATTLEGROUND" : "578080"
+  "PUBG: BATTLEGROUND" : "578080",
+  "Dead by Daylight":"381210"
 }
 
 
-steam.getGameDetails("578080").then((data) => fs.writeFileSync('578080.json', JSON.stringify(data)));
+steam.getGameDetails("381210").then((data) => fs.writeFileSync('381210.json', JSON.stringify(data)));
