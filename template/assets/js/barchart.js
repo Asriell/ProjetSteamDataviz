@@ -80,7 +80,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
         }
-        console.log("GTPD11111 : ",gameTimePerDay);
+        //console.log("GTPD : ",gameTimePerDay);
         datas = [];
         var id = 0;
         var total_game_duration = "00:00:00";
@@ -96,7 +96,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
                 //console.log(total_game_duration)
                 element = {}
                 element["date"] = Object.keys(gameTimePerDay)[id];
-                console.log(element["date"])
                 element["id"] = id
                 for (game of Object.keys(val)) {
                     if (game != "total") {
@@ -124,7 +123,6 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
 
                 // Date formatting
                 element["date"] = Object.keys(gameTimePerDay)[id];
-                console.log(element["date"])
                 splitVal = val.split(":");
                 valInSeconds =
                     splitVal[2] * Math.pow(60, 0) +
@@ -137,7 +135,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             }
             d3.select("#played-games").text("--")
             d3.select("#total-game-duration").text(total_game_duration)
-            d3.select("#last-game-date").text(datas.pop().date)
+            d3.select("#last-game-date").text(datas[datas.length-1].date)
 
         }
         if(!svg_already_exists){
@@ -477,7 +475,7 @@ function display_graph1(svg_already_exists, svg, change = undefined) {
             }
         }
 
-        console.log("datasssssss  ",datas);
+        //console.log("datas  ",datas);
         set_legende_graph1(datas);
         d3.select("svg1").selectAll(".legendDetails").remove();
         if(document.getElementById("details-checkbox").checked) addLegend(color,gamesPlayed,total_width,start_margin,margin);
