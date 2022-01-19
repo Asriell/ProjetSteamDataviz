@@ -51,6 +51,7 @@ function display_graph4(svg_already_exists) {
         console.log("inf pie 4 : ", inf)
         indexData = 0;
         KeysData = Object.keys(data);
+        console.log(KeysData);
         filteredData = {}
         while (inf != TODAY) {
             filteredData[KeysData[indexData]] = data[KeysData[indexData]];
