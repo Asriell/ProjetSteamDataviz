@@ -150,7 +150,6 @@ function display_graph4(svg_already_exists) {
             );
         }
         data = filteredData;
-        console.log("ddddata : ",data)
         for (entry of Object.values(data)) {
             day_period = check_day_period(entry.game_end)
             if (day_period == 0) {
@@ -163,7 +162,6 @@ function display_graph4(svg_already_exists) {
                 gameTimePerPeriod["nuit"] = SumDurations(gameTimePerPeriod["nuit"], entry.game_duration)
             }
         }
-        console.log(gameTimePerPeriod)
         datas = [];
         id = 0;
         for (period of Object.keys(gameTimePerPeriod)) {
@@ -174,7 +172,6 @@ function display_graph4(svg_already_exists) {
             datas.push(obj);
             id ++;
         }
-        console.log(datas);
         var color = d3.scaleOrdinal()
             .domain([0, d3.max(datas, function (d) { return d.id; })])
             .range(['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
@@ -192,7 +189,6 @@ function display_graph4(svg_already_exists) {
                 return d.time;
             })
         var data_ready = pie(datas);
-        console.log("data ready : ",data_ready);
         svg4
             .selectAll('arcs')
             .data(data_ready)
