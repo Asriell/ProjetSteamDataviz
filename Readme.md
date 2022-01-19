@@ -2,7 +2,7 @@
 ```
 Project made by group 6.
 
-Tools for this project : Javacript (avec bibliothèque D3js), html/css, Python, Shell, Cron, Firebase Realtime Database, Steam API.
+Tools for this project : Javascript (avec bibliothèque D3js), html/css, Python, Shell, Cron, Firebase Realtime Database, Steam API.
 
 ```
 
