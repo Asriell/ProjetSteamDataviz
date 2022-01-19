@@ -48,6 +48,7 @@ function display_graph4(svg_already_exists) {
             "soir": "0:0:0",
             "nuit": "0:0:0"
         }
+        /*
         gameTimePerDay = {};
         while (inf != TODAY) {
             games = [];
@@ -137,7 +138,18 @@ function display_graph4(svg_already_exists) {
             timeArray = genreTimePerPeriod[genre].split(":");
             genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
         }
-
+*/
+        indexData = 0;
+        KeysData = Object.keys(data);
+        filteredData = {}
+        while (inf != TODAY) {
+            filteredData[KeysData[i]] = data[KeysData[i]];
+            indexData++;
+            inf = formatDate(
+                new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
+            );
+        }
+        data = filteredData;
         console.log("ddddata : ",data)
         for (entry of Object.values(data)) {
             day_period = check_day_period(entry.game_end)
