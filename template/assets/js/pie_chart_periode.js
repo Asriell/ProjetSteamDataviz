@@ -54,7 +54,8 @@ function display_graph4(svg_already_exists) {
         filteredData = {}
         while (inf != TODAY) {
             for(element in KeysData) {
-                if (element.split(" ")[0] == inf) {
+                console.log(element);
+                if (element.includes(inf)) {
                     filteredData[element] = data[element];
                 }
             }
