@@ -13,7 +13,7 @@ Outils utilisés : Javacript (avec bibliothèque D3js), html/css, Python, Shell,
 
 
 ### Nos visualisations 
-* Lien Github pages : https://asriell.github.io/ProjetSteamDataviz/template/template/dashboard.html
+* Lien Github pages : https://asriell.github.io/SteamGamingTimeVisualization/template/template/dashboard.html
 
 + Nos visualisations sont disponibles dans la branche gh-pages, dossier template : 
   - Notre code javascript est disponible dans assets/js
