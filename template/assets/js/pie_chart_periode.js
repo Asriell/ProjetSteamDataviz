@@ -49,13 +49,15 @@ function display_graph4(svg_already_exists) {
             "nuit": "0:0:0"
         }
         console.log("inf pie 4 : ", inf)
-        indexData = 0;
         KeysData = Object.keys(data);
         console.log(KeysData);
         filteredData = {}
         while (inf != TODAY) {
-            filteredData[KeysData[indexData]] = data[KeysData[indexData]];
-            indexData++;
+            for(element in KeysData) {
+                if (element.split(" ")[0] == inf) {
+                    filteredData[element] = data[element];
+                }
+            }
             inf = formatDate(
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
             );
