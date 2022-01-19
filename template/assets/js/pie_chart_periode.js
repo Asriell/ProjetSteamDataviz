@@ -48,97 +48,7 @@ function display_graph4(svg_already_exists) {
             "soir": "0:0:0",
             "nuit": "0:0:0"
         }
-        /*
-        gameTimePerDay = {};
-        while (inf != TODAY) {
-            games = [];
-            for (entry of Object.values(data)) {
-                if ((!games.includes(entry.game_name)) && entry.game_end.includes(inf)) {
-                    games.push(entry.game_name)
-                }
-                gameTimePerDay[inf] = {}
-                gameTimePerDay[inf]["total"] = "0:0:0";
-                if (games.length != 0) {
-                    for (game of games) {
-                        gameTimePerDay[inf][game] = {}
-                        gameTimePerDay[inf][game]["time"] = "0:0:0";
-                        for (entry of Object.keys(data)) {
-                            if (data[entry].game_end.includes(inf) && game == data[entry].game_name) {
-                                gameTimePerDay[inf][game]["time"] = SumDurations(
-                                    gameTimePerDay[inf][game]["time"],
-                                    data[entry].game_duration
-                                );
-
-                                gameTimePerDay[inf]["total"] = SumDurations(
-                                    gameTimePerDay[inf]["total"],
-                                    data[entry].game_duration
-                                );
-                                gameTimePerDay[inf][game]["id"] = data[entry].game_id;
-                            }
-                        }
-                    }
-                }
-            }
-            inf = formatDate(
-                new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
-            );
-        }
-
-        var gamesIds = {}
-        for(date of Object.values(gameTimePerDay)) {
-            for (game of Object.keys(date)) {
-                if(!Object.keys(gamesIds).includes(game)) {
-                    gamesIds[game] = date[game]["id"];
-                }
-            }
-        }
-
-        gameDescriptions = json.games;
-        gameInfos = {}
-        for(id of Object.keys(gamesIds)) {
-            if (id != "total") {
-                gameInfos[id] = {}
-                gameInfos[id]["genres"] = gameDescriptions[gamesIds[id]].genres;
-                gameInfos[id]["is_free"] = gameDescriptions[gamesIds[id]].is_free;
-                gameInfos[id]["controller_support"] = gameDescriptions[gamesIds[id]].controller_support;
-                gameInfos[id]["header_image"] = gameDescriptions[gamesIds[id]].header_image;
-                gameInfos[id]["developers"] = gameDescriptions[gamesIds[id]].developers;
-                gameInfos[id]["price_overview"] = gameDescriptions[gamesIds[id]].price_overview;
-                gameInfos[id]["platforms"] = gameDescriptions[gamesIds[id]].platforms;
-                gameInfos[id]["metacritic"] = gameDescriptions[gamesIds[id]].metacritic;
-                gameInfos[id]["movies"] = gameDescriptions[gamesIds[id]].movies;
-                gameInfos[id]["mp4"] = gameDescriptions[gamesIds[id]].mp4;
-            }
-        }
-        genreTimePerPeriod = {};
-        for(day of Object.keys(gameTimePerDay)) {
-            if(gameTimePerDay[day].total == "0:0:0") {
-                continue;
-            } else {
-                for(game of Object.keys(gameTimePerDay[day])) {
-                    if(game == "total") {
-                        continue;
-                    } else {
-                        tags = gameInfos[game]["genres"];
-                        for (tag of tags) {
-                            if (!Object.keys(genreTimePerPeriod).includes(tag.description)) {
-                                genreTimePerPeriod[tag.description] = gameTimePerDay[day][game]["time"];
-                            } else {
-                                genreTimePerPeriod[tag.description] = SumDurations(genreTimePerPeriod[tag.description], gameTimePerDay[day][game]["time"]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        delete genreTimePerPeriod["Early Access"];
-        delete genreTimePerPeriod["Free to Play"];
-        id = 0;
-        for(genre of Object.keys(genreTimePerPeriod)) {
-            timeArray = genreTimePerPeriod[genre].split(":");
-            genreTimePerPeriod[genre] = timeArray[0]*3600 + timeArray[1] * 60 + parseInt(timeArray[2]);
-        }
-*/
+        console.log("inf pie 4 : ", inf)
         indexData = 0;
         KeysData = Object.keys(data);
         filteredData = {}
@@ -150,6 +60,7 @@ function display_graph4(svg_already_exists) {
             );
         }
         data = filteredData;
+        console.log("data pie 4 ", data)
         for (entry of Object.values(data)) {
             day_period = check_day_period(entry.game_end)
             if (day_period == 0) {
