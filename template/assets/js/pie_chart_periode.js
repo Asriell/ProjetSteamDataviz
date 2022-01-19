@@ -53,7 +53,7 @@ function display_graph4(svg_already_exists) {
         console.log(KeysData);
         filteredData = {}
         while (inf != TODAY) {
-            for(element in KeysData) {
+            for(element of KeysData) {
                 console.log(element);
                 if (element.includes(inf)) {
                     filteredData[element] = data[element];
