@@ -135,7 +135,8 @@ var DataCleaning = function (data, user) {
 //var PERIOD = "1 Month";
 var TODAY = formatDate(new Date());
 const urlRaw = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/games.csv"
-const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
+//const urlplayersjson = "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json"
+const urlplayersjson = "https://raw.githubusercontent.com/Asriell/SteamGamingTimeVisualization/gh-pages/data/steam-players-data.json"
 
 function get_total_playtime_of_all_data(dataset) {
     let total = 0;
