@@ -143,7 +143,7 @@ function display_graph4(svg_already_exists) {
         KeysData = Object.keys(data);
         filteredData = {}
         while (inf != TODAY) {
-            filteredData[KeysData[i]] = data[KeysData[i]];
+            filteredData[KeysData[indexData]] = data[KeysData[indexData]];
             indexData++;
             inf = formatDate(
                 new Date(new Date(inf).setDate(new Date(inf).getDate() + 1))
