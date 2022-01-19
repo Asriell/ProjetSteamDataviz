@@ -19,7 +19,7 @@ Outils utilisés : Javacript (avec bibliothèque D3js), html/css, Python, Shell,
   - Notre code javascript est disponible dans assets/js
   - Notre code css est disponible dans assets/css/style.css
   - Notre code html est disponible dans template/dashboard.html
-  - Le json utilisé est à l'adresse "https://raw.githubusercontent.com/Asriell/ProjetSteamDataviz/gh-pages/data/steam-players-data.json", soit dans le dossier data de gh-pages.
+  - Le json utilisé est à l'adresse "https://raw.githubusercontent.com/Asriell/SteamGamingTimeVisualization/gh-pages/data/steam-players-data.json", soit dans le dossier data de gh-pages.
 
 ### Le Data Scraping 
 
