@@ -490,6 +490,8 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
         .attr('x', (d,i) => i%legendPerLines * spacingBeetweenCells)
         .attr('y', (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10)
         .style("fill", d => d);
+
+    if (maxCarac <= 30) {
     legend.selectAll()
         .data(keys)
         .enter().append('text')
@@ -498,6 +500,17 @@ function addLegend(colors,keys,total_width,start_margin,margin, legendPerLines =
         .style("font-size", "13px")
         .style("fill", axisColor)
         .text(d => d);
+    } else {
+        legend.selectAll()
+        .data(keys)
+        .enter().append('text')
+        .attr("transform", (d,i) => "translate(" + (i%legendPerLines * spacingBeetweenCells + legendCellSize + 5) + ", " + 0 + ")")
+        .attr("dy", (d,i) => Math.floor(i/legendPerLines)*legendCellSize+Math.floor(i/legendPerLines)*10 + legendCellSize / 1.6) // Pour centrer le texte par rapport aux carrés
+        .style("font-size", "11px")
+        .style("fill", axisColor)
+        .text(d => d);
+    }
+
 
 }
 
