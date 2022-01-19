@@ -1,41 +1,41 @@
-# ProjetSteamDataviz
+# Steam Gaming Time Visualization
 ```
-Projet de data visualisation du groupe 6 : Données d'utilisation des jeux vidéos.
+Project made by group 6.
 
-Outils utilisés : Javacript (avec bibliothèque D3js), html/css, Python, Shell, Cron, Firebase Realtime Database, Steam API.
+Tools for this project : Javacript (avec bibliothèque D3js), html/css, Python, Shell, Cron, Firebase Realtime Database, Steam API.
 
 ```
 
-### Problématiques auquelles Nos visualisations vont apporter des réponses : 
-+ A quelle fréquence joue-t-on aux jeux vidéos par unité de temps ?
-+ Qui est le joueur qui joue le plus ? (Comparaison du temps de jeu de chaque membre du groupe)
-+ Quelles sont les catégories les plus populaires ? Quelles sont les tendances ?
+### Questions our project will answer : 
++ How often do we play video games ?
++ Which person play the most ? (playing time comparison between each members of group 6)
++ Which cathegories are the most played ? What are the trends
 
 
-### Nos visualisations 
-* Lien Github pages : https://asriell.github.io/SteamGamingTimeVisualization/template/template/dashboard.html
+### Our Visualizations 
+* Link to Github pages : https://asriell.github.io/SteamGamingTimeVisualization/template/template/dashboard.html
 
-+ Nos visualisations sont disponibles dans la branche gh-pages, dossier template : 
-  - Notre code javascript est disponible dans assets/js
-  - Notre code css est disponible dans assets/css/style.css
-  - Notre code html est disponible dans template/dashboard.html
-  - Le json utilisé est à l'adresse "https://raw.githubusercontent.com/Asriell/SteamGamingTimeVisualization/gh-pages/data/steam-players-data.json", soit dans le dossier data de gh-pages.
++ Our visualizations are available, in gh-pages, template folder :
+  - Our javascript code is available in assets/js
+  - Our css code  is available in assets/css/style.css
+  - Our html code is available in template/dashboard.html
+  - The json we used is at "https://raw.githubusercontent.com/Asriell/SteamGamingTimeVisualization/gh-pages/data/steam-players-data.json", or in the folder data in gh-pages.
 
-### Le Data Scraping 
+### Data Scraping 
 
-Nos scripts utilisés pour le scraping de données dans le dossier scrapingScript. Un readme y est associé pour plus de précisions.
+Our scripts for the data scraping are in the folder scrapingScript. A readme is present for more informations.
 
-#### La VM pour le data scraping
+#### Our VM for the data scraping
 ```
 address : 192.168.74.201
 password : steam
 ```
 
 
-### A Propos de l'API Steam 
+### About Steam API
 
 ##### Doc Steam API
-La Doc sur l'API Steam : https://developer.valvesoftware.com/wiki/Steam_Web_API#GetGlobalAchievementPercentagesForApp_.28v0001.29
-Autre Doc de l'API Steam : https://steamcommunity.com/dev?l=french
-##### Clé Steam
-Pour les différentes requêtes, il faut ajouter une clé Steam que l'on réclame ici : https://steamcommunity.com/dev/apikey
+Steam API Documentation : https://developer.valvesoftware.com/wiki/Steam_Web_API#GetGlobalAchievementPercentagesForApp_.28v0001.29
+Steam API Other Documentation : https://steamcommunity.com/dev?l=french
+##### Steam Key
+For our requests, we need a key that we get by following this link : https://steamcommunity.com/dev/apikey
