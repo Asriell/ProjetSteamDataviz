@@ -1,0 +1,47 @@
+.bar {
+  fill: steelblue;
+}
+
+h1 {
+  color: aquamarine;
+}
+
+div.tooltip {
+  color: #222;
+  background-color: #fff;
+  padding: 0.5em;
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px;
+  opacity: 0.9;
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}
+
+.bar:hover {
+  fill: #666;
+}
+
+.rectGames:hover {
+  fill: #666;
+}
+
+.pie:hover {
+  transform: scale(1.1);
+}
+
+footer {
+  height: 10em;
+  background-color: yellow;
+}
+
+#visu-activite1 {
+  background-color: blanchedalmond;
+}
+
+#visu-activite2 {
+  background-color: lightpink;
+  height: 900px;
+}
