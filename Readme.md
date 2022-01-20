@@ -1,12 +1,13 @@
 # Steam Gaming Time Visualization
 ```
-Project made by group 6.
+Project made by group 6, at Lyon 1, in Data visualization course.
 
 Tools for this project : Javascript (avec bibliothèque D3js), html/css, Python, Shell, Cron, Firebase Realtime Database, Steam API.
-
 ```
 
 ![teaser.png](teaser.png)
+
+Link to datavisualization course : https://lyondataviz.github.io/teaching/lyon1-m2/2021/
 
 ### Questions our project will answer : 
 + How often do we play video games ?
