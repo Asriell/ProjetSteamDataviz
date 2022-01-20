@@ -6,6 +6,8 @@ Tools for this project : Javascript (avec bibliothèque D3js), html/css, Python,
 
 ```
 
+
+
 ### Questions our project will answer : 
 + How often do we play video games ?
 + Which person play the most ? (playing time comparison between each members of group 6)
