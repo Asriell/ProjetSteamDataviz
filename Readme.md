@@ -6,7 +6,7 @@ Tools for this project : Javascript (avec bibliothèque D3js), html/css, Python,
 
 ```
 
-
+![teaser.png](teaser.png)
 
 ### Questions our project will answer : 
 + How often do we play video games ?
