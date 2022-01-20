@@ -42,3 +42,8 @@ Steam API Documentation : https://developer.valvesoftware.com/wiki/Steam_Web_API
 Steam API Other Documentation : https://steamcommunity.com/dev?l=french
 ##### Steam Key
 For our requests, we need a key that we get by following this link : https://steamcommunity.com/dev/apikey
+
+
+```
+Group 6 members : Kerbouche Mahfoudh, Firmin-Pignot Jeff, Burdin Kevin, Garcia Gael
+```
