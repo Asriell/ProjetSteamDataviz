@@ -18,11 +18,11 @@ Link to datavisualization course : https://lyondataviz.github.io/teaching/lyon1-
 ### Our Visualizations 
 * Link to Github pages : https://asriell.github.io/SteamGamingTimeVisualization/template/template/dashboard.html
 
-+ Our visualizations are available, in gh-pages, template folder :
++ Our visualizations are available, in the main branch, template folder :
   - Our javascript code is available in assets/js
   - Our css code  is available in assets/css/style.css
   - Our html code is available in template/dashboard.html
-  - The json we used is at "https://raw.githubusercontent.com/Asriell/SteamGamingTimeVisualization/gh-pages/data/steam-players-data.json", or in the folder data in gh-pages.
+  - The json we used is at "https://github.com/Asriell/SteamGamingTimeVisualization/tree/main/data/steam-players-data.json", or in the folder ``/data/steam-players-data.json`` in main.
 
 ### Data Scraping 
 
